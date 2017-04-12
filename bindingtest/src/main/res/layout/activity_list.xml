@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="presenter"
+            type="com.edgarxie.bindingtest.aty.ListActivity.Presenter"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="5dp"
+        >
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{presenter.onClickAddItem}"
+            android:text="add"
+            android:id="@+id/add_item"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:text="remove"
+            android:layout_height="wrap_content"
+            android:onClick="@{presenter.onClickRemoveItem}"
+            android:id="@+id/remove_item"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/recycler_view" />
+
+    </LinearLayout>
+
+</layout>
