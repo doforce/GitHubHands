@@ -1,23 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
         <item
             android:id="@+id/nav_repositories"
             android:title="@string/repositories"
             android:icon="@drawable/repository"/>
+
         <item
                 android:id="@+id/nav_developers"
                 android:title="@string/developers"
                 android:icon="@drawable/developer"/>
+
         <item
             android:id="@+id/nav_collections"
             android:icon="@drawable/collection_heart"
             android:title="@string/collections"/>
+
+        <item
+                android:id="@+id/nav_edit_language"
+                android:title="@string/edit_language"
+                android:icon="@drawable/edit"/>
+
         <item
                 android:id="@+id/nav_about"
                 android:icon="@drawable/about"
                 android:title="@string/about"/>
         <item
+            android:id="@+id/nav_feedback"
+            android:title="@string/feedback"
+            android:icon="@drawable/feedback"/>
+
+        <item
             android:id="@+id/nav_share"
             android:icon="@drawable/ic_menu_share"
             android:title="@string/share" />
+
 </menu>

@@ -13,8 +13,11 @@
     <string name="repositories">Repositories</string>
     <string name="developers">Developers</string>
     <string name="about">About</string>
+    <string name="edit_language">Edit Repo Language</string>
+    <string name="feedback">Feedback</string>
 
     <string name="setting">Setting</string>
+    <string name="login_with_github">Login with GitHub.</string>
 
 
 </resources>

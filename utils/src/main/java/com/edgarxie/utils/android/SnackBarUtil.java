@@ -1,4 +1,4 @@
-package com.edgarxie.githubhands.util;
+package com.edgarxie.utils.android;
 
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -10,7 +10,7 @@ import android.view.View;
 public class SnackBarUtil {
 
     public static void show(View view,CharSequence text){
-        Snackbar.make(view,text,Snackbar.LENGTH_SHORT).show();
+        show(view,text,Snackbar.LENGTH_SHORT);
     }
 
     public static void show(View view,CharSequence text,int duration){

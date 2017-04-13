@@ -11,7 +11,7 @@ import android.view.MenuItem;
 
 import com.edgarxie.githubhands.R;
 import com.edgarxie.githubhands.databinding.ActivityMainBinding;
-import com.edgarxie.githubhands.util.SnackBarUtil;
+import com.edgarxie.utils.android.SnackBarUtil;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
