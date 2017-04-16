@@ -21,6 +21,19 @@
                 app:layout_scrollFlags="enterAlways"
                 app:popupTheme="@style/AppTheme.PopupOverlay" >
 
+                <Spinner
+                    android:id="@+id/trending_frequency"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/trending_frequency"
+                    />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/search_github"
+                    android:src="@drawable/search_github"/>
+
             </android.support.v7.widget.Toolbar>
 
         </android.support.design.widget.AppBarLayout>

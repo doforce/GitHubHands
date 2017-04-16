@@ -3,16 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/search_github"
-        android:icon="@drawable/search_github"
-        android:title="@string/action_search"
-        app:showAsAction="ifRoom|collapseActionView"
-        android:actionViewClass="android.support.v7.widget.SearchView"
-        />
+        android:id="@+id/action_trending_today"
+        android:orderInCategory="100"
+        android:title="@string/trending_daily"
+        app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_trending_this_week"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="@string/trending_weekly"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_trending_this_month"
+        android:orderInCategory="100"
+        android:title="@string/trending_monthly"
+        app:showAsAction="never" />
+
+
 </menu>

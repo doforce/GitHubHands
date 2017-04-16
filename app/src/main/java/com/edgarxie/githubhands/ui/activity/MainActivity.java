@@ -5,15 +5,13 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.edgarxie.githubhands.R;
 import com.edgarxie.githubhands.databinding.ActivityMainBinding;
-import com.edgarxie.utils.android.SnackBarUtil;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private ActivityMainBinding mBinding;
 
@@ -23,12 +21,11 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         mBinding= DataBindingUtil.setContentView(this,R.layout.activity_main);
         setSupportActionBar(mBinding.appBarMainId.toolbar);
-
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, mBinding.drawerLayout, mBinding.appBarMainId.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mBinding.drawerLayout.setDrawerListener(toggle);
         toggle.syncState();
-
         mBinding.navView.setNavigationItemSelectedListener(this);
     }
 
@@ -54,9 +51,6 @@ public class MainActivity extends AppCompatActivity
 
         int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -66,8 +60,21 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id){
+            case R.id.nav_trending_repositories:
+                mBinding.appBarMainId.toolbar.getMenu().clear();
+                mBinding.appBarMainId.toolbar.inflateMenu(R.menu.main_toolbar);
+                break;
+            case R.id.nav_trending_developers:
+                mBinding.appBarMainId.toolbar.getMenu().clear();
+                mBinding.appBarMainId.toolbar.inflateMenu(R.menu.main_toolbar);
+            case R.id.nav_collections:
+                mBinding.appBarMainId.toolbar.getMenu().clear();
+                break;
+            case R.id.nav_about:
+                break;
+            case R.id.nav_feedback:
+                break;
             case R.id.nav_share:
-                SnackBarUtil.show(mBinding.appBarMainId.mainSnackBar,"Share");
                 break;
         }
         mBinding.drawerLayout.closeDrawer(GravityCompat.START);
