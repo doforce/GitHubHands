@@ -3,22 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_trending_today"
+        android:id="@+id/action_trending_daily"
         android:orderInCategory="100"
         android:title="@string/trending_daily"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_trending_this_week"
+        android:id="@+id/action_trending_weekly"
         android:orderInCategory="100"
         android:title="@string/trending_weekly"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_trending_this_month"
+        android:id="@+id/action_trending_monthly"
         android:orderInCategory="100"
         android:title="@string/trending_monthly"
         app:showAsAction="never" />
-
 
 </menu>

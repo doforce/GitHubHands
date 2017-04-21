@@ -5,22 +5,34 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     //menu
-    <string name="action_settings">Settings</string>
+    <string name="action_setting">Settings</string>
     <string name="action_search">search</string>
     <string name="search">Search</string>
     <string name="share">Share</string>
-    <string name="collections">Collections</string>
-    <string name="trending_repositories">Trending Repositories</string>
-    <string name="trending_developers">Trending Developers</string>
+    <string name="collection">Collection</string>
+    <string name="trending_repository">Trending repository</string>
+    <string name="repository">Repository</string>
+    <string name="trending_developers">Trending developers</string>
+    <string name="developer">Developer</string>
     <string name="about">About</string>
-    <string name="edit_language">Edit Repo Language</string>
+    <string name="edit_language">Edit repo language</string>
     <string name="feedback">Feedback</string>
+    <string name="trending_daily">Trending daily</string>
+    <string name="trending_weekly">Trending weekly</string>
+    <string name="trending_monthly">Trending monthly</string>
 
     <string name="setting">Setting</string>
+
+
     <string name="login_with_github">Login with GitHub.</string>
-    <string name="trending_daily">Trending Daily</string>
-    <string name="trending_weekly">Trending Weekly</string>
-    <string name="trending_monthly">Trending Monthly</string>
+    <string name="repository_daily">Repository daily</string>
+    <string name="repository_weekly">Repository weekly</string>
+    <string name="repository_monthly">Repository monthly</string>
+    <string name="developer_daily">Developer daily</string>
+    <string name="developer_weekly">Developer weekly</string>
+    <string name="developer_monthly">Developer monthly</string>
+    <string name="collection_repository">Collection repository</string>
+    <string name="collection_developer">Collection developer</string>
     <string name="trending">Trending</string>
 
 
