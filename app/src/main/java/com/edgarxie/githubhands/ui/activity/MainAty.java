@@ -12,30 +12,31 @@ import android.view.MenuItem;
 
 import com.edgarxie.githubhands.R;
 import com.edgarxie.githubhands.databinding.ActivityMainBinding;
-import com.edgarxie.githubhands.model.MenuModel;
-import com.edgarxie.githubhands.ui.fragment.CollectionsFragment;
-import com.edgarxie.githubhands.ui.fragment.TrendingDeveloperFragment;
-import com.edgarxie.githubhands.ui.fragment.TrendingRepoFragment;
+import com.edgarxie.githubhands.model.ToolbarBean;
+import com.edgarxie.githubhands.ui.fragment.CollectionFrag;
+import com.edgarxie.githubhands.ui.fragment.TrendingDeveloperFrag;
+import com.edgarxie.githubhands.ui.fragment.TrendingRepoFrag;
 import com.edgarxie.githubhands.util.MainConstants;
-import com.edgarxie.githubhands.viewmodel.MainViewModel;
+import com.edgarxie.githubhands.viewmodel.MainVM;
 
-public class MainActivity extends BaseActivity<MainViewModel,ActivityMainBinding>
+public class MainAty extends BaseActivity<MainVM,ActivityMainBinding>
         implements NavigationView.OnNavigationItemSelectedListener {
     private FragmentManager mFm;
     private Fragment mRepoFrag;
     private Fragment mDeveloperFrag;
     private Fragment mCollectionsFrag;
-    private static final String TAG = "MainActivity";
-    private MenuModel mMenu=new MenuModel();
+    private static final String TAG = "MainAty";
+    private ToolbarBean mMenu=new ToolbarBean();
+    private int startTitle=R.string.repository;
+    private OnMenuClick mOnMenuClick;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initViews();
+        addDefaultFragment();
         mBinding.setModel(getModel());
-        mMenu.setToolBarTitle(getString(R.string.repository_daily));
-        mBinding.setMenu(mMenu);
     }
 
     @Override
@@ -44,8 +45,8 @@ public class MainActivity extends BaseActivity<MainViewModel,ActivityMainBinding
     }
 
     @Override
-    protected MainViewModel getModel() {
-        mModel=new MainViewModel(mBinding,getApplicationContext());
+    protected MainVM getModel() {
+        mModel=new MainVM(mBinding,getApplicationContext());
         return mModel;
     }
 
@@ -53,12 +54,13 @@ public class MainActivity extends BaseActivity<MainViewModel,ActivityMainBinding
         setSupportActionBar(mBinding.appBarMainId.toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, mBinding.drawerLayout, mBinding.appBarMainId.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, mBinding.drawerLayout, mBinding.appBarMainId.toolbar
+                , R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mBinding.drawerLayout.setDrawerListener(toggle);
         toggle.syncState();
         mBinding.navView.setNavigationItemSelectedListener(this);
-        addDefaultFragment();
-//        mBinding.appBarMainId.toolbarTitle.setText(R.string.repository_daily);
+        setToolBarTitle(startTitle,R.string.daily);
+        mBinding.setMenu(mMenu);
     }
 
 
@@ -68,7 +70,7 @@ public class MainActivity extends BaseActivity<MainViewModel,ActivityMainBinding
     private void addDefaultFragment(){
         mFm =getSupportFragmentManager();
         FragmentTransaction transaction= mFm.beginTransaction();
-        mRepoFrag =new TrendingRepoFragment();
+        mRepoFrag =new TrendingRepoFrag();
         transaction.add(R.id.fragment_container, mRepoFrag
                 , MainConstants.TAG_TRENDING_REPO);
         transaction.commit();
@@ -94,15 +96,18 @@ public class MainActivity extends BaseActivity<MainViewModel,ActivityMainBinding
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        if (mOnMenuClick!=null){
+            mOnMenuClick.onMenuClick(item);
+        }
         switch (id){
             case R.id.action_trending_daily:
-                setToolBarTitle(R.string.trending_daily);
+                setToolBarTitle(startTitle,R.string.daily);
                 break;
             case R.id.action_trending_weekly:
-                setToolBarTitle(R.string.trending_weekly);
+                setToolBarTitle(startTitle,R.string.weekly);
                 break;
             case R.id.action_trending_monthly:
-                setToolBarTitle(R.string.trending_monthly);
+                setToolBarTitle(startTitle,R.string.monthly);
                 break;
             case R.id.action_collections_repo:
                 setToolBarTitle(R.string.collection_repository);
@@ -128,7 +133,8 @@ public class MainActivity extends BaseActivity<MainViewModel,ActivityMainBinding
                 mBinding.appBarMainId.toolbar.getMenu().clear();
                 mBinding.appBarMainId.toolbar
                         .inflateMenu(R.menu.main_toolbar_frequency);
-                setToolBarTitle(R.string.trending_daily);
+                startTitle=R.string.repository;
+                setToolBarTitle(startTitle,R.string.daily);
                 switchFragment(mDeveloperFrag,mCollectionsFrag,mRepoFrag,1
                         ,MainConstants.TAG_TRENDING_REPO);
                 break;
@@ -136,7 +142,8 @@ public class MainActivity extends BaseActivity<MainViewModel,ActivityMainBinding
                 mBinding.appBarMainId.toolbar.getMenu().clear();
                 mBinding.appBarMainId.toolbar
                         .inflateMenu(R.menu.main_toolbar_frequency);
-                setToolBarTitle(R.string.trending_daily);
+                startTitle=R.string.developer;
+                setToolBarTitle(startTitle,R.string.daily);
                 switchFragment(mRepoFrag,mCollectionsFrag,mDeveloperFrag,2
                         ,MainConstants.TAG_TRENDING_DEVELOPER);
                 break;
@@ -169,17 +176,30 @@ public class MainActivity extends BaseActivity<MainViewModel,ActivityMainBinding
         }
         if (show == null) {
             if (showId==1){
-                show = new TrendingRepoFragment();
+                show = new TrendingRepoFrag();
             }else if (showId==2){
-                show=new TrendingDeveloperFragment();
+                show=new TrendingDeveloperFrag();
             }else if (showId==3){
-                show=new CollectionsFragment();
+                show=new CollectionFrag();
             }
             ft.add(R.id.fragment_container, show, tag);
         } else {
             ft.show(show);
         }
         ft.commit();
+    }
+
+    //让fragment监听MainActivity中的MenuItem
+    public interface OnMenuClick{
+        void onMenuClick(MenuItem item);
+    }
+
+    public void setOnMenuClick(OnMenuClick mOnMenuClick) {
+        this.mOnMenuClick = mOnMenuClick;
+    }
+
+    private void setToolBarTitle(int start, int end){
+        mMenu.setToolBarTitle(getString(start)+" "+getString(end));
     }
 
     private void setToolBarTitle(int id){

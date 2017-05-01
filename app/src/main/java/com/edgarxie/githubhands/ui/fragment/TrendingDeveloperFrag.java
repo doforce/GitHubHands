@@ -14,19 +14,13 @@ import com.edgarxie.githubhands.databinding.FragmentTrendingDeveloperBinding;
  * Created by edgar on 17-4-18.
  */
 
-public class TrendingDeveloperFragment extends BaseFragment {
-    FragmentTrendingDeveloperBinding mBinding;
+public class TrendingDeveloperFrag extends BaseFragment {
+    private FragmentTrendingDeveloperBinding mBinding;
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinding= DataBindingUtil.inflate(inflater, R.layout.fragment_trending_developer,container,false);
         return mBinding.getRoot();
     }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
-
 }

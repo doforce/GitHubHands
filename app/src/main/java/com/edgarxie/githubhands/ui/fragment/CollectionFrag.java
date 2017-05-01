@@ -14,20 +14,13 @@ import com.edgarxie.githubhands.databinding.FragmentCollectionsBinding;
  * Created by edgar on 17-4-18.
  */
 
-public class CollectionsFragment extends BaseFragment {
-    FragmentCollectionsBinding mBinding;
-
+public class CollectionFrag extends BaseMainFragment {
+    private FragmentCollectionsBinding mBinding;
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinding= DataBindingUtil.inflate(inflater, R.layout.fragment_collections,container,false);
         return mBinding.getRoot();
     }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
-
 }

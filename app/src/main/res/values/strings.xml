@@ -34,6 +34,13 @@
     <string name="collection_repository">Collection repository</string>
     <string name="collection_developer">Collection developer</string>
     <string name="trending">Trending</string>
+    <string name="daily">daily</string>
+    <string name="weekly">weekly</string>
+    <string name="monthly">monthly</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="built_by">Built By</string>
 
 
 </resources>

@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/main_snack_bar"
-        tools:context="com.edgarxie.githubhands.ui.activity.SearchActivity">
+        tools:context="com.edgarxie.githubhands.ui.activity.SearchAty">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

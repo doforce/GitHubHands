@@ -9,7 +9,7 @@ import com.edgarxie.githubhands.BR;
  * Created by edgar on 17-4-21.
  */
 
-public class MenuModel extends BaseObservable {
+public class ToolbarBean extends BaseObservable {
 
     private String toolBarTitle;
     private int menuId;

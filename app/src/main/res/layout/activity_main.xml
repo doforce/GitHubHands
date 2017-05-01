@@ -7,10 +7,10 @@
     <data>
         <variable
             name="model"
-            type="com.edgarxie.githubhands.viewmodel.MainViewModel"/>
+            type="com.edgarxie.githubhands.viewmodel.MainVM"/>
         <variable
             name="menu"
-            type="com.edgarxie.githubhands.model.MenuModel"/>
+            type="com.edgarxie.githubhands.model.ToolbarBean"/>
     </data>
 
     <android.support.v4.widget.DrawerLayout

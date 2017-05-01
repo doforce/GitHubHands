@@ -6,11 +6,11 @@ import android.databinding.ViewDataBinding;
  * Created by edgar on 17-4-21.
  */
 
-public  abstract class BaseViewModel<T extends ViewDataBinding> {
+public  abstract class BaseViewModel<V extends ViewDataBinding> {
 
-    protected T mBinding;
+    protected V mBinding;
 
-    public BaseViewModel(T binding){
+    public BaseViewModel(V binding){
         mBinding=binding;
     }
 

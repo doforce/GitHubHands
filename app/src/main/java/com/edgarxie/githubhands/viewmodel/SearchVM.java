@@ -6,9 +6,9 @@ import com.edgarxie.githubhands.databinding.ActivitySearchBinding;
  * Created by edgar on 17-4-21.
  */
 
-public class SearchViewModel extends BaseViewModel<ActivitySearchBinding> {
+public class SearchVM extends BaseViewModel<ActivitySearchBinding> {
 
-    public SearchViewModel(ActivitySearchBinding binding) {
+    public SearchVM(ActivitySearchBinding binding) {
         super(binding);
     }
 }
