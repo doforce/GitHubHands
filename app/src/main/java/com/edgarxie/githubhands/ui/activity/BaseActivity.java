@@ -1,29 +1,31 @@
 package com.edgarxie.githubhands.ui.activity;
 
-import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.edgarxie.githubhands.R;
-import com.edgarxie.githubhands.viewmodel.BaseViewModel;
+import com.edgarxie.githubhands.presenter.BasePresenter;
 
 /**
- * Created by edgar on 17-4-16.
+ * Created by edgar on 17-5-3.
  */
 
-public abstract class BaseActivity<T extends BaseViewModel,V extends ViewDataBinding> extends AppCompatActivity {
-    protected T mModel;
-    protected V mBinding;
+public class BaseActivity<T extends BasePresenter> extends AppCompatActivity {
+    protected T mPresenter;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setStatusBarColor(getColor(R.color.colorPrimary));
-        mBinding= DataBindingUtil.setContentView(this,getLayoutId());
+        getWindow().setStatusBarColor(getColor(R.color.colorLogo));
     }
 
-    protected abstract int getLayoutId();
-    protected abstract T getModel();
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mPresenter!=null){
+            mPresenter.detach();
+        }
+    }
 }

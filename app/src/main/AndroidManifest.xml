@@ -9,13 +9,13 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/github"
-        android:name=".MyApplication"
+        android:name=".App"
         android:label="@string/app_name"
         android:roundIcon="@drawable/github"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.activity.MainAty"
+            android:name=".ui.activity.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -24,7 +24,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.SearchAty"/>
+        <activity android:name=".ui.activity.SearchActivity"/>
+        <activity android:name=".ui.activity.CustomLanguageActivity"/>
     </application>
 
 </manifest>

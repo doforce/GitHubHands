@@ -9,9 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by edgarx on 16-8-22.
@@ -19,7 +17,7 @@ import java.util.Map;
 public abstract class BaseRVAdapter<T,VH extends BaseRVAdapter.SparseArrayViewHolder>
         extends RecyclerView.Adapter<VH> {
     protected List<T> mList;
-    protected Map<T,Integer> mItemPosition=new HashMap<>();
+    protected SparseArray<T> mItemPosition =new SparseArray<>();
 
     /**
      * clicked listener
@@ -105,7 +103,7 @@ public abstract class BaseRVAdapter<T,VH extends BaseRVAdapter.SparseArrayViewHo
     @Override
     public final void onBindViewHolder(VH vh, int position) {
         final T item = getItem(position);
-        mItemPosition.put(item,position);
+        mItemPosition.put(position,item);
         bindDataToItemView(vh, item);
         bindItemViewClickListener(vh, item);
     }
@@ -151,8 +149,8 @@ public abstract class BaseRVAdapter<T,VH extends BaseRVAdapter.SparseArrayViewHo
         this.mOnItemLongClickedListener = mOnItemLongClickedListener;
     }
 
-    public Map<T, Integer> getmItemPosition() {
-        return mItemPosition;
+    public int  getPosition(T item){
+        return mItemPosition.indexOfValue(item);
     }
 
     public static class SparseArrayViewHolder extends RecyclerView.ViewHolder {
@@ -160,7 +158,7 @@ public abstract class BaseRVAdapter<T,VH extends BaseRVAdapter.SparseArrayViewHo
 
         public SparseArrayViewHolder(View itemView) {
             super(itemView);
-            views = new SparseArray<View>();
+            views = new SparseArray<>();
         }
 
         public <T extends View> T getView(int id) {

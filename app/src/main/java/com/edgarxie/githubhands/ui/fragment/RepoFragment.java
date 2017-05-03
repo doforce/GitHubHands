@@ -1,22 +1,20 @@
 package com.edgarxie.githubhands.ui.fragment;
 
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.support.v7.widget.RecyclerView;
 import android.widget.LinearLayout;
 
 import com.edgarxie.githubhands.R;
-import com.edgarxie.githubhands.databinding.FragmentRepoBinding;
 
 public class RepoFragment extends BaseFragment {
-    private FragmentRepoBinding mBinding;
     public static final String ARG_LANGUAGE="arg_language";
     private String mLanguage="";
+    private RecyclerView mRvRepo;
+    private SwipeRefreshLayout mRefresh;
 
     public RepoFragment() {
 
@@ -38,19 +36,23 @@ public class RepoFragment extends BaseFragment {
         }
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        mBinding= DataBindingUtil.inflate(inflater,R.layout.fragment_repo, container, false);
-        return mBinding.getRoot();
-    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mBinding.rvTrendingRepo.setLayoutManager(new LinearLayoutManager(getContext()));
-        mBinding.rvTrendingRepo.addItemDecoration(new DividerItemDecoration(getContext()
-                , LinearLayout.VERTICAL));
+        mRvRepo= (RecyclerView) mView.findViewById(R.id.rv_trending_repo);
+        mRefresh= (SwipeRefreshLayout) mView.findViewById(R.id.layout_swipe_refresh);
+        mRvRepo.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRvRepo.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayout.VERTICAL));
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_repo;
+    }
+
+    @Override
+    protected void attachView() {
 
     }
 }

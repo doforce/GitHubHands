@@ -1,48 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<RelativeLayout
+   xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:app="http://schemas.android.com/apk/res-auto"
+   android:layout_width="match_parent"
+   android:layout_height="match_parent">
 
-   <data>
-      <variable
-          name="model"
-          type="com.edgarxie.githubhands.viewmodel.RepoVM"/>
-   </data>
-   <RelativeLayout
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/toolbar_small_size"
+      android:id="@+id/tab"
+      android:orientation="horizontal"
+      android:gravity="center_vertical"
+      android:background="@color/colorLogo"
+      >
+
+     <com.edgarxie.githubhands.view.MyTabLayout
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:layout_weight="1"
+         app:tabGravity="fill"
+         app:tabMode="scrollable"
+         style="@style/MyTabLayoutStyle"
+         android:layout_marginEnd="@dimen/small_view_size"
+         android:id="@+id/tab_language"/>
+
+
+      <ImageView
+          android:layout_width="wrap_content"
+          android:layout_height="@dimen/down_icon_width"
+          android:id="@+id/language_select"
+          android:src="@drawable/down"
+          android:layout_marginEnd="@dimen/small_view_size"
+          android:layout_weight="1"/>
+
+  </LinearLayout>
+   <android.support.v4.view.ViewPager
+       android:id="@+id/view_pager"
        android:layout_width="match_parent"
-       android:layout_height="match_parent">
-
-      <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="@dimen/toolbar_small_size"
-          android:id="@+id/tab"
-          android:orientation="horizontal"
-          android:gravity="center_vertical"
-          android:background="@color/colorLogo"
-          >
-
-         <com.edgarxie.githubhands.view.MyTabLayout
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:layout_weight="1"
-             app:tabGravity="fill"
-             app:tabMode="scrollable"
-             style="@style/MyTabLayoutStyle"
-             android:layout_marginRight="@dimen/small_view_size"
-             android:id="@+id/tab_language"/>
-
-
-          <ImageView
-              android:layout_width="wrap_content"
-              android:layout_height="@dimen/down_icon_width"
-              android:id="@+id/tab_select"
-              android:src="@drawable/down"
-              android:layout_marginRight="@dimen/small_view_size"
-              android:layout_weight="1"/>
-
-      </LinearLayout>
-       <android.support.v4.view.ViewPager
-           android:id="@+id/view_pager"
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"/>
-   </RelativeLayout>
-</layout>
+       android:layout_height="match_parent"/>
+</RelativeLayout>

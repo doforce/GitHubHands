@@ -5,4 +5,12 @@
         <item>@string/trending_weekly</item>
         <item>@string/trending_monthly</item>
     </string-array>
+
+    <string-array name="default_languages">
+        <item>All</item>
+        <item>Java</item>
+        <item>Python</item>
+        <item>JavaScript</item>
+        <item>C</item>
+    </string-array>
 </resources>

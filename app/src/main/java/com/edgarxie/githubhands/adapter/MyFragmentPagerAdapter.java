@@ -3,18 +3,19 @@ package com.edgarxie.githubhands.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.util.SparseArray;
 
 import com.edgarxie.githubhands.ui.fragment.RepoFragment;
+
+import java.util.ArrayList;
 
 /**
  * Created by edgar on 17-4-30.
  */
 
 public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
-    private SparseArray<String> mLang=new SparseArray<>();
+    private ArrayList<String> mLang=new ArrayList<>();
 
-    public MyFragmentPagerAdapter(FragmentManager fm,SparseArray<String> list) {
+    public MyFragmentPagerAdapter(FragmentManager fm,ArrayList<String> list) {
         super(fm);
         mLang=list;
     }
@@ -26,7 +27,7 @@ public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getItemPosition(Object object) {
-        return mLang.indexOfValue((String) object);
+        return mLang.indexOf(object);
     }
 
     @Override

@@ -4,9 +4,9 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="colorSearch">#f2efef</color>
+    <color name="colorSearch">@color/colorWhite</color>
     <color name="colorBlack">#FF000000</color>
-    <color name="colorWhite">#ffffff</color>
+    <color name="colorWhite">#f2efef</color>
     <color name="colorYellow">#f4ea2a</color>
 
     <color name="colorLogo">#2E7D32</color>

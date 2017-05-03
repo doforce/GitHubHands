@@ -5,22 +5,24 @@ import android.support.annotation.Nullable;
 import android.view.MenuItem;
 
 import com.edgarxie.githubhands.R;
-import com.edgarxie.githubhands.ui.activity.MainAty;
+import com.edgarxie.githubhands.presenter.BasePresenter;
+import com.edgarxie.githubhands.ui.activity.MainActivity;
 import com.edgarxie.githubhands.util.NetConstants;
 
 /**
  * Created by edgar on 17-4-24.
  */
 
-public abstract class BaseMainFragment
-        extends BaseFragment implements MainAty.OnMenuClick{
-    private MainAty mActivity;
+public abstract class BaseMainFragment<T extends BasePresenter>
+        extends BaseFragment implements MainActivity.OnMenuClick{
+    protected T mPresenter;
+    private MainActivity mActivity;
     protected String mFrequency= NetConstants.DAILY;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mActivity= (MainAty) getActivity();
+        mActivity= (MainActivity) getActivity();
         mActivity.setOnMenuClick(this);
     }
 

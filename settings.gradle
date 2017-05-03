@@ -1,1 +1,1 @@
-include ':app', ':bindingtest', ':utils'
+include ':app', ':utils'
