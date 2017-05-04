@@ -2,6 +2,7 @@ package com.edgarxie.githubhands.ui.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.DisplayMetrics;
 
 import com.edgarxie.githubhands.R;
 import com.edgarxie.githubhands.presenter.CustomLanguagePresenter;
@@ -19,6 +20,8 @@ public class CustomLanguageActivity extends BaseActivity<CustomLanguagePresenter
     }
 
     private void initViews(){
-
+        DisplayMetrics metrics=new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        int width=metrics.widthPixels;
     }
 }

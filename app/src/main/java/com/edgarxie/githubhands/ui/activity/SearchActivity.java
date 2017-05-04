@@ -4,12 +4,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.edgarxie.githubhands.R;
+import com.edgarxie.githubhands.view.SelectView;
 
 /**
  * Created by edgar on 17-4-21.
  */
 
 public class SearchActivity extends BaseActivity {
+    private SelectView mSelectView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

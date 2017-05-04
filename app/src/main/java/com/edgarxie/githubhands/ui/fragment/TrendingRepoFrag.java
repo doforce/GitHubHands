@@ -4,20 +4,19 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.widget.ImageView;
 
 import com.edgarxie.githubhands.R;
 import com.edgarxie.githubhands.presenter.TrendingRepoPresenter;
 import com.edgarxie.githubhands.ui.interf.ITrendingRepoView;
 
+import java.util.List;
+
 /**
  * Created by edgar on 17-4-18.
  */
 
 public class TrendingRepoFrag extends BaseMainFragment<TrendingRepoPresenter> implements ITrendingRepoView{
-    private ViewPager mViewPager;
     private TabLayout mLanguageTab;
     private ImageView mSelect;
 
@@ -30,16 +29,33 @@ public class TrendingRepoFrag extends BaseMainFragment<TrendingRepoPresenter> im
     }
 
     private void initViews(){
-        mViewPager= (ViewPager) mView.findViewById(R.id.view_pager);
         mLanguageTab= (TabLayout) mView.findViewById(R.id.tab_language);
         mSelect= (ImageView) mView.findViewById(R.id.language_select);
         mSelect.setOnClickListener((v) -> mPresenter.goToCustomLanguage());
+        mLanguageTab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                mPresenter.onTabSelected(tab);
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                mPresenter.onTabUnSelected(tab);
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {}
+        });
     }
 
+
+
     @Override
-    public void setPagerAdapter(FragmentPagerAdapter adapter) {
-        mViewPager.setAdapter(adapter);
-        mLanguageTab.setupWithViewPager(mViewPager);
+    public void addTabs(List<String> tabs) {
+        mLanguageTab.removeAllTabs();
+        for (int i = 0; i < tabs.size(); i++) {
+            mLanguageTab.addTab(mLanguageTab.newTab().setText(tabs.get(i)));
+        }
     }
 
     @Override

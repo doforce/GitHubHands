@@ -16,4 +16,7 @@
     <color name="colorTabLayout">@color/colorLogo</color>
 
     <color name="colorItemRepo">#4d86c7</color>
+
+    <color name="language_tab_bg_color">#44ac67</color>
+    <color name="language_tab_text_color">#0e0606</color>
 </resources>

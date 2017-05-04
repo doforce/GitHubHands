@@ -20,4 +20,5 @@ public abstract class BasePresenter<T extends ITopView> {
     public void detach(){
         mView=null;
     }
+
 }
