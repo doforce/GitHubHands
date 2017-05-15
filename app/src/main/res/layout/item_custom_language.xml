@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="2dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/item_lang"
+        android:textSize="@dimen/item_title_size"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="@dimen/middle_view_size"
+        android:text="JavaScript"/>
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/item_status"
+        android:checked="true"
+        android:textAllCaps="false"
+        android:layout_marginEnd="@dimen/middle_view_size"
+        android:layout_alignParentEnd="true"/>
+
+
+</RelativeLayout>

@@ -11,7 +11,7 @@ import com.edgarxie.githubhands.presenter.BasePresenter;
  * Created by edgar on 17-5-3.
  */
 
-public class BaseActivity<T extends BasePresenter> extends AppCompatActivity {
+public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity {
     protected T mPresenter;
 
 
@@ -28,4 +28,12 @@ public class BaseActivity<T extends BasePresenter> extends AppCompatActivity {
             mPresenter.detach();
         }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        attachView();
+    }
+
+    protected abstract void attachView();
 }

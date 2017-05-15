@@ -13,4 +13,33 @@
         <item>JavaScript</item>
         <item>C</item>
     </string-array>
+
+    <string-array name="all_language">
+        <item>Assembly</item>
+        <item>C</item>
+        <item>C#</item>
+        <item>C++</item>
+        <item>Clojure</item>
+        <item>CSS</item>
+        <item>F#</item>
+        <item>Go</item>
+        <item>Groovy</item>
+        <item>HTML</item>
+        <item>Java</item>
+        <item>Java-Server-Pages</item>
+        <item>JavaScript</item>
+        <item>Kotlin</item>
+        <item>Objective-C</item>
+        <item>Pascal</item>
+        <item>Perl</item>
+        <item>PHP</item>
+        <item>Python</item>
+        <item>R</item>
+        <item>Ruby</item>
+        <item>Scala</item>
+        <item>Shell</item>
+        <item>Swift</item>
+        <item>TypeScript</item>
+        <item>Visual-Basic</item>
+    </string-array>
 </resources>

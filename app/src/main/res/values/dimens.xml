@@ -25,5 +25,5 @@
 
     <dimen name="language_tab_bg_radius">10dp</dimen>
     <dimen name="language_tab_text_size">18sp</dimen>
-    <dimen name="language_tab_padding">10dp</dimen>
+    <dimen name="language_tab_padding">2dp</dimen>
 </resources>

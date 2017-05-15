@@ -8,4 +8,7 @@ import com.edgarxie.githubhands.ui.interf.ICustomLanguageView;
 
 public class CustomLanguagePresenter extends BasePresenter<ICustomLanguageView> {
 
+    public void loadLanguages() {
+
+    }
 }

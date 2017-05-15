@@ -1,27 +1,26 @@
 package com.edgarxie.githubhands.view;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Created by edgar on 17-5-4.
+ * Created by edgar on 17-5-10.
  */
 
-public class SelectView extends ViewGroup {
-//    private ArrayList<String> mValues;
-//    private ArrayList<TextView> mChildrenViews=new ArrayList<>();
+public class NewLineLayout extends ViewGroup {
 
-    public SelectView(Context context) {
+    public NewLineLayout(Context context) {
         super(context,null);
     }
 
-    public SelectView(Context context, AttributeSet attrs) {
+    public NewLineLayout(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs,0);
     }
 
-    public SelectView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public NewLineLayout(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
@@ -52,7 +51,7 @@ public class SelectView extends ViewGroup {
                 maxHeight = curHeight;
             curLeft += curWidth;
         }
-}
+    }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -87,45 +86,4 @@ public class SelectView extends ViewGroup {
         setMeasuredDimension(resolveSizeAndState(maxWidth,widthMeasureSpec,0)
                 ,resolveSizeAndState(maxHeight,heightMeasureSpec,0));
     }
-
-//    private void addTextView(String text,int index){
-//        TextView textView= (TextView) LayoutInflater.from(mContext).inflate(R.layout.oval_text_view,this);
-//        textView.setText(text);
-//        mChildrenViews.add(index,textView);
-//        addView(textView,index);
-//    }
-//
-//    public void setValues(ArrayList<String> mValues) {
-//        this.mValues = mValues;
-//        for (int i = 0; i < mValues.size(); i++) {
-//            addTextView(mValues.get(i),i);
-//        }
-//    }
-//
-//    public ArrayList<String> getValues() {
-//        return mValues;
-//    }
-//
-//    public void getValue(int index){
-//        if (mValues.size()>0) {
-//            mValues.get(index);
-//        }
-//    }
-//
-//    public void addVaule(int index, String value){
-//        mValues.add(index,value);
-//        addTextView(value,index);
-//    }
-//
-//    public void addVaule(String value){
-//        mValues.add(value);
-//        addTextView(value,-1);
-//    }
-//
-//    public void removeValue(int index){
-//        if (mValues.size()>0) {
-//            mValues.remove(index);
-//            removeView(mChildrenViews.get(index));
-//        }
-//    }
 }

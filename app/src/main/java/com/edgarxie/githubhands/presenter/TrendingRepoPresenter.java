@@ -14,15 +14,13 @@ import com.edgarxie.githubhands.ui.fragment.RepoFragment;
 import com.edgarxie.githubhands.ui.interf.ITrendingRepoView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by edgar on 17-5-3.
  */
 
 public class TrendingRepoPresenter extends BasePresenter<ITrendingRepoView> {
-    private List<String> mLang=new ArrayList<>();
+    private ArrayList<String> mLang=new ArrayList<>();
     private String[] mDefault_languages;
 
     public TrendingRepoPresenter(Context context){
@@ -33,13 +31,16 @@ public class TrendingRepoPresenter extends BasePresenter<ITrendingRepoView> {
     public void goToCustomLanguage() {
         Intent intent=new Intent(mContext, CustomLanguageActivity.class);
         Bundle bundle=new Bundle();
-        bundle.putStringArrayList("languages", (ArrayList<String>) mLang);
+        bundle.putStringArrayList("languages", mLang);
         mContext.startActivity(intent,bundle);
     }
 
     public void setLanguages() {
         if (LanguageModel.isTableEmpty()){
-            mLang= Arrays.asList(mDefault_languages);
+            mLang.clear();
+            for (int i = 0; i < mDefault_languages.length; i++) {
+                mLang.add(mDefault_languages[i]);
+            }
         }else {
             mLang=LanguageModel.getAll();
         }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    >
 
     <include
         layout="@layout/tool_bar_back"
@@ -10,12 +10,13 @@
         android:layout_height="wrap_content"
         android:id="@+id/toolbar_layout"/>
 
-    <com.edgarxie.githubhands.view.SelectView
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/all_language_list"
         android:layout_below="@+id/toolbar_layout"
-        android:id="@+id/select_view">
+        android:padding="2dp">
 
-    </com.edgarxie.githubhands.view.SelectView>
+    </android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>
