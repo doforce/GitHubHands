@@ -1,38 +1,48 @@
 package com.edgarxie.githubhands.ui.activity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.DividerItemDecoration;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.edgarxie.githubhands.R;
-import com.edgarxie.githubhands.presenter.CustomLanguagePresenter;
+import com.edgarxie.githubhands.presenter.CustomLangP;
 import com.edgarxie.githubhands.ui.interf.ICustomLanguageView;
 import com.edgarxie.utils.android.recyclerview.BaseRVAdapter;
+import com.edgarxie.utils.android.recyclerview.RVDecoration;
 
 /**
  * Created by edgar on 17-5-3.
  */
 
-public class CustomLanguageActivity extends BaseActivity<CustomLanguagePresenter>
+public class CustomLangAty extends BaseActivity<CustomLangP>
         implements ICustomLanguageView{
-    private Bundle mBundle;
     private RecyclerView mLanguageList;
+    private ImageView mBack;
+    private TextView mTitle;
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_language);
-        mPresenter=new CustomLanguagePresenter();
+        mPresenter=new CustomLangP(this);
         initViews();
-        mBundle=getIntent().getExtras();
     }
 
     private void initViews(){
         mLanguageList= (RecyclerView) findViewById(R.id.all_language_list);
+        mBack= (ImageView) findViewById(R.id.toolbar_back);
+        mTitle= (TextView) findViewById(R.id.toolbar_title);
+
         mLanguageList.setLayoutManager(new LinearLayoutManager(this));
-        mLanguageList.addItemDecoration(new DividerItemDecoration(this, LinearLayout.VERTICAL));
+        mLanguageList.addItemDecoration(new RVDecoration(this,RVDecoration.VERTICAL_LIST));
+        mTitle.setText(getResources().getString(R.string.title_custom_language));
+        mBack.setOnClickListener((view) -> finish());
     }
 
     @Override
@@ -41,10 +51,6 @@ public class CustomLanguageActivity extends BaseActivity<CustomLanguagePresenter
         mPresenter.loadLanguages();
     }
 
-    @Override
-    public Bundle getBundle() {
-        return mBundle;
-    }
 
     @Override
     protected void attachView() {

@@ -13,7 +13,7 @@ import com.edgarxie.githubhands.util.NetConstants;
  * Created by edgar on 17-4-24.
  */
 
-public abstract class BaseMainFragment<T extends BasePresenter>
+public abstract class BaseMainFrag<T extends BasePresenter>
         extends BaseFragment implements MainActivity.OnMenuClick{
     protected T mPresenter;
     private MainActivity mActivity;

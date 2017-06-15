@@ -1,10 +1,9 @@
 package com.edgarxie.githubhands;
 
 import android.app.Application;
-import android.database.sqlite.SQLiteDatabase;
 
-import com.edgarxie.githubhands.model.table.DaoMaster;
-import com.edgarxie.githubhands.model.table.DaoSession;
+import com.edgarxie.githubhands.util.GreenDaoManager;
+import com.koma.greendao.gen.DaoSession;
 
 
 /**
@@ -13,31 +12,16 @@ import com.edgarxie.githubhands.model.table.DaoSession;
 
 public class App extends Application {
 
-    private DaoMaster.DevOpenHelper mHelper;
-    private SQLiteDatabase db;
-    private DaoMaster mDaoMaster;
-    private DaoSession mDaoSession;
-    public static App instances;
-    @Override    public void onCreate() {
+
+    public static DaoSession mSession;
+    public static String[] DEFAULT_LANG;
+    public static String[] ALL_LANG;
+
+    @Override
+    public void onCreate() {
         super.onCreate();
-        instances = this;
-        setDatabase();
-    }
-    public static App getInstances(){
-        return instances;
-    }
-
-    private void setDatabase() {
-        mHelper = new DaoMaster.DevOpenHelper(this, "github", null);
-        db = mHelper.getWritableDatabase();
-        mDaoMaster = new DaoMaster(db);
-        mDaoSession = mDaoMaster.newSession();
-    }
-    public DaoSession getDaoSession() {
-        return mDaoSession;
-    }
-
-    public SQLiteDatabase getDb() {
-        return db;
+        mSession=GreenDaoManager.getInstance(this).getNewSession();
+        DEFAULT_LANG=getResources().getStringArray(R.array.default_languages);
+        ALL_LANG=getResources().getStringArray(R.array.all_language);
     }
 }

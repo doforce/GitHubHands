@@ -6,7 +6,7 @@ import com.edgarxie.githubhands.R;
  * Created by edgar on 17-4-18.
  */
 
-public class TrendingDeveloperFrag extends BaseFragment {
+public class TrendingDevFrag extends BaseFragment {
 
     @Override
     protected int getLayoutId() {

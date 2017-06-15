@@ -16,14 +16,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.edgarxie.githubhands.R;
-import com.edgarxie.githubhands.presenter.MainPresenter;
+import com.edgarxie.githubhands.presenter.MainP;
 import com.edgarxie.githubhands.ui.fragment.CollectionFrag;
-import com.edgarxie.githubhands.ui.fragment.TrendingDeveloperFrag;
+import com.edgarxie.githubhands.ui.fragment.TrendingDevFrag;
 import com.edgarxie.githubhands.ui.fragment.TrendingRepoFrag;
 import com.edgarxie.githubhands.util.MainConstants;
 import com.edgarxie.githubhands.ui.interf.IMainView;
 
-public class MainActivity extends BaseActivity<MainPresenter>
+public class MainActivity extends BaseActivity<MainP>
         implements NavigationView.OnNavigationItemSelectedListener,IMainView {
     private FragmentManager mFm;
     private Fragment mRepoFrag;
@@ -43,11 +43,10 @@ public class MainActivity extends BaseActivity<MainPresenter>
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mPresenter=new MainPresenter();
+        mPresenter=new MainP();
         initViews();
         addDefaultFragment();
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -144,7 +143,7 @@ public class MainActivity extends BaseActivity<MainPresenter>
             if (showId==1){
                 show = new TrendingRepoFrag();
             }else if (showId==2){
-                show=new TrendingDeveloperFrag();
+                show=new TrendingDevFrag();
             }else if (showId==3){
                 show=new CollectionFrag();
             }
@@ -213,4 +212,8 @@ public class MainActivity extends BaseActivity<MainPresenter>
         mToolbarTitle.setText(id);
     }
 
+    @Override
+    protected void attachView() {
+        mPresenter.attach(this);
+    }
 }

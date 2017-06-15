@@ -25,10 +25,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activity.SearchActivity" />
-        <activity android:name=".ui.activity.CustomLanguageActivity" />
-        <activity
-            android:name=".ui.SettingsActivity"
-            android:label="@string/title_activity_settings"></activity>
+        <activity android:name=".ui.activity.CustomLangAty" />
     </application>
 
 </manifest>

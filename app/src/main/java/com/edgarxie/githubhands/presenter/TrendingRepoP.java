@@ -2,47 +2,42 @@ package com.edgarxie.githubhands.presenter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
+import com.edgarxie.githubhands.App;
 import com.edgarxie.githubhands.R;
-import com.edgarxie.githubhands.model.LanguageModel;
-import com.edgarxie.githubhands.ui.activity.CustomLanguageActivity;
+import com.edgarxie.githubhands.model.DbLangModel;
+import com.edgarxie.githubhands.ui.activity.CustomLangAty;
 import com.edgarxie.githubhands.ui.fragment.RepoFragment;
 import com.edgarxie.githubhands.ui.interf.ITrendingRepoView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by edgar on 17-5-3.
  */
 
-public class TrendingRepoPresenter extends BasePresenter<ITrendingRepoView> {
+public class TrendingRepoP extends BasePresenter<ITrendingRepoView> {
     private ArrayList<String> mLang=new ArrayList<>();
-    private String[] mDefault_languages;
 
-    public TrendingRepoPresenter(Context context){
+    public TrendingRepoP(Context context){
         mContext=context;
-        mDefault_languages=mContext.getResources()
-                .getStringArray(R.array.default_languages);
     }
     public void goToCustomLanguage() {
-        Intent intent=new Intent(mContext, CustomLanguageActivity.class);
-        Bundle bundle=new Bundle();
-        bundle.putStringArrayList("languages", mLang);
-        mContext.startActivity(intent,bundle);
+        Intent intent=new Intent(mContext, CustomLangAty.class);
+        mContext.startActivity(intent);
     }
 
     public void setLanguages() {
-        if (LanguageModel.isTableEmpty()){
+        if (DbLangModel.isEmpty()){
+            DbLangModel.initTable();
             mLang.clear();
-            for (int i = 0; i < mDefault_languages.length; i++) {
-                mLang.add(mDefault_languages[i]);
-            }
+            mLang=new ArrayList<>(Arrays.asList(App.DEFAULT_LANG));
         }else {
-            mLang=LanguageModel.getAll();
+            mLang= DbLangModel.getAllSelectedLang();
         }
         mView.addTabs(mLang);
     }

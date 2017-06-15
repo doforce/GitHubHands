@@ -1,7 +1,5 @@
 package com.edgarxie.githubhands.ui.interf;
 
-import android.os.Bundle;
-
 import com.edgarxie.utils.android.recyclerview.BaseRVAdapter;
 
 /**
@@ -9,6 +7,5 @@ import com.edgarxie.utils.android.recyclerview.BaseRVAdapter;
  */
 
 public interface ICustomLanguageView extends ITopView {
-    Bundle getBundle();
     void setAdapter(BaseRVAdapter adapter);
 }

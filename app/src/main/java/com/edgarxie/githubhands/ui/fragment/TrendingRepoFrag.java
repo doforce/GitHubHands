@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.widget.ImageView;
 
 import com.edgarxie.githubhands.R;
-import com.edgarxie.githubhands.presenter.TrendingRepoPresenter;
+import com.edgarxie.githubhands.presenter.TrendingRepoP;
 import com.edgarxie.githubhands.ui.interf.ITrendingRepoView;
 
 import java.util.List;
@@ -16,7 +16,7 @@ import java.util.List;
  * Created by edgar on 17-4-18.
  */
 
-public class TrendingRepoFrag extends BaseMainFragment<TrendingRepoPresenter> implements ITrendingRepoView{
+public class TrendingRepoFrag extends BaseMainFrag<TrendingRepoP> implements ITrendingRepoView{
     private TabLayout mLanguageTab;
     private ImageView mSelect;
 
@@ -24,7 +24,7 @@ public class TrendingRepoFrag extends BaseMainFragment<TrendingRepoPresenter> im
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mPresenter=new TrendingRepoPresenter(getContext());
+        mPresenter=new TrendingRepoP(getContext());
         initViews();
     }
 
@@ -47,8 +47,6 @@ public class TrendingRepoFrag extends BaseMainFragment<TrendingRepoPresenter> im
             public void onTabReselected(TabLayout.Tab tab) {}
         });
     }
-
-
 
     @Override
     public void addTabs(List<String> tabs) {

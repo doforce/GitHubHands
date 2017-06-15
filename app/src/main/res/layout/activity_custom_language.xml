@@ -14,8 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/all_language_list"
-        android:layout_below="@+id/toolbar_layout"
-        android:padding="2dp">
+        android:padding="2dp"
+        android:layout_below="@+id/toolbar_layout">
 
     </android.support.v7.widget.RecyclerView>
 
