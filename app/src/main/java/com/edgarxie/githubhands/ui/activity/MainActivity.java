@@ -1,8 +1,11 @@
 package com.edgarxie.githubhands.ui.activity;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -12,7 +15,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.edgarxie.githubhands.R;
@@ -20,8 +25,10 @@ import com.edgarxie.githubhands.presenter.MainP;
 import com.edgarxie.githubhands.ui.fragment.CollectionFrag;
 import com.edgarxie.githubhands.ui.fragment.TrendingDevFrag;
 import com.edgarxie.githubhands.ui.fragment.TrendingRepoFrag;
-import com.edgarxie.githubhands.util.MainConstants;
 import com.edgarxie.githubhands.ui.interf.IMainView;
+import com.edgarxie.githubhands.util.MainConstants;
+
+import java.util.List;
 
 public class MainActivity extends BaseActivity<MainP>
         implements NavigationView.OnNavigationItemSelectedListener,IMainView {
@@ -31,28 +38,33 @@ public class MainActivity extends BaseActivity<MainP>
     private Fragment mCollectionsFrag;
     private static final String TAG = "MainActivity";
     private int startTitle=R.string.repository;
-    private OnMenuClick mOnMenuClick;
+    private OnMenuClick onMenuClick;
+    private OnTabSelectedListener onTabSelectedListener;
 
     private Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavView;
     private TextView mToolbarTitle;
     private ImageView mToolbarSearch;
+    private TabLayout mLanguageTab;
+    private ImageView mSelect;
+    private LinearLayout mTabLayout;
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mPresenter=new MainP();
         initViews();
+        mPresenter=new MainP(this);
         addDefaultFragment();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (mOnMenuClick!=null){
-            mOnMenuClick.onMenuClick(item);
+        if (onMenuClick !=null){
+            onMenuClick.onMenuClick(item);
         }
         switch (id){
             case R.id.action_trending_daily:
@@ -85,6 +97,7 @@ public class MainActivity extends BaseActivity<MainP>
         mCollectionsFrag = mFm.findFragmentByTag(MainConstants.TAG_COLLECTIONS);
         switch (id) {
             case R.id.nav_trending_repositories:
+                mTabLayout.setVisibility(View.VISIBLE);
                 mToolbar.getMenu().clear();
                 mToolbar.inflateMenu(R.menu.main_toolbar_frequency);
                 startTitle=R.string.repository;
@@ -93,6 +106,7 @@ public class MainActivity extends BaseActivity<MainP>
                         ,MainConstants.TAG_TRENDING_REPO);
                 break;
             case R.id.nav_trending_developers:
+                mTabLayout.setVisibility(View.GONE);
                 mToolbar.getMenu().clear();
                 mToolbar.inflateMenu(R.menu.main_toolbar_frequency);
                 startTitle=R.string.developer;
@@ -101,6 +115,7 @@ public class MainActivity extends BaseActivity<MainP>
                         ,MainConstants.TAG_TRENDING_DEVELOPER);
                 break;
             case R.id.nav_collections:
+                mTabLayout.setVisibility(View.GONE);
                 mToolbar.getMenu().clear();
                 mToolbar.inflateMenu(R.menu.main_toolbar_type);
                 setToolBarTitle(R.string.collection_repository);
@@ -125,6 +140,9 @@ public class MainActivity extends BaseActivity<MainP>
         mFm =getSupportFragmentManager();
         FragmentTransaction transaction= mFm.beginTransaction();
         mRepoFrag =new TrendingRepoFrag();
+
+        mRepoFrag=TrendingRepoFrag.newInstance(mPresenter
+                .getDefaultTabText());
         transaction.add(R.id.fragment_container, mRepoFrag
                 , MainConstants.TAG_TRENDING_REPO);
         transaction.commit();
@@ -155,12 +173,15 @@ public class MainActivity extends BaseActivity<MainP>
     }
 
 
-    private void initViews(){
+    public void initViews(){
         mToolbar= (Toolbar) findViewById(R.id.toolbar);
         mDrawerLayout= (DrawerLayout) findViewById(R.id.drawer_layout);
         mNavView= (NavigationView) findViewById(R.id.nav_view);
         mToolbarTitle= (TextView) findViewById(R.id.toolbar_title);
         mToolbarSearch= (ImageView) findViewById(R.id.toolbar_search);
+        mLanguageTab= (TabLayout) findViewById(R.id.tab_language);
+        mSelect= (ImageView) findViewById(R.id.language_select);
+        mTabLayout= (LinearLayout) findViewById(R.id.tab_layout);
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -177,6 +198,25 @@ public class MainActivity extends BaseActivity<MainP>
             startActivity(intent);
         });
         mNavView.setNavigationItemSelectedListener(this);
+
+        mSelect.setOnClickListener((v) -> mPresenter.goToCustomLanguage());
+        mLanguageTab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                onTabSelectedListener.selected((String) tab.getText());
+            }
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {}
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {}
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mPresenter.setLanguages();
     }
 
     @Override
@@ -195,13 +235,21 @@ public class MainActivity extends BaseActivity<MainP>
         }
     }
 
+    public interface OnTabSelectedListener {
+        void selected(String tab);
+    }
+
+    public void setOnTabSelectedListener(OnTabSelectedListener onTabSelectedListener) {
+        this.onTabSelectedListener = onTabSelectedListener;
+    }
+
     //让fragment监听MainActivity中的MenuItem
     public interface OnMenuClick{
         void onMenuClick(MenuItem item);
     }
 
     public void setOnMenuClick(OnMenuClick mOnMenuClick) {
-        this.mOnMenuClick = mOnMenuClick;
+        this.onMenuClick = mOnMenuClick;
     }
 
     private void setToolBarTitle(int start, int end){
@@ -210,6 +258,19 @@ public class MainActivity extends BaseActivity<MainP>
 
     private void setToolBarTitle(int id){
         mToolbarTitle.setText(id);
+    }
+
+    @Override
+    public void addTabs(List<String> tabs) {
+        mLanguageTab.removeAllTabs();
+        for (int i = 0; i < tabs.size(); i++) {
+            mLanguageTab.addTab(mLanguageTab.newTab().setText(tabs.get(i)));
+        }
+    }
+
+    @Override
+    public void getTabAt(int index) {
+        mLanguageTab.getTabAt(index);
     }
 
     @Override

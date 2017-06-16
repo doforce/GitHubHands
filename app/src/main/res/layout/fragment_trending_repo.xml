@@ -1,46 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-   xmlns:android="http://schemas.android.com/apk/res/android"
-   xmlns:app="http://schemas.android.com/apk/res-auto"
-   android:layout_width="match_parent"
-   android:layout_height="match_parent">
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="@dimen/toolbar_small_size"
-      android:id="@+id/tab"
-      android:orientation="horizontal"
-      android:gravity="center_vertical"
-      android:paddingRight="@dimen/middle_view_size"
-      android:background="@color/colorLogo"
-      >
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/layout_swipe_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
 
-     <android.support.design.widget.TabLayout
-         android:layout_width="match_parent"
-         android:layout_height="match_parent"
-         app:tabGravity="fill"
-         app:tabMode="scrollable"
-         style="@style/MyTabLayoutStyle"
-         android:layout_weight="1"
-         android:layout_marginEnd="@dimen/down_icon_margin_size"
-         android:id="@+id/tab_language"/>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_trending_repo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="2dp"
+                >
+            </android.support.v7.widget.RecyclerView>
 
 
-      <ImageView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
-          android:id="@+id/language_select"
-          android:src="@drawable/down"
-          />
+        </android.support.v4.widget.SwipeRefreshLayout>
 
-  </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/repo_container"
-        android:layout_below="@+id/tab">
-
-    </RelativeLayout>
 </RelativeLayout>

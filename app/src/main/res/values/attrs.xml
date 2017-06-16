@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="DragButton">
-        <attr name="view_text_color" format="color"/>
-        <attr name="canDrag" format="boolean"/>
-        <attr name="view_bg" format="color|reference"/>
-    </declare-styleable>
+
 </resources>

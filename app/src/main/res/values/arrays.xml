@@ -40,6 +40,7 @@
         <item>Shell</item>
         <item>Swift</item>
         <item>TypeScript</item>
+        <item>Unknown</item>
         <item>Visual-Basic</item>
     </string-array>
 </resources>

@@ -1,60 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_snack_bar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/main_snack_bar"
     tools:context="com.edgarxie.githubhands.ui.activity.MainActivity">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/main_app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay"
-        android:id="@+id/main_app_bar_layout"
-        tools:layout_editor_absoluteY="25dp"
-        tools:layout_editor_absoluteX="8dp">
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="25dp">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="@dimen/toolbar_middle_size"
             android:background="?attr/colorPrimary"
             app:layout_scrollFlags="enterAlways"
-            app:popupTheme="@style/AppTheme.PopupOverlay" >
+            app:popupTheme="@style/AppTheme.PopupOverlay">
 
             <RelativeLayout
+                android:id="@+id/toolbar_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/toolbar_layout">
+                android:layout_height="match_parent">
 
                 <TextView
+                    android:id="@+id/toolbar_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/toolbar_title"
-                    android:textSize="@dimen/toolbar_title_size"
                     android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"/>
+                    android:layout_centerVertical="true"
+                    android:textSize="@dimen/toolbar_title_size" />
 
                 <ImageView
+                    android:id="@+id/toolbar_search"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/toolbar_search"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/search_github"/>
+                    app:srcCompat="@drawable/search_github" />
 
             </RelativeLayout>
 
         </android.support.v7.widget.Toolbar>
 
+        <LinearLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_small_size"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingRight="@dimen/middle_view_size">
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tab_language"
+                style="@style/MyTabLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/down_icon_margin_size"
+                android:layout_weight="1"
+                app:tabGravity="fill"
+                app:tabMode="scrollable" />
+
+            <ImageView
+                android:id="@+id/language_select"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/down" />
+
+        </LinearLayout>
+
+
     </android.support.design.widget.AppBarLayout>
 
     <FrameLayout
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/fragment_container"
         android:layout_marginTop="?attr/actionBarSize">
 
     </FrameLayout>
