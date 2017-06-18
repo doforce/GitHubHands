@@ -24,8 +24,12 @@ public class DbLangModel {
         List<TrendingLang> languages=App.mSession.getTrendingLangDao()
                 .queryBuilder().where(TrendingLangDao.Properties.Selected.eq(1)).list();
         ArrayList<String> result=new ArrayList<>();
-        for (TrendingLang language : languages) {
-            result.add(language.getLang());
+        if (languages.size()==0){
+            result.add("All");
+        }else {
+            for (TrendingLang language : languages) {
+                result.add(language.getLang());
+            }
         }
         return result;
     }

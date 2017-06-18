@@ -59,6 +59,7 @@ public class TrendingRepoFrag extends BaseFragment<RepoPresenter> implements IRe
 
         mRefresh.setOnRefreshListener(() -> mPresenter.onRefresh());
         mActivity.setOnTabSelectedListener(this);
+        mActivity.setOnMenuClick(this);
     }
 
     @Override
@@ -105,6 +106,11 @@ public class TrendingRepoFrag extends BaseFragment<RepoPresenter> implements IRe
     @Override
     public void setRefreshing(boolean refreshing) {
         mRefresh.setRefreshing(refreshing);
+    }
+
+    @Override
+    public void refreshingPost(Runnable runnable) {
+        mRefresh.post(runnable);
     }
 
     @Override
