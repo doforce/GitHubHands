@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import com.bumptech.glide.Glide;
 import com.edgarxie.githubhands.R;
 import com.edgarxie.githubhands.model.bean.TrendingRepoBean;
+import com.edgarxie.utils.android.ToastUtil;
 import com.edgarxie.utils.android.recyclerview.BaseRVAdapter;
 
 import java.util.List;
@@ -31,6 +32,11 @@ public class TrendingRepoAdapter extends BaseRVAdapter<TrendingRepoBean,BaseRVAd
         holder.setText(R.id.item_forks,item.getForks());
         holder.setText(R.id.item_added_stars,item.getAddedStars());
         setAvatarsUrl(holder,item.getAvatars());
+        holder.setOnClickListener(R.id.item_collect, v -> {
+            ToastUtil.show(mContext,"Collect");
+            holder.setImageBackground(R.id.item_collect
+                    ,mContext.getResources().getDrawable(R.drawable.collection_heart_selected));
+        });
     }
 
     @Override

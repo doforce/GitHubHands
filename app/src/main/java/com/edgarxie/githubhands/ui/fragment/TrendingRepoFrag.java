@@ -24,6 +24,7 @@ public class TrendingRepoFrag extends BaseFragment<RepoPresenter> implements IRe
     private RecyclerView mRvRepo;
     private SwipeRefreshLayout mRefresh;
     protected MainActivity mActivity;
+    private boolean isFirstLoad=true;
 
     public TrendingRepoFrag() {
 
@@ -49,6 +50,8 @@ public class TrendingRepoFrag extends BaseFragment<RepoPresenter> implements IRe
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        isFirstLoad=true;
+
         mRvRepo= (RecyclerView) mView.findViewById(R.id.rv_trending_repo);
         mRefresh= (SwipeRefreshLayout) mView.findViewById(R.id.layout_swipe_refresh);
         mRvRepo.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -57,7 +60,7 @@ public class TrendingRepoFrag extends BaseFragment<RepoPresenter> implements IRe
         mPresenter=new RepoPresenter(getContext());
         mActivity= (MainActivity) getActivity();
 
-        mRefresh.setOnRefreshListener(() -> mPresenter.onRefresh());
+        mRefresh.setOnRefreshListener(() -> mPresenter.requestRepo(mLanguage,mFrequency));
         mActivity.setOnTabSelectedListener(this);
         mActivity.setOnMenuClick(this);
     }
@@ -85,7 +88,7 @@ public class TrendingRepoFrag extends BaseFragment<RepoPresenter> implements IRe
     private void applyFrequencyChange(String frequency){
         if (mFrequency!=frequency){
             mFrequency=frequency;
-            mPresenter.reloadRepo(mLanguage,mFrequency);
+            mPresenter.requestRepo(mLanguage,mFrequency);
         }
     }
 
@@ -93,14 +96,27 @@ public class TrendingRepoFrag extends BaseFragment<RepoPresenter> implements IRe
     public void selected(String tab) {
         if (mLanguage!=tab){
             mLanguage= tab;
-            mPresenter.reloadRepo(mLanguage,mFrequency);
+            mPresenter.requestRepo(mLanguage,mFrequency);
         }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mPresenter.requestRepo(mLanguage,mFrequency);
+        if (isFirstLoad) {
+            mPresenter.resumeRequest(mLanguage, mFrequency);
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        isFirstLoad=false;
+    }
+
+    @Override
+    public void runOnUIThread(Runnable action) {
+        getActivity().runOnUiThread(action);
     }
 
     @Override

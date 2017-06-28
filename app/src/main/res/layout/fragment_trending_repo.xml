@@ -7,13 +7,13 @@
             android:id="@+id/layout_swipe_refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/small_view_size"
             >
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_trending_repo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="2dp"
                 >
             </android.support.v7.widget.RecyclerView>
 

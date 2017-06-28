@@ -5,31 +5,28 @@ import com.google.gson.annotations.SerializedName;
 
 public class TrendingDevBean {
 
-    @SerializedName("target_link")
-    @Expose
-    private String targetLink;
     @SerializedName("user_link")
     @Expose
     private String userLink;
     @SerializedName("full_name")
     @Expose
     private String fullName;
-    @SerializedName("target")
-    @Expose
-    private String target;
-    @SerializedName("target_desc")
-    @Expose
-    private String targetDesc;
     @SerializedName("user")
     @Expose
     private String user;
 
-    public String getTargetLink() {
-        return targetLink;
+    @SerializedName("developer_avatar")
+    @Expose
+    private String developerAvatar;
+
+    private boolean collected;
+
+    public boolean isCollected() {
+        return collected;
     }
 
-    public void setTargetLink(String targetLink) {
-        this.targetLink = targetLink;
+    public void setCollected(boolean collected) {
+        this.collected = collected;
     }
 
     public String getUserLink() {
@@ -48,22 +45,6 @@ public class TrendingDevBean {
         this.fullName = fullName;
     }
 
-    public String getTarget() {
-        return target;
-    }
-
-    public void setTarget(String target) {
-        this.target = target;
-    }
-
-    public String getTargetDesc() {
-        return targetDesc;
-    }
-
-    public void setTargetDesc(String targetDesc) {
-        this.targetDesc = targetDesc;
-    }
-
     public String getUser() {
         return user;
     }
@@ -72,4 +53,11 @@ public class TrendingDevBean {
         this.user = user;
     }
 
+    public String getDeveloperAvatar() {
+        return developerAvatar;
+    }
+
+    public void setDeveloperAvatar(String developerAvatar) {
+        this.developerAvatar = developerAvatar;
+    }
 }

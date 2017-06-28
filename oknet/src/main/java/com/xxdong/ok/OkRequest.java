@@ -43,9 +43,11 @@ public class OkRequest {
     }
 
     protected Request builderPostRequest(String url, Map<String, String> parameters) {
-        FormBody.Builder body = new FormBody.Builder();
+        final FormBody.Builder body = new FormBody.Builder();
         if (parameters != null) {
-            parameters.forEach(body::add);
+            for (Map.Entry<String,String> entry:parameters.entrySet()){
+                body.add(entry.getKey(),entry.getValue());
+            }
         }
         return new Request.Builder()
                 .post(body.build())
@@ -55,7 +57,9 @@ public class OkRequest {
     private HttpUrl buildHttpUrl(String url, Map<String, String> parameters) {
         HttpUrl.Builder builder = HttpUrl.parse(url).newBuilder();
         if (parameters != null) {
-            parameters.forEach(builder::addQueryParameter);
+            for (Map.Entry<String,String> entry:parameters.entrySet()){
+                builder.addQueryParameter(entry.getKey(),entry.getValue());
+            }
         }
         return builder.build();
     }

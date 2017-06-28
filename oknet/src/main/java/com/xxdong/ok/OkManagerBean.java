@@ -88,8 +88,8 @@ public class OkManagerBean<T> {
         enqueue(url, okManager.getRequest().builderPostRequest(url,json),clazz,success,null);
     }
 
-    private void enqueue(String url, Request request, Class<T> clazz
-            , OkSuccessListener<T> success, OkFailedListener failed) throws IOException {
+    private void enqueue(String url, Request request, final Class<T> clazz
+            , final OkSuccessListener<T> success, final OkFailedListener failed) throws IOException {
         okManager.getOkHttpClient().newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {

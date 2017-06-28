@@ -37,6 +37,16 @@ public class TrendingRepoBean {
     @Expose
     private String addedStars;
 
+    private boolean collected;
+
+    public boolean isCollected() {
+        return collected;
+    }
+
+    public void setCollected(boolean collected) {
+        collected = collected;
+    }
+
     public String getLang() {
         return lang;
     }

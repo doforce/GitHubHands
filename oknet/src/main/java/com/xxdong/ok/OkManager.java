@@ -4,7 +4,11 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLSession;
+
 import okhttp3.Callback;
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Response;
 
@@ -18,9 +22,9 @@ public class OkManager {
     private static volatile OkManager okManager = null;
     private OkRequest request;
     private static final String AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.86 Safari/537.36";
-    private static long READ_TIMEOUT=20;
-    private static long WRITE_TIMEOUT=20;
-    private static long CONNECT_TIMEOUT=20;
+    private static final long READ_TIMEOUT=20;
+    private static final long WRITE_TIMEOUT=20;
+    private static final long CONNECT_TIMEOUT=20;
 
 
     private OkManager() {
@@ -28,9 +32,19 @@ public class OkManager {
                 .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
                 .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
-                .hostnameVerifier((s, sslSession) -> true)
-                .addInterceptor(chain -> chain.proceed(chain.request()
-                        .newBuilder().addHeader("User-Agent", AGENT).build()))
+                .hostnameVerifier(new HostnameVerifier() {
+                    @Override
+                    public boolean verify(String s, SSLSession sslSession) {
+                        return true;
+                    }
+                })
+                .addInterceptor(new Interceptor() {
+                    @Override
+                    public Response intercept(Chain chain) throws IOException {
+                        return chain.proceed(chain.request()
+                                .newBuilder().addHeader("User-Agent", AGENT).build());
+                    }
+                })
                 .followRedirects(true)
                 .sslSocketFactory(HttpsUtils.initSSLSocketFactory(), HttpsUtils.initTrustManager())
                 .build();

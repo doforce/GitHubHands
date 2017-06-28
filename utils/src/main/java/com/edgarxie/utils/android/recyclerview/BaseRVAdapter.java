@@ -1,6 +1,7 @@
 package com.edgarxie.utils.android.recyclerview;
 
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -185,6 +186,12 @@ public abstract class BaseRVAdapter<T,VH extends BaseRVAdapter.SparseArrayViewHo
         public SparseArrayViewHolder setImageResource(int viewId, int imageResId) {
             ImageView view = getView(viewId);
             view.setImageResource(imageResId);
+            return SparseArrayViewHolder.this;
+        }
+
+        public SparseArrayViewHolder setImageBackground(int viewId, Drawable drawable) {
+            ImageView view = getView(viewId);
+            view.setBackground(drawable);
             return SparseArrayViewHolder.this;
         }
 

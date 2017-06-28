@@ -10,4 +10,5 @@ public interface IRepoView extends ITopView {
     void setRefreshing(boolean refreshing);
     void refreshingPost(Runnable runnable);
     void setRecyclerAdapter(TrendingRepoAdapter adapter);
+    void runOnUIThread(Runnable action);
 }
