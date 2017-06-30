@@ -99,7 +99,7 @@
                 android:id="@+id/item_collect"
                 android:background="@drawable/collection_heart_unselected"
                 android:layout_alignParentEnd="true"
-                android:layout_marginRight="@dimen/small_view_size"
+                android:layout_marginEnd="@dimen/small_view_size"
                 android:layout_centerVertical="true"
                 />
 

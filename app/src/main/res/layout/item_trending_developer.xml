@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/item_card_view"
+    app:cardCornerRadius="10dp"
+    app:cardUseCompatPadding="true"
+    app:cardPreventCornerOverlap="true"
+    app:contentPadding="2dp"
+    app:cardElevation="7dp"
+    android:foreground="?attr/selectableItemBackground"
+    android:clickable="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+           <ImageView
+               android:layout_width="@dimen/developer_avatar_size"
+               android:layout_height="@dimen/developer_avatar_size"
+               android:id="@+id/item_avatar"
+               android:layout_centerVertical="true"
+               />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/item_user"
+                android:layout_toEndOf="@+id/item_avatar"
+                android:layout_marginStart="@dimen/middle_view_size"
+                android:layout_marginTop="@dimen/small_view_size"
+                android:textColor="@color/colorItemRepo"
+                android:textSize="@dimen/item_user_text_size"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/item_full_name"
+                android:layout_below="@+id/item_user"
+                android:layout_toEndOf="@id/item_avatar"
+                android:layout_marginStart="@dimen/middle_view_size"
+                android:layout_marginTop="@dimen/small_view_size"
+                android:textColor="@color/colorBlack"
+                android:layout_marginBottom="@dimen/small_view_size"
+                android:textSize="@dimen/item_title_size"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/item_collect"
+                android:background="@drawable/collection_heart_unselected"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/small_view_size"
+                android:layout_centerVertical="true"
+                />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>

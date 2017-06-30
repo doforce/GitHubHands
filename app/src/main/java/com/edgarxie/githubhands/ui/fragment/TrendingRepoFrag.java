@@ -11,12 +11,12 @@ import android.widget.LinearLayout;
 
 import com.edgarxie.githubhands.R;
 import com.edgarxie.githubhands.adapter.TrendingRepoAdapter;
-import com.edgarxie.githubhands.presenter.RepoPresenter;
+import com.edgarxie.githubhands.presenter.TrendingRepoPresenter;
 import com.edgarxie.githubhands.ui.activity.MainActivity;
-import com.edgarxie.githubhands.ui.interf.IRepoView;
+import com.edgarxie.githubhands.ui.interf.ITrendingRepoView;
 import com.edgarxie.githubhands.util.NetConstants;
 
-public class TrendingRepoFrag extends BaseFragment<RepoPresenter> implements IRepoView
+public class TrendingRepoFrag extends BaseFragment<TrendingRepoPresenter> implements ITrendingRepoView
         ,MainActivity.OnMenuClick, MainActivity.OnTabSelectedListener {
     public static final String ARGS ="args";
     private String mLanguage="";
@@ -57,7 +57,7 @@ public class TrendingRepoFrag extends BaseFragment<RepoPresenter> implements IRe
         mRvRepo.setLayoutManager(new LinearLayoutManager(getContext()));
         mRvRepo.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayout.VERTICAL));
 
-        mPresenter=new RepoPresenter(getContext());
+        mPresenter=new TrendingRepoPresenter(getContext());
         mActivity= (MainActivity) getActivity();
 
         mRefresh.setOnRefreshListener(() -> mPresenter.requestRepo(mLanguage,mFrequency));
@@ -136,7 +136,7 @@ public class TrendingRepoFrag extends BaseFragment<RepoPresenter> implements IRe
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_trending_repo;
+        return R.layout.fragment_trending_list;
     }
 
     @Override

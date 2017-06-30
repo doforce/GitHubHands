@@ -37,7 +37,7 @@ public class TrendingRepoBean {
     @Expose
     private String addedStars;
 
-    private boolean collected;
+    private boolean collected=false;
 
     public boolean isCollected() {
         return collected;

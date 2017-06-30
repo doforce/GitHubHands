@@ -1,7 +1,9 @@
 package com.edgarxie.githubhands.ui.activity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 
 import com.edgarxie.githubhands.R;
 
@@ -11,6 +13,7 @@ import com.edgarxie.githubhands.R;
 
 public class SearchActivity extends BaseActivity {
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

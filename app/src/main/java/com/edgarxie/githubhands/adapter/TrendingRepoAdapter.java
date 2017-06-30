@@ -31,13 +31,33 @@ public class TrendingRepoAdapter extends BaseRVAdapter<TrendingRepoBean,BaseRVAd
         holder.setText(R.id.item_stars,item.getStars());
         holder.setText(R.id.item_forks,item.getForks());
         holder.setText(R.id.item_added_stars,item.getAddedStars());
+        boolean selected=item.isCollected();
+        if (!selected){
+            holder.setImageBackground(R.id.item_collect
+                    ,mContext.getResources().getDrawable(R.drawable.collection_heart_unselected));
+        }else {
+            holder.setImageBackground(R.id.item_collect
+                    ,mContext.getResources().getDrawable(R.drawable.collection_heart_selected));
+        }
         setAvatarsUrl(holder,item.getAvatars());
         holder.setOnClickListener(R.id.item_collect, v -> {
             ToastUtil.show(mContext,"Collect");
-            holder.setImageBackground(R.id.item_collect
-                    ,mContext.getResources().getDrawable(R.drawable.collection_heart_selected));
+            if (!selected){
+                holder.setImageBackground(R.id.item_collect
+                        ,mContext.getResources().getDrawable(R.drawable.collection_heart_selected));
+                //// TODO: 2017/6/29 添加收藏
+            }else {
+                holder.setImageBackground(R.id.item_collect
+                        ,mContext.getResources().getDrawable(R.drawable.collection_heart_unselected));
+                //// TODO: 2017/6/29 删除收藏
+            }
+            TrendingRepoBean bean=item;
+            bean.setCollected(!selected);
+            itemChange(bean,getPosition(item));
         });
     }
+
+
 
     @Override
     public SparseArrayViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
