@@ -41,5 +41,6 @@
 
     <!--title-->
     <string name="title_custom_language">Custom trending languages</string>
+    <string name="search_repo">Search Repo</string>
 
 </resources>

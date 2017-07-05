@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <string-array name="search_item">
+        <item>Repo</item>
+        <item>Developer</item>
+    </string-array>
+
     <string-array name="trending_frequency">
         <item>@string/trending_daily</item>
         <item>@string/trending_weekly</item>

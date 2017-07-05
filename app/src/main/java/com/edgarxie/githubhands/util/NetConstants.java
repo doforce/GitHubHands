@@ -15,6 +15,9 @@ public class NetConstants {
     public static final String DAILY="daily";
     public static final String MONTHLY="monthly";
 
+    public static final String BASE_GITHUB_URL="https://api.github.com";
+    public static final String GITHUB_SEARCH_REPO="/search/repositories";
+
     public static final long DEFAULT_TIMEOUT=20L;
 
 

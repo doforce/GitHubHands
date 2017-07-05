@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/toolbar_middle_size"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorLogo">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/back"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/small_view_size"
+        android:id="@+id/back"/>
+
+
+    <android.support.v7.widget.SearchView
+        android:id="@+id/search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:iconifiedByDefault="false"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/back"
+        android:queryHint="@string/search_repo"
+        />
+
+
+</RelativeLayout>
