@@ -3,7 +3,7 @@ package com.edgarxie.githubhands.presenter;
 import android.content.Context;
 
 import com.edgarxie.githubhands.adapter.TrendingRepoAdapter;
-import com.edgarxie.githubhands.model.bean.BaseTrendingRepoBean;
+import com.edgarxie.githubhands.model.bean.JsonTrendingRepoBean;
 import com.edgarxie.githubhands.model.bean.TrendingRepoBean;
 import com.edgarxie.githubhands.ui.interf.ITrendingRepoView;
 import com.edgarxie.githubhands.util.NetConstants;
@@ -37,12 +37,12 @@ public class TrendingRepoPresenter extends BasePresenter<ITrendingRepoView> {
 
     public void requestRepo(String language, String frequency) {
         mView.refreshingPost(() -> mView.setRefreshing(true));
-        OkManagerBean<BaseTrendingRepoBean> beanBuilder = new OkManagerBean<>();
+        OkManagerBean<JsonTrendingRepoBean> beanBuilder = new OkManagerBean<>();
         Map<String, String> par = new HashMap<>();
         par.put("since", frequency);
         try {
             beanBuilder.getAsync(NetConstants.BASE_TRENDING_URL + NetConstants.REPO + formatLanguage(language)
-                    , par, BaseTrendingRepoBean.class, data -> {
+                    , par, JsonTrendingRepoBean.class, data -> {
                         int count = data.getCount();
                         if (count != 0) {
                             mRepos = setCollection(data.getItems());

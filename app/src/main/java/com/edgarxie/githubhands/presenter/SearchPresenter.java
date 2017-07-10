@@ -1,9 +1,11 @@
 package com.edgarxie.githubhands.presenter;
 
 import android.content.Context;
+import android.view.View;
 
 import com.edgarxie.githubhands.adapter.SearchRepoAdapter;
 import com.edgarxie.githubhands.model.bean.SearchRepoBean;
+import com.edgarxie.githubhands.model.bean.JsonSearchRepoBean;
 import com.edgarxie.githubhands.ui.interf.ISearchView;
 import com.edgarxie.githubhands.util.NetConstants;
 import com.edgarxie.utils.android.ToastUtil;
@@ -20,7 +22,7 @@ import java.util.Map;
  */
 
 public class SearchPresenter extends BasePresenter<ISearchView> {
-    private List<SearchRepoBean.Items> repos=new ArrayList<>();
+    private List<SearchRepoBean> repos=new ArrayList<>();
     private SearchRepoAdapter mAdapter;
 
     public SearchPresenter(Context context){
@@ -29,31 +31,32 @@ public class SearchPresenter extends BasePresenter<ISearchView> {
     }
 
     public void textSubmit(String query) {
-        OkManagerBean<SearchRepoBean> okManagerBean=new OkManagerBean<>();
+        OkManagerBean<JsonSearchRepoBean> okManagerBean=new OkManagerBean<>();
         Map<String,String> p=new HashMap<>();
         p.put("q",query);
-        mView.setRefresh(true);
+        mView.setVisibility(View.VISIBLE);
         try {
             okManagerBean.getAsync(NetConstants.BASE_GITHUB_URL
-                    + NetConstants.GITHUB_SEARCH_REPO, p, SearchRepoBean.class, data -> {
+                    + NetConstants.GITHUB_SEARCH_REPO, p, JsonSearchRepoBean.class, data -> {
                     int count=data.getTotalCount();
                 if (count!=0){
-                    repos.clear();
-                    List<SearchRepoBean.Items> items=data.getItems();
-                    for (int i = 0; i < items.size(); i++) {
-                        repos.add(items.get(i));
-                        if (i==29)
-                            break;
-                    }
+//                    repos.clear();
+//                    List<JsonSearchRepoBean.SearchRepoBean> items=data.getItems();
+//                    for (int i = 0; i < items.size(); i++) {
+//                        repos.add(items.get(i));
+//                        if (i==29)
+//                            break;
+//                    }
+                    repos=data.getItems();
                     mAdapter.setList(repos);
-                    mView.runOnUi(() -> mView.setAdapter(mAdapter));
+                    mView.setAdapter(mAdapter);
                 }else {
-                    mView.runOnUi(() -> ToastUtil.show(mContext,"No result for the search"));
+                    mView.showToast("No result for the search");
                 }
-                mView.setRefresh(false);
+                mView.setVisibility(View.GONE);
             }, msg -> {
-                mView.runOnUi(() -> ToastUtil.show(mContext,"Connection error"));
-                mView.setRefresh(false);
+                mView.showToast("Connection error");
+                mView.setVisibility(View.GONE);
             });
         } catch (IOException e) {
             e.printStackTrace();
@@ -66,7 +69,7 @@ public class SearchPresenter extends BasePresenter<ISearchView> {
 
     public void setAdapterListener(){
         mAdapter.setOnItemClickedListener((view, item) -> {
-            SearchRepoBean.Items data= (SearchRepoBean.Items) item;
+            SearchRepoBean data= (SearchRepoBean) item;
             ToastUtil.show(mContext,data.getHtmlUrl());
         });
     }

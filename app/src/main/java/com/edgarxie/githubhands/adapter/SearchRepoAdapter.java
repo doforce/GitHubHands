@@ -12,14 +12,14 @@ import com.edgarxie.utils.android.recyclerview.BaseRVAdapter;
  * Created by edgar on 17-5-3.
  */
 
-public class SearchRepoAdapter extends BaseRVAdapter<SearchRepoBean.Items,BaseRVAdapter.SparseArrayViewHolder> {
+public class SearchRepoAdapter extends BaseRVAdapter<SearchRepoBean,BaseRVAdapter.SparseArrayViewHolder> {
     private Context mContext;
 
     public SearchRepoAdapter(Context context){
         mContext=context;
     }
     @Override
-    protected void bindDataToItemView(SparseArrayViewHolder holder, SearchRepoBean.Items item) {
+    protected void bindDataToItemView(SparseArrayViewHolder holder, SearchRepoBean item) {
         holder.setText(R.id.item_repo,item.getFullName());
         holder.setText(R.id.item_desc,item.getDescription());
         holder.setText(R.id.item_lang,item.getLanguage());
@@ -42,7 +42,7 @@ public class SearchRepoAdapter extends BaseRVAdapter<SearchRepoBean.Items,BaseRV
                         ,mContext.getResources().getDrawable(R.drawable.collection_heart_unselected));
                 //// TODO: 2017/6/29 删除收藏
             }
-            SearchRepoBean.Items bean=item;
+            SearchRepoBean bean=item;
             bean.setCollected(!selected);
             itemChange(bean,getPosition(item));
         });
@@ -50,7 +50,7 @@ public class SearchRepoAdapter extends BaseRVAdapter<SearchRepoBean.Items,BaseRV
 
     @Override
     public SparseArrayViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        SparseArrayViewHolder holder=new SparseArrayViewHolder(inflateItemView(parent, R.layout.item_trending_repo));
+        SparseArrayViewHolder holder=new SparseArrayViewHolder(inflateItemView(parent, R.layout.item_search_repo));
         return holder;
     }
 

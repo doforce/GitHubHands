@@ -3,7 +3,7 @@ package com.edgarxie.githubhands.presenter;
 import android.content.Context;
 
 import com.edgarxie.githubhands.TrendingDevAdapter;
-import com.edgarxie.githubhands.model.bean.BaseTrendingDevBean;
+import com.edgarxie.githubhands.model.bean.JsonTrendingDevBean;
 import com.edgarxie.githubhands.model.bean.TrendingDevBean;
 import com.edgarxie.githubhands.ui.interf.ITrendingDeveloperView;
 import com.edgarxie.githubhands.util.NetConstants;
@@ -37,12 +37,12 @@ public class TrendingDevPresenter extends BasePresenter<ITrendingDeveloperView> 
 
     public void requestDeveloper(String frequency) {
         mView.refreshingPost(() -> mView.setRefreshing(true));
-        OkManagerBean<BaseTrendingDevBean> beanBuilder = new OkManagerBean<>();
+        OkManagerBean<JsonTrendingDevBean> beanBuilder = new OkManagerBean<>();
         Map<String, String> par = new HashMap<>();
         par.put("since", frequency);
         try {
             beanBuilder.getAsync(NetConstants.BASE_TRENDING_URL + NetConstants.DEVELOPER,
-                    par, BaseTrendingDevBean.class, data -> {
+                    par, JsonTrendingDevBean.class, data -> {
                         int count = data.getCount();
                         if (count != 0) {
                             mData=data.getItems();

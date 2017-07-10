@@ -10,8 +10,8 @@ public interface ISearchView extends ITopView {
 
     void setAdapter(SearchRepoAdapter adapter);
 
-    void runOnUi(Runnable action);
+    void setVisibility(int visibility);
 
-    void setRefresh(boolean refresh);
+    void showToast(String text);
 
 }

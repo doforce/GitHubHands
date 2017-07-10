@@ -16,7 +16,7 @@ import com.edgarxie.githubhands.util.NetConstants;
 
 public abstract class BaseGitHubFrag<T extends BasePresenter>
         extends BaseFragment<T> implements MainActivity.OnMenuClick{
-    protected T mPresenter;
+//    protected T mPresenter;
     protected MainActivity mActivity;
     protected String mFrequency= NetConstants.DAILY;
     protected int mWhatCollection= MainConstants.Collection.REPO;

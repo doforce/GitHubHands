@@ -9,10 +9,10 @@ import java.util.List;
  * Created by edgar on 17-6-16.
  */
 
-public class BaseTrendingDevBean {
+public class JsonTrendingRepoBean {
     @SerializedName("items")
     @Expose
-    private List<TrendingDevBean> items = null;
+    private List<TrendingRepoBean> items = null;
     @SerializedName("count")
     @Expose
     private Integer count;
@@ -20,11 +20,11 @@ public class BaseTrendingDevBean {
     @Expose
     private String msg;
 
-    public List<TrendingDevBean> getItems() {
+    public List<TrendingRepoBean> getItems() {
         return items;
     }
 
-    public void setItems(List<TrendingDevBean> items) {
+    public void setItems(List<TrendingRepoBean> items) {
         this.items = items;
     }
 

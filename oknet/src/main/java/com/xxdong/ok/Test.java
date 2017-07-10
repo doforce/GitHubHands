@@ -22,30 +22,30 @@ public class Test {
     }
 
     public static void githubSearchBean(){
-        final OkManagerBean<SearchReopBean> managerBean=new OkManagerBean<>();
-        Map<String,String> p=new HashMap<>();
-        p.put("q","trending");
-        try {
-            managerBean.getAsync(BASE_GITHUB_URL + GITHUB_SEARCH_REPO, p, SearchReopBean.class,
-                    new OkSuccessListener<SearchReopBean>() {
-                        @Override
-                        public void success(SearchReopBean data) {
-                            System.out.println(data.getTotalCount());
-                            System.out.println(data.getItems().get(0).getDescription());
-                            System.out.println(data.getItems().get(0).getFullName());
-                            System.out.println(data.getItems().get(0).getHtmlUrl());
-                            System.out.println(data.getItems().get(0).getLanuage());
-                            System.out.println(data.getItems().get(0).getName());
-                        }
-                    }, new OkFailedListener() {
-                        @Override
-                        public void failed(String msg) {
-                            System.err.println(msg);
-                        }
-                    });
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        final OkManagerBean<SearchReopBean> managerBean=new OkManagerBean<>();
+//        Map<String,String> p=new HashMap<>();
+//        p.put("q","trending");
+//        try {
+//            managerBean.getAsync(BASE_GITHUB_URL + GITHUB_SEARCH_REPO, p, SearchReopBean.class,
+//                    new OkSuccessListener<SearchReopBean>() {
+//                        @Override
+//                        public void success(SearchReopBean data) {
+//                            System.out.println(data.getTotalCount());
+//                            System.out.println(data.getItems().get(0).getDescription());
+//                            System.out.println(data.getItems().get(0).getFullName());
+//                            System.out.println(data.getItems().get(0).getHtmlUrl());
+//                            System.out.println(data.getItems().get(0).getLanuage());
+//                            System.out.println(data.getItems().get(0).getName());
+//                        }
+//                    }, new OkFailedListener() {
+//                        @Override
+//                        public void failed(String msg) {
+//                            System.err.println(msg);
+//                        }
+//                    });
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public static void githubSearch(){
