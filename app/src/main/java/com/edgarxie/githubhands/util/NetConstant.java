@@ -4,7 +4,7 @@ package com.edgarxie.githubhands.util;
  * Created by edgar on 17-4-10.
  */
 
-public class NetConstants {
+public class NetConstant {
 
     //GitHub trending Api
     public static final String BASE_TRENDING_URL="https://trendings.herokuapp.com/";

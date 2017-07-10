@@ -14,7 +14,7 @@ import com.edgarxie.githubhands.adapter.TrendingRepoAdapter;
 import com.edgarxie.githubhands.presenter.TrendingRepoPresenter;
 import com.edgarxie.githubhands.ui.activity.MainActivity;
 import com.edgarxie.githubhands.ui.interf.ITrendingRepoView;
-import com.edgarxie.githubhands.util.NetConstants;
+import com.edgarxie.githubhands.util.NetConstant;
 
 public class TrendingRepoFrag extends BaseFragment<TrendingRepoPresenter> implements ITrendingRepoView
         ,MainActivity.OnMenuClick, MainActivity.OnTabSelectedListener {
@@ -70,13 +70,13 @@ public class TrendingRepoFrag extends BaseFragment<TrendingRepoPresenter> implem
         int id = item.getItemId();
         switch (id) {
             case R.id.action_trending_daily:
-                applyFrequencyChange(NetConstants.DAILY);
+                applyFrequencyChange(NetConstant.DAILY);
                 break;
             case R.id.action_trending_weekly:
-                applyFrequencyChange(NetConstants.WEEKLY);
+                applyFrequencyChange(NetConstant.WEEKLY);
                 break;
             case R.id.action_trending_monthly:
-                applyFrequencyChange(NetConstants.MONTHLY);
+                applyFrequencyChange(NetConstant.MONTHLY);
                 break;
             case R.id.action_collections_repo:
                 break;

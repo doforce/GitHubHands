@@ -1,14 +1,17 @@
 package com.edgarxie.githubhands.presenter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 
 import com.edgarxie.githubhands.adapter.SearchRepoAdapter;
-import com.edgarxie.githubhands.model.bean.SearchRepoBean;
 import com.edgarxie.githubhands.model.bean.JsonSearchRepoBean;
+import com.edgarxie.githubhands.model.bean.SearchRepoBean;
+import com.edgarxie.githubhands.ui.activity.WebRepoDevRepoDevAty;
 import com.edgarxie.githubhands.ui.interf.ISearchView;
-import com.edgarxie.githubhands.util.NetConstants;
-import com.edgarxie.utils.android.ToastUtil;
+import com.edgarxie.githubhands.util.Constant;
+import com.edgarxie.githubhands.util.NetConstant;
 import com.xxdong.ok.OkManagerBean;
 
 import java.io.IOException;
@@ -36,8 +39,8 @@ public class SearchPresenter extends BasePresenter<ISearchView> {
         p.put("q",query);
         mView.setVisibility(View.VISIBLE);
         try {
-            okManagerBean.getAsync(NetConstants.BASE_GITHUB_URL
-                    + NetConstants.GITHUB_SEARCH_REPO, p, JsonSearchRepoBean.class, data -> {
+            okManagerBean.getAsync(NetConstant.BASE_GITHUB_URL
+                    + NetConstant.GITHUB_SEARCH_REPO, p, JsonSearchRepoBean.class, data -> {
                     int count=data.getTotalCount();
                 if (count!=0){
 //                    repos.clear();
@@ -69,8 +72,14 @@ public class SearchPresenter extends BasePresenter<ISearchView> {
 
     public void setAdapterListener(){
         mAdapter.setOnItemClickedListener((view, item) -> {
-            SearchRepoBean data= (SearchRepoBean) item;
-            ToastUtil.show(mContext,data.getHtmlUrl());
+            SearchRepoBean bean= (SearchRepoBean) item;
+            Intent intent=new Intent(mContext, WebRepoDevRepoDevAty.class);
+            Bundle bundle=new Bundle();
+            bundle.putBoolean(Constant.BUNDLE_IS_REPO,true);
+            bundle.putString(Constant.BUNDLE_WEB_URL,bean.getHtmlUrl());
+            bundle.putString(Constant.BUNDLE_REPO,bean.getFullName());
+            intent.putExtras(bundle);
+            mContext.startActivity(intent);
         });
     }
 }

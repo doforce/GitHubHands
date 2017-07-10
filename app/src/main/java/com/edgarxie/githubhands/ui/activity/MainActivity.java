@@ -26,7 +26,7 @@ import com.edgarxie.githubhands.ui.fragment.CollectionFrag;
 import com.edgarxie.githubhands.ui.fragment.TrendingDevFrag;
 import com.edgarxie.githubhands.ui.fragment.TrendingRepoFrag;
 import com.edgarxie.githubhands.ui.interf.IMainView;
-import com.edgarxie.githubhands.util.MainConstants;
+import com.edgarxie.githubhands.util.Constant;
 
 import java.util.List;
 
@@ -92,9 +92,9 @@ public class MainActivity extends BaseActivity<MainP>
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
-        mRepoFrag = mFm.findFragmentByTag(MainConstants.TAG_TRENDING_REPO);
-        mDeveloperFrag = mFm.findFragmentByTag(MainConstants.TAG_TRENDING_DEVELOPER);
-        mCollectionsFrag = mFm.findFragmentByTag(MainConstants.TAG_COLLECTIONS);
+        mRepoFrag = mFm.findFragmentByTag(Constant.TAG_TRENDING_REPO);
+        mDeveloperFrag = mFm.findFragmentByTag(Constant.TAG_TRENDING_DEVELOPER);
+        mCollectionsFrag = mFm.findFragmentByTag(Constant.TAG_COLLECTIONS);
         switch (id) {
             case R.id.nav_trending_repositories:
                 mTabLayout.setVisibility(View.VISIBLE);
@@ -103,7 +103,7 @@ public class MainActivity extends BaseActivity<MainP>
                 startTitle=R.string.repository;
                 setToolBarTitle(startTitle,R.string.daily);
                 switchFragment(mDeveloperFrag,mCollectionsFrag,mRepoFrag,1
-                        ,MainConstants.TAG_TRENDING_REPO);
+                        , Constant.TAG_TRENDING_REPO);
                 break;
             case R.id.nav_trending_developers:
                 mTabLayout.setVisibility(View.GONE);
@@ -112,7 +112,7 @@ public class MainActivity extends BaseActivity<MainP>
                 startTitle=R.string.developer;
                 setToolBarTitle(startTitle,R.string.daily);
                 switchFragment(mRepoFrag,mCollectionsFrag,mDeveloperFrag,2
-                        ,MainConstants.TAG_TRENDING_DEVELOPER);
+                        , Constant.TAG_TRENDING_DEVELOPER);
                 break;
             case R.id.nav_collections:
                 mTabLayout.setVisibility(View.GONE);
@@ -120,7 +120,7 @@ public class MainActivity extends BaseActivity<MainP>
                 mToolbar.inflateMenu(R.menu.main_toolbar_type);
                 setToolBarTitle(R.string.collection_repository);
                 switchFragment(mRepoFrag,mDeveloperFrag,mCollectionsFrag,3
-                        ,MainConstants.TAG_COLLECTIONS);
+                        , Constant.TAG_COLLECTIONS);
                 break;
             case R.id.nav_about:
                 break;
@@ -144,7 +144,7 @@ public class MainActivity extends BaseActivity<MainP>
         mRepoFrag=TrendingRepoFrag.newInstance(mPresenter
                 .getDefaultTabText());
         transaction.add(R.id.fragment_container, mRepoFrag
-                , MainConstants.TAG_TRENDING_REPO);
+                , Constant.TAG_TRENDING_REPO);
         transaction.commit();
     }
 

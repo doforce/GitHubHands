@@ -1,12 +1,16 @@
 package com.edgarxie.githubhands.presenter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 
 import com.edgarxie.githubhands.adapter.TrendingRepoAdapter;
 import com.edgarxie.githubhands.model.bean.JsonTrendingRepoBean;
 import com.edgarxie.githubhands.model.bean.TrendingRepoBean;
+import com.edgarxie.githubhands.ui.activity.WebRepoDevRepoDevAty;
 import com.edgarxie.githubhands.ui.interf.ITrendingRepoView;
-import com.edgarxie.githubhands.util.NetConstants;
+import com.edgarxie.githubhands.util.Constant;
+import com.edgarxie.githubhands.util.NetConstant;
 import com.edgarxie.utils.android.ToastUtil;
 import com.xxdong.ok.OkManagerBean;
 
@@ -41,7 +45,7 @@ public class TrendingRepoPresenter extends BasePresenter<ITrendingRepoView> {
         Map<String, String> par = new HashMap<>();
         par.put("since", frequency);
         try {
-            beanBuilder.getAsync(NetConstants.BASE_TRENDING_URL + NetConstants.REPO + formatLanguage(language)
+            beanBuilder.getAsync(NetConstant.BASE_TRENDING_URL + NetConstant.REPO + formatLanguage(language)
                     , par, JsonTrendingRepoBean.class, data -> {
                         int count = data.getCount();
                         if (count != 0) {
@@ -77,7 +81,14 @@ public class TrendingRepoPresenter extends BasePresenter<ITrendingRepoView> {
 
     private void setAdapterListener(){
         mAdapter.setOnItemClickedListener((view, item) -> {
-            ToastUtil.show(mContext,"Adapter");
+            TrendingRepoBean bean= (TrendingRepoBean) item;
+            Intent intent=new Intent(mContext, WebRepoDevRepoDevAty.class);
+            Bundle bundle=new Bundle();
+            bundle.putBoolean(Constant.BUNDLE_IS_REPO,true);
+            bundle.putString(Constant.BUNDLE_WEB_URL,bean.getRepoLink());
+            bundle.putString(Constant.BUNDLE_REPO,bean.getRepo());
+            intent.putExtras(bundle);
+            mContext.startActivity(intent);
         });
     }
 

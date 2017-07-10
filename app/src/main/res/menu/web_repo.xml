@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_collect"
+        android:orderInCategory="100"
+        android:icon="@drawable/collection_heart_unselected"
+        android:title="@string/collect"
+        app:showAsAction="never"
+        />
+
+    <item
+        android:id="@+id/menu_star"
+        android:orderInCategory="100"
+        android:icon="@drawable/star_unselected"
+        android:title="@string/star"
+        app:showAsAction="never"
+        />
+
+    <item
+        android:id="@+id/menu_fork"
+        android:orderInCategory="100"
+        android:icon="@drawable/fork_unselected"
+        android:title="@string/fork"
+        app:showAsAction="never"
+        />
+
+    <item
+        android:id="@+id/menu_watch"
+        android:orderInCategory="100"
+        android:icon="@drawable/watch_unselected"
+        android:title="@string/watch"
+        app:showAsAction="never"
+        />
+
+    <item
+        android:id="@+id/menu_share"
+        android:orderInCategory="100"
+        android:icon="@drawable/share_selected"
+        android:title="@string/share"
+        app:showAsAction="never"
+        />
+</menu>

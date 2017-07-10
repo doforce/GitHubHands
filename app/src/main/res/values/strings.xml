@@ -42,5 +42,10 @@
     <!--title-->
     <string name="title_custom_language">Custom trending languages</string>
     <string name="search_repo">Search Repo</string>
+    <string name="collect">Collect</string>
+    <string name="star">Star</string>
+    <string name="watch">Watch</string>
+    <string name="fork">Fork</string>
+    <string name="follow">Follow</string>
 
 </resources>

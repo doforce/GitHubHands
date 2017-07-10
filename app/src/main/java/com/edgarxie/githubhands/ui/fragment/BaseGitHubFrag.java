@@ -7,8 +7,8 @@ import android.view.MenuItem;
 import com.edgarxie.githubhands.R;
 import com.edgarxie.githubhands.presenter.BasePresenter;
 import com.edgarxie.githubhands.ui.activity.MainActivity;
-import com.edgarxie.githubhands.util.MainConstants;
-import com.edgarxie.githubhands.util.NetConstants;
+import com.edgarxie.githubhands.util.Constant;
+import com.edgarxie.githubhands.util.NetConstant;
 
 /**
  * Created by edgar on 17-4-24.
@@ -18,8 +18,8 @@ public abstract class BaseGitHubFrag<T extends BasePresenter>
         extends BaseFragment<T> implements MainActivity.OnMenuClick{
 //    protected T mPresenter;
     protected MainActivity mActivity;
-    protected String mFrequency= NetConstants.DAILY;
-    protected int mWhatCollection= MainConstants.Collection.REPO;
+    protected String mFrequency= NetConstant.DAILY;
+    protected int mWhatCollection= Constant.Collection.REPO;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -39,19 +39,19 @@ public abstract class BaseGitHubFrag<T extends BasePresenter>
         int id = item.getItemId();
         switch (id) {
             case R.id.action_trending_daily:
-                mFrequency=NetConstants.DAILY;
+                mFrequency= NetConstant.DAILY;
                 break;
             case R.id.action_trending_weekly:
-                mFrequency=NetConstants.WEEKLY;
+                mFrequency= NetConstant.WEEKLY;
                 break;
             case R.id.action_trending_monthly:
-                mFrequency=NetConstants.MONTHLY;
+                mFrequency= NetConstant.MONTHLY;
                 break;
             case R.id.action_collections_repo:
-                mWhatCollection=MainConstants.Collection.REPO;
+                mWhatCollection= Constant.Collection.REPO;
                 break;
             case R.id.action_collections_developer:
-                mWhatCollection=MainConstants.Collection.DEVE;
+                mWhatCollection= Constant.Collection.DEVELOPER;
                 break;
         }
     }

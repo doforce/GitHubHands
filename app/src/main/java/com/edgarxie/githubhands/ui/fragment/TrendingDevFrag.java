@@ -14,7 +14,7 @@ import com.edgarxie.githubhands.TrendingDevAdapter;
 import com.edgarxie.githubhands.presenter.TrendingDevPresenter;
 import com.edgarxie.githubhands.ui.activity.MainActivity;
 import com.edgarxie.githubhands.ui.interf.ITrendingDeveloperView;
-import com.edgarxie.githubhands.util.NetConstants;
+import com.edgarxie.githubhands.util.NetConstant;
 
 /**
  * Created by edgar on 17-4-18.
@@ -23,7 +23,7 @@ import com.edgarxie.githubhands.util.NetConstants;
 public class TrendingDevFrag extends BaseFragment<TrendingDevPresenter>
         implements MainActivity.OnMenuClick, ITrendingDeveloperView {
 
-    private String mFrequency=NetConstants.DAILY;
+    private String mFrequency= NetConstant.DAILY;
     private RecyclerView mRvDeveloper;
     private SwipeRefreshLayout mRefresh;
     protected MainActivity mActivity;
@@ -52,13 +52,13 @@ public class TrendingDevFrag extends BaseFragment<TrendingDevPresenter>
         int id = item.getItemId();
         switch (id) {
             case R.id.action_trending_daily:
-                applyFrequencyChange(NetConstants.DAILY);
+                applyFrequencyChange(NetConstant.DAILY);
                 break;
             case R.id.action_trending_weekly:
-                applyFrequencyChange(NetConstants.WEEKLY);
+                applyFrequencyChange(NetConstant.WEEKLY);
                 break;
             case R.id.action_trending_monthly:
-                applyFrequencyChange(NetConstants.MONTHLY);
+                applyFrequencyChange(NetConstant.MONTHLY);
                 break;
             case R.id.action_collections_repo:
                 break;
