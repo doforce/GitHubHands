@@ -20,5 +20,7 @@ public class NetConstant {
 
     public static final long DEFAULT_TIMEOUT=20L;
 
+    public static final String GITHUB_TOKEN_MANUAL_URL="http://www.jianshu.com/p/df002fc555ff";
+
 
 }

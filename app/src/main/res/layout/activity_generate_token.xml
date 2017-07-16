@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:wheel="http://schemas.android.com/apk/res-auto">
+
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/toolbar_middle_size"
+      android:background="@color/colorLogo"
+      android:id="@+id/bar"
+      >
+
+      <ImageView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:background="@drawable/back"
+          android:layout_centerVertical="true"
+          android:layout_marginStart="@dimen/small_view_size"
+          android:id="@+id/back"/>
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:id="@+id/title"
+          android:textColor="@color/colorWhite"
+          android:text="@string/token_activity_title"
+          android:textSize="@dimen/item_title_size"
+          android:layout_centerInParent="true"/>
+
+      <ImageView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:background="@drawable/question"
+          android:layout_centerVertical="true"
+          android:layout_alignParentEnd="true"
+          android:layout_marginEnd="@dimen/small_view_size"
+          android:id="@+id/question"/>
+
+  </RelativeLayout>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/large_view_size"
+        android:layout_marginEnd="@dimen/large_view_size"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/token_box"
+        android:hint="@string/token_box_hint"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="@dimen/large_view_size"
+        />
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/token_submit"
+        android:text="@string/submit"
+        android:textColor="@color/colorLogo"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/token_box"
+        android:background="@drawable/button_bg"
+        android:textAllCaps="false"
+        />
+
+    <com.pnikosis.materialishprogress.ProgressWheel
+        android:id="@+id/progress_wheel"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        wheel:matProg_barColor="@color/colorBlack"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        wheel:matProg_progressIndeterminate="true"
+        />
+
+</RelativeLayout>

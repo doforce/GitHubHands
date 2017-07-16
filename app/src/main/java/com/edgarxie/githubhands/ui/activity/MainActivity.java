@@ -50,7 +50,10 @@ public class MainActivity extends BaseActivity<MainP>
     private ImageView mSelect;
     private LinearLayout mTabLayout;
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private ImageView mUserAvatar;
+    private TextView mUsername;
+    private View mHeaderView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -182,6 +185,9 @@ public class MainActivity extends BaseActivity<MainP>
         mLanguageTab= (TabLayout) findViewById(R.id.tab_language);
         mSelect= (ImageView) findViewById(R.id.language_select);
         mTabLayout= (LinearLayout) findViewById(R.id.tab_layout);
+        mHeaderView=mNavView.getHeaderView(0);
+        mUserAvatar= (ImageView) mHeaderView.findViewById(R.id.user_avatar);
+        mUsername= (TextView) mHeaderView.findViewById(R.id.username);
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -191,6 +197,15 @@ public class MainActivity extends BaseActivity<MainP>
         mDrawerLayout.setDrawerListener(toggle);
         toggle.syncState();
         setToolBarTitle(startTitle,R.string.daily);
+
+        setListener();
+    }
+
+
+    private void setListener(){
+        //// TODO: 17-7-16 获取token跳转
+        mUserAvatar.setOnClickListener(view -> mPresenter.authEvent());
+        mUsername.setOnClickListener(view -> mPresenter.authEvent());
 
         mToolbarSearch.setOnClickListener(v -> {
             Intent intent=new Intent(this, SearchActivity.class);

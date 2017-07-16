@@ -39,7 +39,6 @@ public class WebRepoDevRepoDevAty extends BaseActivity<WebRepoDevP> implements I
     private String mRepo;
     private String mDeveloper;
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -132,8 +131,6 @@ public class WebRepoDevRepoDevAty extends BaseActivity<WebRepoDevP> implements I
             case R.id.menu_star:
                 break;
             case R.id.menu_watch:
-                break;
-            case R.id.menu_fork:
                 break;
         }
         return super.onOptionsItemSelected(item);

@@ -28,7 +28,6 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements ISe
     private RecyclerView mResult;
     private ProgressWheel mProgress;
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

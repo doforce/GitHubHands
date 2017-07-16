@@ -25,7 +25,6 @@ public class CustomLangAty extends BaseActivity<CustomLangP>
     private ImageView mBack;
     private TextView mTitle;
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

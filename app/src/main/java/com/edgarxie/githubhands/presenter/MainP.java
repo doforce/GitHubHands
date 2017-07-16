@@ -6,6 +6,7 @@ import android.content.Intent;
 import com.edgarxie.githubhands.App;
 import com.edgarxie.githubhands.model.DbLangModel;
 import com.edgarxie.githubhands.ui.activity.CustomLangAty;
+import com.edgarxie.githubhands.ui.activity.TokenGenerateActivity;
 import com.edgarxie.githubhands.ui.interf.IMainView;
 
 import java.util.ArrayList;
@@ -27,6 +28,16 @@ public class MainP extends BasePresenter<IMainView> {
     public void goToCustomLanguage() {
         Intent intent=new Intent(mContext, CustomLangAty.class);
         mContext.startActivity(intent);
+    }
+
+    public void goToTokenGenerate(){
+        Intent intent=new Intent(mContext, TokenGenerateActivity.class);
+        mContext.startActivity(intent);
+    }
+
+
+    public void authEvent(){
+        goToTokenGenerate();
     }
 
     public void setLanguages() {
