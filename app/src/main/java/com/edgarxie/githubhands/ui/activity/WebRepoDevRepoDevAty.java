@@ -34,6 +34,7 @@ public class WebRepoDevRepoDevAty extends BaseActivity<WebRepoDevP> implements I
     private TextView mTitle;
     private ProgressWheel mProgress;
     private WebView mWebView;
+    private ImageView mDelete;
     private boolean isRepo;
     private String mUrl;
     private String mRepo;
@@ -62,18 +63,24 @@ public class WebRepoDevRepoDevAty extends BaseActivity<WebRepoDevP> implements I
         mTitle= (TextView) findViewById(R.id.bar_title);
         mProgress= (ProgressWheel) findViewById(R.id.progress_wheel);
         mWebView= (WebView) findViewById(R.id.web_show);
+        mDelete= (ImageView) findViewById(R.id.delete);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         initWebView();
         initTitle();
         mBack.setOnClickListener(view -> finish());
+        mDelete.setOnClickListener(v -> mPresenter.deleteToken());
     }
 
     private void initTitle(){
         if (isRepo){
             mTitle.setText(mRepo);
         }else {
+            boolean isAuthUser=getIntent().getExtras().getBoolean(Constant.BUNDLE_IS_AUTH_USER);
+            if (isAuthUser){
+                mDelete.setVisibility(View.VISIBLE);
+            }
             mTitle.setText(mDeveloper);
         }
     }
@@ -167,6 +174,11 @@ public class WebRepoDevRepoDevAty extends BaseActivity<WebRepoDevP> implements I
     @Override
     public void setVisibility(int visibility) {
         mProgress.setVisibility(visibility);
+    }
+
+    @Override
+    public void finishAty() {
+        finish();
     }
 
     @Override

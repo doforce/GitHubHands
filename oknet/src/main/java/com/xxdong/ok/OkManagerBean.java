@@ -1,9 +1,12 @@
 package com.xxdong.ok;
 
 import com.google.gson.Gson;
+import com.google.gson.annotations.SerializedName;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.jar.Pack200;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -35,9 +38,24 @@ public class OkManagerBean<T> {
         enqueue(url, okManager.getRequest().buildGetRequest(url,parameters),clazz,success,failed);
     }
 
+    public void getAsync(String url, String key,String val, Class<T> clazz
+            , OkSuccessListener<T> success, OkFailedListener failed) throws IOException {
+        Map<String,String> p=new HashMap<>();
+        p.put(key,val);
+        getAsync(url,p,clazz,success,failed);
+    }
+
+
     public void getAsync(String url,Map<String,String> parameters,Class<T> clazz
             ,OkSuccessListener<T> success) throws IOException {
         enqueue(url, okManager.getRequest().buildGetRequest(url,parameters),clazz,success,null);
+    }
+
+    public void getAsync(String url,String key,String val,Class<T> clazz
+            ,OkSuccessListener<T> success) throws IOException {
+        Map<String,String> p=new HashMap<>();
+        p.put(key,val);
+        getAsync(url,p,clazz,success);
     }
 
     public T get(String url,Class<T> clazz) throws IOException {
@@ -52,12 +70,24 @@ public class OkManagerBean<T> {
         return null;
     }
 
+    public T get(String url,String key,String val,Class<T> clazz) throws IOException {
+        Map<String,String> p=new HashMap<>();
+        p.put(key,val);
+        return get(url,p,clazz);
+    }
+
     public T post(String url,Map<String,String> parameters,Class<T> clazz) throws IOException {
         Response resp= okManager.getOkHttpClient().newCall(okManager.getRequest().builderPostRequest(url,parameters)).execute();
         if (resp.isSuccessful()){
             return getBean(resp.body().string(),clazz);
         }
         return null;
+    }
+
+    public T post(String url,String key,String val,Class<T> clazz) throws IOException {
+        Map<String,String> p=new HashMap<>();
+        p.put(key,val);
+        return post(url,p,clazz);
     }
 
     public T post(String url,String json,Class<T> clazz) throws IOException {
@@ -73,9 +103,23 @@ public class OkManagerBean<T> {
         enqueue(url, okManager.getRequest().builderPostRequest(url,parameters),clazz,success,failed);
     }
 
+    public void postAsync(String url,String key,String val,Class<T> clazz
+            ,OkSuccessListener<T> success,OkFailedListener failed) throws IOException{
+        Map<String,String> p=new HashMap<>();
+        p.put(key,val);
+        postAsync(url,p,clazz,success,failed);
+    }
+
     public void postAsync(String url,Map<String,String> parameters,Class<T> clazz
             ,OkSuccessListener<T> success) throws IOException{
         enqueue(url, okManager.getRequest().builderPostRequest(url,parameters),clazz,success,null);
+    }
+
+    public void postAsync(String url,String key,String val,Class<T> clazz
+            ,OkSuccessListener<T> success) throws IOException{
+        Map<String,String> p=new HashMap<>();
+        p.put(key,val);
+        postAsync(url,p,clazz,success);
     }
 
     public void postAsync(String url,String json,Class<T> clazz

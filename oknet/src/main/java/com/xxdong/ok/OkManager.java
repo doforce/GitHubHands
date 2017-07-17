@@ -1,6 +1,7 @@
 package com.xxdong.ok;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -63,12 +64,24 @@ public class OkManager {
         return null;
     }
 
+    public String get(String url, String key,String val) throws IOException {
+        Map<String,String> p=new HashMap<>();
+        p.put(key,val);
+        return get(url,p);
+    }
+
     public void getAsync(String url, Callback callback) throws IOException {
         getAsync(url, null, callback);
     }
 
     public void getAsync(String url, Map<String, String> parameters, Callback callback) throws IOException {
         okManager.okHttpClient.newCall(request.buildGetRequest(url, parameters)).enqueue(callback);
+    }
+
+    public void getAsync(String url, String key,String val, Callback callback) throws IOException {
+        Map<String,String> p=new HashMap<>();
+        p.put(key,val);
+        getAsync(url,p,callback);
     }
 
     public String post(String url, String json) throws IOException {
@@ -92,8 +105,20 @@ public class OkManager {
         return null;
     }
 
+    public String post(String url, String key,String val) throws IOException {
+        Map<String,String> p=new HashMap<>();
+        p.put(key,val);
+        return post(url,p);
+    }
+
     public void postAsync(String url, Map<String, String> parameters, Callback callback) throws IOException {
         okHttpClient.newCall(request.builderPostRequest(url, parameters)).enqueue(callback);
+    }
+
+    public void postAsync(String url, String key,String val, Callback callback) throws IOException {
+        Map<String,String> p=new HashMap<>();
+        p.put(key,val);
+        postAsync(url,p,callback);
     }
 
     public OkRequest getRequest() {

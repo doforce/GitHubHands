@@ -14,6 +14,8 @@ import com.edgarxie.githubhands.R;
 import com.edgarxie.githubhands.presenter.TokenGeneratePresenter;
 import com.edgarxie.githubhands.ui.interf.ITokenGenerateView;
 import com.edgarxie.githubhands.util.NetConstant;
+import com.edgarxie.utils.android.ToastUtil;
+import com.pnikosis.materialishprogress.ProgressWheel;
 
 /**
  * Created by edgar on 17-7-16.
@@ -24,6 +26,7 @@ public class TokenGenerateActivity extends BaseActivity<TokenGeneratePresenter> 
     private ImageView mQuestion;
     private EditText mTokenBox;
     private Button mTokenSubmit;
+    private ProgressWheel mProgress;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,6 +41,7 @@ public class TokenGenerateActivity extends BaseActivity<TokenGeneratePresenter> 
         mQuestion= (ImageView) findViewById(R.id.question);
         mTokenBox= (EditText) findViewById(R.id.token_box);
         mTokenSubmit= (Button) findViewById(R.id.token_submit);
+        mProgress= (ProgressWheel) findViewById(R.id.progress_wheel);
 
         mBack.setOnClickListener(view -> finish());
         mQuestion.setOnClickListener(view -> {
@@ -47,6 +51,27 @@ public class TokenGenerateActivity extends BaseActivity<TokenGeneratePresenter> 
             intent.setData(content_url);
             startActivity(intent);
         });
+        mTokenSubmit.setOnClickListener(v -> mPresenter.submit());
+    }
+
+    @Override
+    public String getTokenText() {
+        return mTokenBox.getText().toString();
+    }
+
+    @Override
+    public void setProgressVisibility(int vi) {
+        mProgress.setVisibility(vi);
+    }
+
+    @Override
+    public void finishAty() {
+        finish();
+    }
+
+    @Override
+    public void runUi(Runnable action) {
+        runOnUiThread(action);
     }
 
     @Override

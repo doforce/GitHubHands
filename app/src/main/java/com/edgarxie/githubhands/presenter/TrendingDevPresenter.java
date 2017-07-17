@@ -72,7 +72,7 @@ public class TrendingDevPresenter extends BasePresenter<ITrendingDeveloperView> 
             Bundle bundle=new Bundle();
             bundle.putBoolean(Constant.BUNDLE_IS_REPO,false);
             bundle.putString(Constant.BUNDLE_WEB_URL,bean.getUserLink());
-            bundle.putString(Constant.BUNDLE_REPO,bean.getUser());
+            bundle.putString(Constant.BUNDLE_DEVELOPER,bean.getUser());
             intent.putExtras(bundle);
             mContext.startActivity(intent);
         });

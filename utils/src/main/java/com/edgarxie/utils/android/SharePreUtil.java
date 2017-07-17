@@ -10,11 +10,32 @@ import java.util.Set;
  * Created by edgarx on 16-9-6.
  */
 public class SharePreUtil {
+    public static final String FILE_NAME="GitHub-files";
 
     public static void putString(Context context, String filename,String key, String val){
         SharedPreferences preferences=context.getSharedPreferences(filename,Context.MODE_PRIVATE);
         SharedPreferences.Editor editor=preferences.edit();
         editor.putString(key,val);
+        editor.apply();
+    }
+
+    public static void putString(Context context,String key, String val){
+        putString(context,FILE_NAME,key,val);
+    }
+
+    public static String getString(Context context,String filename,  String key){
+        SharedPreferences preferences=context.getSharedPreferences(filename,Context.MODE_PRIVATE);
+        return preferences.getString(key,null);
+    }
+
+    public static String getString(Context context,String key){
+        return getString(context,FILE_NAME,key);
+    }
+
+    public static void clear(Context context){
+        SharedPreferences preferences=context.getSharedPreferences(FILE_NAME,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=preferences.edit();
+        editor.clear();
         editor.apply();
     }
 
@@ -48,11 +69,6 @@ public class SharePreUtil {
         SharedPreferences.Editor editor=preferences.edit();
         editor.putInt(key,val);
         editor.apply();
-    }
-
-    public static String getString(Context context,String filename,  String key){
-        SharedPreferences preferences=context.getSharedPreferences(filename,Context.MODE_PRIVATE);
-        return preferences.getString(key,"");
     }
 
     public static int getInt(Context context,String filename, String key){

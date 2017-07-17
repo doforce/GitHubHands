@@ -6,4 +6,5 @@ package com.edgarxie.githubhands.ui.interf;
 
 public interface IWebRepoDevView extends ITopView {
     void setVisibility(int visibility);
+    void finishAty();
 }

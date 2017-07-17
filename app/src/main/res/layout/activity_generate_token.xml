@@ -39,30 +39,43 @@
 
   </RelativeLayout>
 
-    <EditText
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/large_view_size"
-        android:layout_marginEnd="@dimen/large_view_size"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/token_box"
-        android:hint="@string/token_box_hint"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="@dimen/large_view_size"
-        />
+        android:layout_height="match_parent"
+        android:layout_below="@+id/bar"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        >
 
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/token_submit"
-        android:text="@string/submit"
-        android:textColor="@color/colorLogo"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/token_box"
-        android:background="@drawable/button_bg"
-        android:textAllCaps="false"
-        />
+            <EditText
+                android:id="@+id/token_box"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/token_box_hint"
+                android:imeActionId="@+id/token_submit"
+                android:imeOptions="actionUnspecified"
+                android:inputType="text"
+                android:maxLines="1"
+                />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/token_submit"
+            style="?android:textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:text="@string/submit"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            />
+
+    </LinearLayout>
 
     <com.pnikosis.materialishprogress.ProgressWheel
         android:id="@+id/progress_wheel"

@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.edgarxie.githubhands.R;
 import com.edgarxie.githubhands.presenter.MainP;
 import com.edgarxie.githubhands.ui.fragment.CollectionFrag;
@@ -231,6 +232,7 @@ public class MainActivity extends BaseActivity<MainP>
     @Override
     protected void onResume() {
         super.onResume();
+        mPresenter.verifyUser();
         mPresenter.setLanguages();
     }
 
@@ -283,9 +285,20 @@ public class MainActivity extends BaseActivity<MainP>
         }
     }
 
+
     @Override
     public void getTabAt(int index) {
         mLanguageTab.getTabAt(index);
+    }
+
+    @Override
+    public void setUsernameText(String text) {
+        mUsername.setText(text);
+    }
+
+    @Override
+    public void setUserAvatar(String url) {
+        Glide.with(this).load(url).into(mUserAvatar);
     }
 
     @Override
