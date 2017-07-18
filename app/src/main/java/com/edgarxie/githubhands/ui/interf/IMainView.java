@@ -10,5 +10,7 @@ public interface IMainView extends ITopView {
     void addTabs(List<String> tabs);
     void getTabAt(int index);
     void setUsernameText(String text);
+    void setDefaultUsernameText();
     void setUserAvatar(String url);
+    void setDefaultUserAvatar();
 }

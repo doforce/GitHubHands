@@ -1,12 +1,10 @@
 package com.xxdong.ok;
 
 import com.google.gson.Gson;
-import com.google.gson.annotations.SerializedName;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.jar.Pack200;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -35,7 +33,7 @@ public class OkManagerBean<T> {
 
     public void getAsync(String url, Map<String,String> parameters, Class<T> clazz
             , OkSuccessListener<T> success, OkFailedListener failed) throws IOException {
-        enqueue(url, okManager.getRequest().buildGetRequest(url,parameters),clazz,success,failed);
+        enqueue(url, okManager.getOkRequest().getRequest(url,parameters),clazz,success,failed);
     }
 
     public void getAsync(String url, String key,String val, Class<T> clazz
@@ -48,7 +46,7 @@ public class OkManagerBean<T> {
 
     public void getAsync(String url,Map<String,String> parameters,Class<T> clazz
             ,OkSuccessListener<T> success) throws IOException {
-        enqueue(url, okManager.getRequest().buildGetRequest(url,parameters),clazz,success,null);
+        enqueue(url, okManager.getOkRequest().getRequest(url,parameters),clazz,success,null);
     }
 
     public void getAsync(String url,String key,String val,Class<T> clazz
@@ -63,7 +61,7 @@ public class OkManagerBean<T> {
     }
 
     public T get(String url,Map<String,String> parameters,Class<T> clazz) throws IOException {
-        Response resp= okManager.getOkHttpClient().newCall(okManager.getRequest().buildGetRequest(url,parameters)).execute();
+        Response resp= okManager.getOkHttpClient().newCall(okManager.getOkRequest().getRequest(url,parameters)).execute();
         if (resp.isSuccessful()){
             return getBean(resp.body().string(),clazz);
         }
@@ -77,7 +75,7 @@ public class OkManagerBean<T> {
     }
 
     public T post(String url,Map<String,String> parameters,Class<T> clazz) throws IOException {
-        Response resp= okManager.getOkHttpClient().newCall(okManager.getRequest().builderPostRequest(url,parameters)).execute();
+        Response resp= okManager.getOkHttpClient().newCall(okManager.getOkRequest().postRequest(url,parameters)).execute();
         if (resp.isSuccessful()){
             return getBean(resp.body().string(),clazz);
         }
@@ -91,7 +89,7 @@ public class OkManagerBean<T> {
     }
 
     public T post(String url,String json,Class<T> clazz) throws IOException {
-        Response resp= okManager.getOkHttpClient().newCall(okManager.getRequest().builderPostRequest(url,json)).execute();
+        Response resp= okManager.getOkHttpClient().newCall(okManager.getOkRequest().postRequestJson(url,json)).execute();
         if (resp.isSuccessful()){
             return getBean(resp.body().string(),clazz);
         }
@@ -100,7 +98,7 @@ public class OkManagerBean<T> {
 
     public void postAsync(String url,Map<String,String> parameters,Class<T> clazz
             ,OkSuccessListener<T> success,OkFailedListener failed) throws IOException{
-        enqueue(url, okManager.getRequest().builderPostRequest(url,parameters),clazz,success,failed);
+        enqueue(url, okManager.getOkRequest().postRequest(url,parameters),clazz,success,failed);
     }
 
     public void postAsync(String url,String key,String val,Class<T> clazz
@@ -112,7 +110,7 @@ public class OkManagerBean<T> {
 
     public void postAsync(String url,Map<String,String> parameters,Class<T> clazz
             ,OkSuccessListener<T> success) throws IOException{
-        enqueue(url, okManager.getRequest().builderPostRequest(url,parameters),clazz,success,null);
+        enqueue(url, okManager.getOkRequest().postRequest(url,parameters),clazz,success,null);
     }
 
     public void postAsync(String url,String key,String val,Class<T> clazz
@@ -124,12 +122,12 @@ public class OkManagerBean<T> {
 
     public void postAsync(String url,String json,Class<T> clazz
             ,OkSuccessListener<T> success,OkFailedListener failed) throws IOException {
-        enqueue(url, okManager.getRequest().builderPostRequest(url,json),clazz,success,failed);
+        enqueue(url, okManager.getOkRequest().postRequestJson(url,json),clazz,success,failed);
     }
 
     public void postAsync(String url,String json,Class<T> clazz
             ,OkSuccessListener<T> success) throws IOException {
-        enqueue(url, okManager.getRequest().builderPostRequest(url,json),clazz,success,null);
+        enqueue(url, okManager.getOkRequest().postRequestJson(url,json),clazz,success,null);
     }
 
     private void enqueue(String url, Request request, final Class<T> clazz

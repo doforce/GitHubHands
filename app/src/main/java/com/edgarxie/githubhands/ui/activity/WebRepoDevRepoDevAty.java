@@ -1,6 +1,8 @@
 package com.edgarxie.githubhands.ui.activity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,6 +24,8 @@ import com.edgarxie.githubhands.R;
 import com.edgarxie.githubhands.presenter.WebRepoDevP;
 import com.edgarxie.githubhands.ui.interf.IWebRepoDevView;
 import com.edgarxie.githubhands.util.Constant;
+import com.edgarxie.githubhands.util.NetConstant;
+import com.edgarxie.utils.android.IntentUtil;
 import com.pnikosis.materialishprogress.ProgressWheel;
 
 /**
@@ -39,6 +43,7 @@ public class WebRepoDevRepoDevAty extends BaseActivity<WebRepoDevP> implements I
     private String mUrl;
     private String mRepo;
     private String mDeveloper;
+    private boolean isAuthUser;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -77,10 +82,6 @@ public class WebRepoDevRepoDevAty extends BaseActivity<WebRepoDevP> implements I
         if (isRepo){
             mTitle.setText(mRepo);
         }else {
-            boolean isAuthUser=getIntent().getExtras().getBoolean(Constant.BUNDLE_IS_AUTH_USER);
-            if (isAuthUser){
-                mDelete.setVisibility(View.VISIBLE);
-            }
             mTitle.setText(mDeveloper);
         }
     }
@@ -131,13 +132,17 @@ public class WebRepoDevRepoDevAty extends BaseActivity<WebRepoDevP> implements I
         switch (id){
             case R.id.menu_collect:
                 break;
-            case R.id.menu_share:
+            case R.id.menu_open_in_browser:
+                IntentUtil.openInBrowser(this,mWebView.getUrl());
                 break;
             case R.id.menu_follow:
+                mPresenter.authOperation(item);
                 break;
             case R.id.menu_star:
+                mPresenter.authOperation(item);
                 break;
             case R.id.menu_watch:
+                mPresenter.authOperation(item);
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -149,7 +154,13 @@ public class WebRepoDevRepoDevAty extends BaseActivity<WebRepoDevP> implements I
         if (isRepo){
             getMenuInflater().inflate(R.menu.web_repo, menu);
         }else {
-            getMenuInflater().inflate(R.menu.web_developer,menu);
+            isAuthUser=getIntent().getExtras().getBoolean(Constant.BUNDLE_IS_AUTH_USER);
+            if (isAuthUser){
+                mDelete.setVisibility(View.VISIBLE);
+                mToolbar.getMenu().clear();
+            }else {
+                getMenuInflater().inflate(R.menu.web_developer, menu);
+            }
         }
         return true;
     }
@@ -174,6 +185,11 @@ public class WebRepoDevRepoDevAty extends BaseActivity<WebRepoDevP> implements I
     @Override
     public void setVisibility(int visibility) {
         mProgress.setVisibility(visibility);
+    }
+
+    @Override
+    public void setMenuItemTitle(MenuItem item,int id) {
+        item.setTitle(id);
     }
 
     @Override

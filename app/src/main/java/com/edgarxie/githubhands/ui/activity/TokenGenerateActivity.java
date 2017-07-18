@@ -14,6 +14,7 @@ import com.edgarxie.githubhands.R;
 import com.edgarxie.githubhands.presenter.TokenGeneratePresenter;
 import com.edgarxie.githubhands.ui.interf.ITokenGenerateView;
 import com.edgarxie.githubhands.util.NetConstant;
+import com.edgarxie.utils.android.IntentUtil;
 import com.edgarxie.utils.android.ToastUtil;
 import com.pnikosis.materialishprogress.ProgressWheel;
 
@@ -44,13 +45,8 @@ public class TokenGenerateActivity extends BaseActivity<TokenGeneratePresenter> 
         mProgress= (ProgressWheel) findViewById(R.id.progress_wheel);
 
         mBack.setOnClickListener(view -> finish());
-        mQuestion.setOnClickListener(view -> {
-            Intent intent = new Intent();
-            intent.setAction("android.intent.action.VIEW");
-            Uri content_url = Uri.parse(NetConstant.GITHUB_TOKEN_MANUAL_URL);
-            intent.setData(content_url);
-            startActivity(intent);
-        });
+        mQuestion.setOnClickListener(view ->
+                IntentUtil.openInBrowser(this,NetConstant.GITHUB_TOKEN_MANUAL_URL));
         mTokenSubmit.setOnClickListener(v -> mPresenter.submit());
     }
 

@@ -297,8 +297,18 @@ public class MainActivity extends BaseActivity<MainP>
     }
 
     @Override
+    public void setDefaultUsernameText() {
+        mUsername.setText(R.string.login_with_github);
+    }
+
+    @Override
     public void setUserAvatar(String url) {
         Glide.with(this).load(url).into(mUserAvatar);
+    }
+
+    @Override
+    public void setDefaultUserAvatar() {
+        mUserAvatar.setImageDrawable(getResources().getDrawable(R.drawable.avatar_default,null));
     }
 
     @Override

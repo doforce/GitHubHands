@@ -6,7 +6,6 @@ import android.os.Bundle;
 
 import com.edgarxie.githubhands.App;
 import com.edgarxie.githubhands.model.DbLangModel;
-import com.edgarxie.githubhands.model.bean.AuthUserBean;
 import com.edgarxie.githubhands.ui.activity.CustomLangAty;
 import com.edgarxie.githubhands.ui.activity.TokenGenerateActivity;
 import com.edgarxie.githubhands.ui.activity.WebRepoDevRepoDevAty;
@@ -16,7 +15,6 @@ import com.edgarxie.utils.android.SharePreUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.IllegalFormatCodePointException;
 
 import static com.edgarxie.githubhands.model.DbLangModel.getAllSelectedLang;
 
@@ -87,6 +85,9 @@ public class MainP extends BasePresenter<IMainView> {
         if (username!=null && avatar!=null){
             mView.setUsernameText(username);
             mView.setUserAvatar(avatar);
+        }else {
+            mView.setDefaultUserAvatar();
+            mView.setDefaultUsernameText();
         }
     }
 }
