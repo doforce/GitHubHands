@@ -8,7 +8,7 @@ import android.view.View;
 import com.edgarxie.githubhands.adapter.SearchRepoAdapter;
 import com.edgarxie.githubhands.model.bean.JsonSearchRepoBean;
 import com.edgarxie.githubhands.model.bean.SearchRepoBean;
-import com.edgarxie.githubhands.ui.activity.WebRepoDevRepoDevAty;
+import com.edgarxie.githubhands.ui.activity.WebRepoDevAty;
 import com.edgarxie.githubhands.ui.interf.ISearchView;
 import com.edgarxie.githubhands.util.Constant;
 import com.edgarxie.githubhands.util.NetConstant;
@@ -39,7 +39,7 @@ public class SearchPresenter extends BasePresenter<ISearchView> {
         p.put("q",query);
         mView.setVisibility(View.VISIBLE);
         try {
-            okManagerBean.getAsync(NetConstant.BASE_GITHUB_URL
+            okManagerBean.getAsync(NetConstant.GITHUB_BASE_API
                     + NetConstant.GITHUB_SEARCH_REPO, p, JsonSearchRepoBean.class, data -> {
                     int count=data.getTotalCount();
                 if (count!=0){
@@ -73,7 +73,7 @@ public class SearchPresenter extends BasePresenter<ISearchView> {
     public void setAdapterListener(){
         mAdapter.setOnItemClickedListener((view, item) -> {
             SearchRepoBean bean= (SearchRepoBean) item;
-            Intent intent=new Intent(mContext, WebRepoDevRepoDevAty.class);
+            Intent intent=new Intent(mContext, WebRepoDevAty.class);
             Bundle bundle=new Bundle();
             bundle.putBoolean(Constant.BUNDLE_IS_REPO,true);
             bundle.putString(Constant.BUNDLE_WEB_URL,bean.getHtmlUrl());

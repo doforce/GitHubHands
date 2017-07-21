@@ -29,7 +29,6 @@ public class TrendingDevFrag extends BaseFragment<TrendingDevPresenter>
     protected MainActivity mActivity;
     private boolean isFirstLoad=true;
 
-
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);

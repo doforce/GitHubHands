@@ -1,8 +1,6 @@
 package com.edgarxie.githubhands.ui.activity;
 
-import android.annotation.TargetApi;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -145,7 +143,7 @@ public class MainActivity extends BaseActivity<MainP>
         FragmentTransaction transaction= mFm.beginTransaction();
         mRepoFrag =new TrendingRepoFrag();
 
-        mRepoFrag=TrendingRepoFrag.newInstance(mPresenter
+        mRepoFrag= TrendingRepoFrag.newInstance(mPresenter
                 .getDefaultTabText());
         transaction.add(R.id.fragment_container, mRepoFrag
                 , Constant.TAG_TRENDING_REPO);
@@ -308,7 +306,8 @@ public class MainActivity extends BaseActivity<MainP>
 
     @Override
     public void setDefaultUserAvatar() {
-        mUserAvatar.setImageDrawable(getResources().getDrawable(R.drawable.avatar_default,null));
+        mUserAvatar.setImageDrawable(getResources()
+                .getDrawable(R.drawable.avatar_default,null));
     }
 
     @Override

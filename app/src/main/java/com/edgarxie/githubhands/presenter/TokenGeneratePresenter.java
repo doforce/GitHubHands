@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.edgarxie.githubhands.model.bean.AuthUserBean;
-import com.edgarxie.githubhands.ui.activity.WebRepoDevRepoDevAty;
+import com.edgarxie.githubhands.ui.activity.WebAuthDevAty;
 import com.edgarxie.githubhands.ui.interf.ITokenGenerateView;
 import com.edgarxie.githubhands.util.Constant;
 import com.edgarxie.githubhands.util.NetConstant;
@@ -35,7 +35,7 @@ public class TokenGeneratePresenter extends BasePresenter<ITokenGenerateView> {
         mView.setProgressVisibility(View.VISIBLE);
         OkManagerBean<AuthUserBean> ok=new OkManagerBean<>();
         try {
-            ok.getAsync(NetConstant.BASE_GITHUB_URL + "/user"
+            ok.getAsync(NetConstant.GITHUB_BASE_API + "/user"
                     , NetConstant.ACCESS_TOKEN, token, AuthUserBean.class, data -> {
                        saveUserData(token,data);
                         mView.runUi(() -> verifyTokenDone(data));
@@ -59,7 +59,7 @@ public class TokenGeneratePresenter extends BasePresenter<ITokenGenerateView> {
 
     private void verifyTokenDone(AuthUserBean data){
         mView.setProgressVisibility(View.GONE);
-        Intent intent=new Intent(mContext, WebRepoDevRepoDevAty.class);
+        Intent intent=new Intent(mContext, WebAuthDevAty.class);
         Bundle bundle=new Bundle();
         bundle.putBoolean(Constant.BUNDLE_IS_REPO,false);
         bundle.putString(Constant.BUNDLE_DEVELOPER,data.getUsername());

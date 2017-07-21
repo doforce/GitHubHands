@@ -20,6 +20,15 @@
     <string name="trending_daily">Trending daily</string>
     <string name="trending_weekly">Trending weekly</string>
     <string name="trending_monthly">Trending monthly</string>
+    <string name="collect">Collect</string>
+    <string name="un_collect">Uncollect</string>
+    <string name="star">Star</string>
+    <string name="un_star">Unstar</string>
+    <string name="watch">Watch</string>
+    <string name="un_watch">Unwatch</string>
+    <string name="fork">Fork</string>
+    <string name="follow">Follow</string>
+    <string name="un_follow">Unfollow</string>
 
     <string name="setting">Setting</string>
 
@@ -42,27 +51,9 @@
     <!--title-->
     <string name="title_custom_language">Custom trending languages</string>
     <string name="search_repo">Search Repo</string>
-    <string name="collect">Collect</string>
-    <string name="star">Star</string>
-    <string name="watch">Watch</string>
-    <string name="fork">Fork</string>
-    <string name="follow">Follow</string>
     <string name="token_activity_title">Input your personal token</string>
     <string name="submit">Submit</string>
     <string name="token_box_hint">Input token</string>
     <string name="title_activity_login">Sign in</string>
-
-    <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
 
 </resources>

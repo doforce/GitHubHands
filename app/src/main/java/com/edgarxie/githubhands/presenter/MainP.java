@@ -8,7 +8,7 @@ import com.edgarxie.githubhands.App;
 import com.edgarxie.githubhands.model.DbLangModel;
 import com.edgarxie.githubhands.ui.activity.CustomLangAty;
 import com.edgarxie.githubhands.ui.activity.TokenGenerateActivity;
-import com.edgarxie.githubhands.ui.activity.WebRepoDevRepoDevAty;
+import com.edgarxie.githubhands.ui.activity.WebAuthDevAty;
 import com.edgarxie.githubhands.ui.interf.IMainView;
 import com.edgarxie.githubhands.util.Constant;
 import com.edgarxie.utils.android.SharePreUtil;
@@ -40,10 +40,9 @@ public class MainP extends BasePresenter<IMainView> {
     }
 
     private void goToUserWebUrl(String username){
-        Intent intent=new Intent(mContext, WebRepoDevRepoDevAty.class);
+        Intent intent=new Intent(mContext, WebAuthDevAty.class);
         Bundle bundle=new Bundle();
         bundle.putBoolean(Constant.BUNDLE_IS_REPO,false);
-        bundle.putBoolean(Constant.BUNDLE_IS_AUTH_USER,true);
         bundle.putString(Constant.BUNDLE_DEVELOPER,username);
         bundle.putString(Constant.BUNDLE_WEB_URL,SharePreUtil.getString(mContext,Constant.SHARE_PRE_URL));
         intent.putExtras(bundle);

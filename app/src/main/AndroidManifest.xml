@@ -31,8 +31,9 @@
         </activity>
         <activity android:name=".ui.activity.SearchActivity" />
         <activity android:name=".ui.activity.CustomLangAty" />
-        <activity android:name=".ui.activity.WebRepoDevRepoDevAty" />
+        <activity android:name=".ui.activity.WebRepoDevAty" />
         <activity android:name=".ui.activity.TokenGenerateActivity" />
+        <activity android:name=".ui.activity.WebAuthDevAty"/>
     </application>
 
 </manifest>

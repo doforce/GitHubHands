@@ -7,7 +7,7 @@ import android.os.Bundle;
 import com.edgarxie.githubhands.TrendingDevAdapter;
 import com.edgarxie.githubhands.model.bean.JsonTrendingDevBean;
 import com.edgarxie.githubhands.model.bean.TrendingDevBean;
-import com.edgarxie.githubhands.ui.activity.WebRepoDevRepoDevAty;
+import com.edgarxie.githubhands.ui.activity.WebRepoDevAty;
 import com.edgarxie.githubhands.ui.interf.ITrendingDeveloperView;
 import com.edgarxie.githubhands.util.Constant;
 import com.edgarxie.githubhands.util.NetConstant;
@@ -43,7 +43,7 @@ public class TrendingDevPresenter extends BasePresenter<ITrendingDeveloperView> 
         mView.refreshingPost(() -> mView.setRefreshing(true));
         OkManagerBean<JsonTrendingDevBean> beanBuilder = new OkManagerBean<>();
         Map<String, String> par = new HashMap<>();
-        par.put("since", frequency);
+        par.put(NetConstant.SINCE, frequency);
         try {
             beanBuilder.getAsync(NetConstant.BASE_TRENDING_URL + NetConstant.DEVELOPER,
                     par, JsonTrendingDevBean.class, data -> {
@@ -68,7 +68,7 @@ public class TrendingDevPresenter extends BasePresenter<ITrendingDeveloperView> 
     private void setAdapterListener(){
         mAdapter.setOnItemClickedListener((view, item) -> {
             TrendingDevBean bean= (TrendingDevBean) item;
-            Intent intent=new Intent(mContext, WebRepoDevRepoDevAty.class);
+            Intent intent=new Intent(mContext, WebRepoDevAty.class);
             Bundle bundle=new Bundle();
             bundle.putBoolean(Constant.BUNDLE_IS_REPO,false);
             bundle.putString(Constant.BUNDLE_WEB_URL,bean.getUserLink());

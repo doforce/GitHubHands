@@ -4,7 +4,7 @@ package com.xxdong.ok;
  * Created by edgar on 17-6-18.
  */
 
-public interface OkSuccessListener<T> {
+public interface OkResponseListener<T> {
 
-    void success(T data);
+    void response(T data);
 }

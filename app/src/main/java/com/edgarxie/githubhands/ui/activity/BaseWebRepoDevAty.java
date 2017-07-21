@@ -1,13 +1,9 @@
 package com.edgarxie.githubhands.ui.activity;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.net.http.SslError;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,31 +20,29 @@ import com.edgarxie.githubhands.R;
 import com.edgarxie.githubhands.presenter.WebRepoDevP;
 import com.edgarxie.githubhands.ui.interf.IWebRepoDevView;
 import com.edgarxie.githubhands.util.Constant;
-import com.edgarxie.githubhands.util.NetConstant;
 import com.edgarxie.utils.android.IntentUtil;
+import com.edgarxie.utils.android.SharePreUtil;
 import com.pnikosis.materialishprogress.ProgressWheel;
 
 /**
  * Created by dofor on 2017/7/10.
  */
 
-public class WebRepoDevRepoDevAty extends BaseActivity<WebRepoDevP> implements IWebRepoDevView {
-    private Toolbar mToolbar;
-    private ImageView mBack;
-    private TextView mTitle;
-    private ProgressWheel mProgress;
-    private WebView mWebView;
-    private ImageView mDelete;
-    private boolean isRepo;
-    private String mUrl;
-    private String mRepo;
-    private String mDeveloper;
-    private boolean isAuthUser;
+public abstract class BaseWebRepoDevAty extends BaseActivity<WebRepoDevP> implements IWebRepoDevView {
+    protected Toolbar mToolbar;
+    protected ImageView mBack;
+    protected TextView mTitle;
+    protected ProgressWheel mProgress;
+    protected WebView mWebView;
+    protected boolean isRepo;
+    protected String mUrl;
+    protected String mRepo;
+    protected String mDeveloper;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_web_repo_developer);
+        setContentView(getLayoutId());
         setBundleData();
         initViews();
         mPresenter=new WebRepoDevP(this);
@@ -58,8 +52,11 @@ public class WebRepoDevRepoDevAty extends BaseActivity<WebRepoDevP> implements I
         Bundle bundle=getIntent().getExtras();
         isRepo=bundle.getBoolean(Constant.BUNDLE_IS_REPO);
         mUrl =bundle.getString(Constant.BUNDLE_WEB_URL);
-        mRepo=bundle.getString(Constant.BUNDLE_REPO);
-        mDeveloper=bundle.getString(Constant.BUNDLE_DEVELOPER);
+        if (isRepo) {
+            mRepo = bundle.getString(Constant.BUNDLE_REPO);
+        }else {
+            mDeveloper = bundle.getString(Constant.BUNDLE_DEVELOPER);
+        }
     }
 
     private void initViews() {
@@ -68,15 +65,16 @@ public class WebRepoDevRepoDevAty extends BaseActivity<WebRepoDevP> implements I
         mTitle= (TextView) findViewById(R.id.bar_title);
         mProgress= (ProgressWheel) findViewById(R.id.progress_wheel);
         mWebView= (WebView) findViewById(R.id.web_show);
-        mDelete= (ImageView) findViewById(R.id.delete);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         initWebView();
         initTitle();
         mBack.setOnClickListener(view -> finish());
-        mDelete.setOnClickListener(v -> mPresenter.deleteToken());
+        initSonViews();
     }
+
+    protected void initSonViews(){}
 
     private void initTitle(){
         if (isRepo){
@@ -150,17 +148,14 @@ public class WebRepoDevRepoDevAty extends BaseActivity<WebRepoDevP> implements I
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        //// TODO: 2017/7/10 从数据库或者网络中确定menu中的值
-        if (isRepo){
-            getMenuInflater().inflate(R.menu.web_repo, menu);
-        }else {
-            isAuthUser=getIntent().getExtras().getBoolean(Constant.BUNDLE_IS_AUTH_USER);
-            if (isAuthUser){
-                mDelete.setVisibility(View.VISIBLE);
-                mToolbar.getMenu().clear();
-            }else {
+        if (SharePreUtil.getString(this,Constant.SHARE_PRE_TOKEN)!=null) {
+            if (isRepo) {
+                getMenuInflater().inflate(R.menu.web_repo, menu);
+            } else {
                 getMenuInflater().inflate(R.menu.web_developer, menu);
             }
+        }else {
+            getMenuInflater().inflate(R.menu.web_no_token,menu);
         }
         return true;
     }
@@ -183,13 +178,23 @@ public class WebRepoDevRepoDevAty extends BaseActivity<WebRepoDevP> implements I
     }
 
     @Override
-    public void setVisibility(int visibility) {
-        mProgress.setVisibility(visibility);
+    public void setMenuItemTitle(int menuId, int textId) {
+        mToolbar.getMenu().findItem(menuId).setTitle(textId);
     }
 
     @Override
-    public void setMenuItemTitle(MenuItem item,int id) {
-        item.setTitle(id);
+    public String getMenuItemTitle(int menuId) {
+       return mToolbar.getMenu().findItem(menuId).getTitle().toString();
+    }
+
+    @Override
+    public void runUi(Runnable action) {
+        runOnUiThread(action);
+    }
+
+    @Override
+    public String getStr(int id) {
+        return getString(id);
     }
 
     @Override
@@ -198,7 +203,14 @@ public class WebRepoDevRepoDevAty extends BaseActivity<WebRepoDevP> implements I
     }
 
     @Override
+    public String getTitleText() {
+        return mTitle.getText().toString();
+    }
+
+    @Override
     protected void attachView() {
         mPresenter.attach(this);
     }
+
+    protected abstract int getLayoutId();
 }

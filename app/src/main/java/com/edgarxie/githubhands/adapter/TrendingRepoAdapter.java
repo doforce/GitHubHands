@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 import com.edgarxie.githubhands.R;
+import com.edgarxie.githubhands.model.DbCollectionMode;
 import com.edgarxie.githubhands.model.bean.TrendingRepoBean;
 import com.edgarxie.utils.android.ToastUtil;
 import com.edgarxie.utils.android.recyclerview.BaseRVAdapter;
@@ -34,26 +35,27 @@ public class TrendingRepoAdapter extends BaseRVAdapter<TrendingRepoBean,BaseRVAd
         boolean selected=item.isCollected();
         if (!selected){
             holder.setImageBackground(R.id.item_collect
-                    ,mContext.getResources().getDrawable(R.drawable.collection_heart_unselected));
+                    ,mContext.getResources().getDrawable(R.drawable.collection_heart_unselected,null));
         }else {
             holder.setImageBackground(R.id.item_collect
-                    ,mContext.getResources().getDrawable(R.drawable.collection_heart_selected));
+                    ,mContext.getResources().getDrawable(R.drawable.collection_heart_selected,null));
         }
         setAvatarsUrl(holder,item.getAvatars());
         holder.setOnClickListener(R.id.item_collect, v -> {
-            ToastUtil.show(mContext,"Collect");
+
             if (!selected){
                 holder.setImageBackground(R.id.item_collect
                         ,mContext.getResources().getDrawable(R.drawable.collection_heart_selected));
                 //// TODO: 2017/6/29 添加收藏
+                ToastUtil.show(mContext,"Collected");
+                DbCollectionMode.repoCollected(item);
             }else {
                 holder.setImageBackground(R.id.item_collect
                         ,mContext.getResources().getDrawable(R.drawable.collection_heart_unselected));
                 //// TODO: 2017/6/29 删除收藏
+                ToastUtil.show(mContext,"Uncollected");
+                DbCollectionMode.repoUncollected(item);
             }
-            TrendingRepoBean bean=item;
-            bean.setCollected(!selected);
-            itemChange(bean,getPosition(item));
         });
     }
 
