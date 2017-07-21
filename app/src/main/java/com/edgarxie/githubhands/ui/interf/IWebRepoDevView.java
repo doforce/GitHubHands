@@ -11,4 +11,6 @@ public interface IWebRepoDevView extends ITopView {
     void runUi(Runnable action);
     String getTitleText();
     String getStr(int id);
+    boolean isCollected();
+    void setCollected(boolean collected);
 }

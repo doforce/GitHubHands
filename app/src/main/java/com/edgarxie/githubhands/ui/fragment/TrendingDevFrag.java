@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import android.widget.LinearLayout;
 
 import com.edgarxie.githubhands.R;
-import com.edgarxie.githubhands.TrendingDevAdapter;
+import com.edgarxie.githubhands.adapter.TrendingDevAdapter;
 import com.edgarxie.githubhands.presenter.TrendingDevPresenter;
 import com.edgarxie.githubhands.ui.activity.MainActivity;
 import com.edgarxie.githubhands.ui.interf.ITrendingDeveloperView;

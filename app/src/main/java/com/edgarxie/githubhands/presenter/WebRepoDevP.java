@@ -6,11 +6,13 @@ import android.util.Log;
 import android.view.MenuItem;
 
 import com.edgarxie.githubhands.R;
+import com.edgarxie.githubhands.model.DbCollectionMode;
 import com.edgarxie.githubhands.ui.interf.IWebRepoDevView;
 import com.edgarxie.githubhands.util.Constant;
 import com.edgarxie.githubhands.util.NetConstant;
 import com.edgarxie.utils.android.SharePreUtil;
 import com.edgarxie.utils.android.ToastUtil;
+import com.edgarxie.utils.functional.NoneConsumers;
 import com.xxdong.ok.OkManager;
 
 import java.io.IOException;
@@ -181,6 +183,46 @@ public class WebRepoDevP extends BasePresenter<IWebRepoDevView> {
                     mView.setMenuItemTitle(R.id.menu_follow,R.string.follow);
                     break;
             }
+        }
+    }
+
+    public void checkCollected(boolean isRepo, String repo, String developer) {
+        if (isRepo){
+            setCollectItem(DbCollectionMode.isRepoCollected(repo));
+        }else {
+            setCollectItem(DbCollectionMode.isDevCollected(developer));
+        }
+    }
+
+    private void setCollectItem(boolean collected){
+        if (collected){
+            mView.setMenuItemTitle(R.id.menu_collect,R.string.un_collect);
+        }else {
+            mView.setMenuItemTitle(R.id.menu_collect,R.string.collect);
+        }
+        mView.setCollected(collected);
+    }
+
+    public void collectOperation(boolean isRepo, String desc, String language, String repo
+            , String developer, String avatar, String url) {
+        if (isRepo){
+            setCollectItem(() -> DbCollectionMode.repoUncollected(repo)
+                    ,() -> DbCollectionMode.repoCollected(desc,language,repo,url));
+        }else {
+            setCollectItem(() -> DbCollectionMode.devUncollected(developer)
+                    ,() -> DbCollectionMode.devCollected(avatar,developer,url));
+        }
+    }
+
+    private void setCollectItem(NoneConsumers delete,NoneConsumers insert){
+        if (mView.isCollected()){
+            delete.accept();
+            ToastUtil.show(mContext,Constant.UNCOLLECTED);
+            mView.setMenuItemTitle(R.id.menu_collect,R.string.collect);
+        }else {
+            insert.accept();
+            ToastUtil.show(mContext,Constant.COLLECTED);
+            mView.setMenuItemTitle(R.id.menu_collect,R.string.un_collect);
         }
     }
 }

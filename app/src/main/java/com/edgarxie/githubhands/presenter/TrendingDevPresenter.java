@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.edgarxie.githubhands.TrendingDevAdapter;
+import com.edgarxie.githubhands.adapter.TrendingDevAdapter;
 import com.edgarxie.githubhands.model.bean.JsonTrendingDevBean;
 import com.edgarxie.githubhands.model.bean.TrendingDevBean;
 import com.edgarxie.githubhands.ui.activity.WebRepoDevAty;
@@ -73,6 +73,7 @@ public class TrendingDevPresenter extends BasePresenter<ITrendingDeveloperView> 
             bundle.putBoolean(Constant.BUNDLE_IS_REPO,false);
             bundle.putString(Constant.BUNDLE_WEB_URL,bean.getUserLink());
             bundle.putString(Constant.BUNDLE_DEVELOPER,bean.getUser());
+            bundle.putString(Constant.BUNDLE_DEV_AVATAR,bean.getDeveloperAvatar());
             intent.putExtras(bundle);
             mContext.startActivity(intent);
         });

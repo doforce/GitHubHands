@@ -1,11 +1,14 @@
-package com.edgarxie.githubhands;
+package com.edgarxie.githubhands.adapter;
 
 import android.content.Context;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.edgarxie.githubhands.R;
+import com.edgarxie.githubhands.model.DbCollectionMode;
 import com.edgarxie.githubhands.model.bean.TrendingDevBean;
+import com.edgarxie.githubhands.util.Constant;
 import com.edgarxie.utils.android.ToastUtil;
 import com.edgarxie.utils.android.recyclerview.BaseRVAdapter;
 
@@ -26,7 +29,7 @@ public class TrendingDevAdapter extends BaseRVAdapter<TrendingDevBean,BaseRVAdap
         holder.setText(R.id.item_full_name,item.getFullName());
         ImageView view=holder.getView(R.id.item_avatar);
         Glide.with(mContext).load(item.getDeveloperAvatar()).into(view);
-        boolean selected=item.isCollected();
+        boolean selected= DbCollectionMode.isDevCollected(item.getUser());
         if (!selected){
             holder.setImageBackground(R.id.item_collect
                     ,mContext.getResources().getDrawable(R.drawable.collection_heart_unselected));
@@ -35,15 +38,17 @@ public class TrendingDevAdapter extends BaseRVAdapter<TrendingDevBean,BaseRVAdap
                     ,mContext.getResources().getDrawable(R.drawable.collection_heart_selected));
         }
         holder.setOnClickListener(R.id.item_collect, v -> {
-            ToastUtil.show(mContext,"Collect");
-            if (!selected){
+            boolean select=DbCollectionMode.isDevCollected(item.getUser());
+            if (!select){
                 holder.setImageBackground(R.id.item_collect
                         ,mContext.getResources().getDrawable(R.drawable.collection_heart_selected));
-                //// TODO: 2017/6/29 添加收藏
+                DbCollectionMode.devCollected(item);
+                ToastUtil.show(mContext, Constant.COLLECTED);
             }else {
                 holder.setImageBackground(R.id.item_collect
                         ,mContext.getResources().getDrawable(R.drawable.collection_heart_unselected));
-                //// TODO: 2017/6/29 删除收藏
+                DbCollectionMode.devUncollected(item);
+                ToastUtil.show(mContext,Constant.UNCOLLECTED);
             }
             TrendingDevBean bean=item;
             bean.setCollected(!selected);

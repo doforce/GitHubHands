@@ -29,15 +29,19 @@ import com.pnikosis.materialishprogress.ProgressWheel;
  */
 
 public abstract class BaseWebRepoDevAty extends BaseActivity<WebRepoDevP> implements IWebRepoDevView {
-    protected Toolbar mToolbar;
-    protected ImageView mBack;
-    protected TextView mTitle;
-    protected ProgressWheel mProgress;
-    protected WebView mWebView;
+    protected Toolbar toolbar;
+    protected ImageView back;
+    protected TextView title;
+    protected ProgressWheel progress;
+    protected WebView webView;
     protected boolean isRepo;
-    protected String mUrl;
-    protected String mRepo;
-    protected String mDeveloper;
+    protected String url;
+    protected String repo;
+    protected String developer;
+    protected String avatar;
+    protected String repoDesc;
+    protected String repoLang;
+    protected boolean collected;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,26 +55,29 @@ public abstract class BaseWebRepoDevAty extends BaseActivity<WebRepoDevP> implem
     private void setBundleData(){
         Bundle bundle=getIntent().getExtras();
         isRepo=bundle.getBoolean(Constant.BUNDLE_IS_REPO);
-        mUrl =bundle.getString(Constant.BUNDLE_WEB_URL);
+        url =bundle.getString(Constant.BUNDLE_WEB_URL);
         if (isRepo) {
-            mRepo = bundle.getString(Constant.BUNDLE_REPO);
+            repo = bundle.getString(Constant.BUNDLE_REPO);
+            repoDesc=bundle.getString(Constant.BUNDLE_REPO_DESC);
+            repoLang=bundle.getString(Constant.BUNDLE_REPO_LANG);
         }else {
-            mDeveloper = bundle.getString(Constant.BUNDLE_DEVELOPER);
+            developer = bundle.getString(Constant.BUNDLE_DEVELOPER);
+            avatar =bundle.getString(Constant.BUNDLE_DEV_AVATAR);
         }
     }
 
     private void initViews() {
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mBack= (ImageView) findViewById(R.id.bar_back);
-        mTitle= (TextView) findViewById(R.id.bar_title);
-        mProgress= (ProgressWheel) findViewById(R.id.progress_wheel);
-        mWebView= (WebView) findViewById(R.id.web_show);
-        setSupportActionBar(mToolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        back = (ImageView) findViewById(R.id.bar_back);
+        title = (TextView) findViewById(R.id.bar_title);
+        progress = (ProgressWheel) findViewById(R.id.progress_wheel);
+        webView = (WebView) findViewById(R.id.web_show);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         initWebView();
         initTitle();
-        mBack.setOnClickListener(view -> finish());
+        back.setOnClickListener(view -> finish());
         initSonViews();
     }
 
@@ -78,43 +85,43 @@ public abstract class BaseWebRepoDevAty extends BaseActivity<WebRepoDevP> implem
 
     private void initTitle(){
         if (isRepo){
-            mTitle.setText(mRepo);
+            title.setText(repo);
         }else {
-            mTitle.setText(mDeveloper);
+            title.setText(developer);
         }
     }
 
     private void initWebView() {
-        mWebView.getSettings().setJavaScriptEnabled(true);
-        mWebView.getSettings().setAppCacheEnabled(true);
-        mWebView.getSettings().setDatabaseEnabled(true);
-        mWebView.getSettings().setDomStorageEnabled(true);
-        mWebView.getSettings().setUseWideViewPort(true);
-        mWebView.getSettings().setLoadWithOverviewMode(true);
-        mWebView.getSettings().setLoadsImagesAutomatically(true);
-        mWebView.getSettings().setDefaultTextEncodingName(Constant.DEFAULT_ENCODING);
-        mWebView.loadUrl(mUrl);
-        mWebView.setWebViewClient(new WebViewClient(){
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setAppCacheEnabled(true);
+        webView.getSettings().setDatabaseEnabled(true);
+        webView.getSettings().setDomStorageEnabled(true);
+        webView.getSettings().setUseWideViewPort(true);
+        webView.getSettings().setLoadWithOverviewMode(true);
+        webView.getSettings().setLoadsImagesAutomatically(true);
+        webView.getSettings().setDefaultTextEncodingName(Constant.DEFAULT_ENCODING);
+        webView.loadUrl(url);
+        webView.setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                view.loadUrl(mUrl);
+                view.loadUrl(url);
                 return true;
             }
 
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                mProgress.setVisibility(View.VISIBLE);
+                progress.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
-                mProgress.setVisibility(View.GONE);
+                progress.setVisibility(View.GONE);
             }
 
             @Override
             public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
                 super.onReceivedError(view, request, error);
-                mProgress.setVisibility(View.GONE);
+                progress.setVisibility(View.GONE);
             }
 
             @Override
@@ -129,9 +136,10 @@ public abstract class BaseWebRepoDevAty extends BaseActivity<WebRepoDevP> implem
         int id=item.getItemId();
         switch (id){
             case R.id.menu_collect:
+                mPresenter.collectOperation(isRepo,repoDesc,repoLang,repo,developer, avatar, url);
                 break;
             case R.id.menu_open_in_browser:
-                IntentUtil.openInBrowser(this,mWebView.getUrl());
+                IntentUtil.openInBrowser(this, webView.getUrl());
                 break;
             case R.id.menu_follow:
                 mPresenter.authOperation(item);
@@ -162,8 +170,8 @@ public abstract class BaseWebRepoDevAty extends BaseActivity<WebRepoDevP> implem
 
     @Override
     public void onBackPressed() {
-        if (mWebView.canGoBack()){
-            mWebView.goBack();
+        if (webView.canGoBack()){
+            webView.goBack();
         }else {
             super.onBackPressed();
         }
@@ -172,19 +180,19 @@ public abstract class BaseWebRepoDevAty extends BaseActivity<WebRepoDevP> implem
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mWebView.clearCache(true);
-        mWebView.clearFormData();
-        mWebView.clearHistory();
+        webView.clearCache(true);
+        webView.clearFormData();
+        webView.clearHistory();
     }
 
     @Override
     public void setMenuItemTitle(int menuId, int textId) {
-        mToolbar.getMenu().findItem(menuId).setTitle(textId);
+        toolbar.getMenu().findItem(menuId).setTitle(textId);
     }
 
     @Override
     public String getMenuItemTitle(int menuId) {
-       return mToolbar.getMenu().findItem(menuId).getTitle().toString();
+       return toolbar.getMenu().findItem(menuId).getTitle().toString();
     }
 
     @Override
@@ -203,8 +211,18 @@ public abstract class BaseWebRepoDevAty extends BaseActivity<WebRepoDevP> implem
     }
 
     @Override
+    public boolean isCollected() {
+        return collected;
+    }
+
+    @Override
+    public void setCollected(boolean collected) {
+        this.collected = collected;
+    }
+
+    @Override
     public String getTitleText() {
-        return mTitle.getText().toString();
+        return title.getText().toString();
     }
 
     @Override

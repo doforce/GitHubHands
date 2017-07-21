@@ -27,6 +27,7 @@ public class WebAuthDevAty extends BaseWebRepoDevAty {
     @Override
     protected void onResume() {
         super.onResume();
+        mPresenter.checkCollected(isRepo, repo, developer);
     }
 
     @Override

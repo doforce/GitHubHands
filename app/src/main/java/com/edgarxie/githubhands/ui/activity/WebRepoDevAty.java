@@ -17,5 +17,6 @@ public class WebRepoDevAty extends BaseWebRepoDevAty {
     protected void onResume() {
         super.onResume();
         mPresenter.checkStarredWatchedFollowing(isRepo);
+        mPresenter.checkCollected(isRepo, repo, developer);
     }
 }

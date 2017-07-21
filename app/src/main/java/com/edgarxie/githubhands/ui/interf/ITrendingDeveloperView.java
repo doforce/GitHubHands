@@ -1,6 +1,6 @@
 package com.edgarxie.githubhands.ui.interf;
 
-import com.edgarxie.githubhands.TrendingDevAdapter;
+import com.edgarxie.githubhands.adapter.TrendingDevAdapter;
 
 /**
  * Created by edgar on 17-6-16.

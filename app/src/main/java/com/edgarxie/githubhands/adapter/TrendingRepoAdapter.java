@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide;
 import com.edgarxie.githubhands.R;
 import com.edgarxie.githubhands.model.DbCollectionMode;
 import com.edgarxie.githubhands.model.bean.TrendingRepoBean;
+import com.edgarxie.githubhands.util.Constant;
 import com.edgarxie.utils.android.ToastUtil;
 import com.edgarxie.utils.android.recyclerview.BaseRVAdapter;
 
@@ -32,7 +33,7 @@ public class TrendingRepoAdapter extends BaseRVAdapter<TrendingRepoBean,BaseRVAd
         holder.setText(R.id.item_stars,item.getStars());
         holder.setText(R.id.item_forks,item.getForks());
         holder.setText(R.id.item_added_stars,item.getAddedStars());
-        boolean selected=item.isCollected();
+        boolean selected=DbCollectionMode.isRepoCollected(item.getRepo());
         if (!selected){
             holder.setImageBackground(R.id.item_collect
                     ,mContext.getResources().getDrawable(R.drawable.collection_heart_unselected,null));
@@ -42,23 +43,20 @@ public class TrendingRepoAdapter extends BaseRVAdapter<TrendingRepoBean,BaseRVAd
         }
         setAvatarsUrl(holder,item.getAvatars());
         holder.setOnClickListener(R.id.item_collect, v -> {
-
-            if (!selected){
+            boolean select=DbCollectionMode.isRepoCollected(item.getRepo());
+            if (!select){
                 holder.setImageBackground(R.id.item_collect
                         ,mContext.getResources().getDrawable(R.drawable.collection_heart_selected));
-                //// TODO: 2017/6/29 添加收藏
-                ToastUtil.show(mContext,"Collected");
                 DbCollectionMode.repoCollected(item);
+                ToastUtil.show(mContext, Constant.COLLECTED);
             }else {
                 holder.setImageBackground(R.id.item_collect
                         ,mContext.getResources().getDrawable(R.drawable.collection_heart_unselected));
-                //// TODO: 2017/6/29 删除收藏
-                ToastUtil.show(mContext,"Uncollected");
                 DbCollectionMode.repoUncollected(item);
+                ToastUtil.show(mContext,Constant.UNCOLLECTED);
             }
         });
     }
-
 
 
     @Override

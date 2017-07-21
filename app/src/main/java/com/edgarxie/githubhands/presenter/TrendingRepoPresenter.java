@@ -87,6 +87,8 @@ public class TrendingRepoPresenter extends BasePresenter<ITrendingRepoView> {
             bundle.putBoolean(Constant.BUNDLE_IS_REPO,true);
             bundle.putString(Constant.BUNDLE_WEB_URL,bean.getRepoLink());
             bundle.putString(Constant.BUNDLE_REPO,bean.getRepo());
+            bundle.putString(Constant.BUNDLE_REPO_DESC,bean.getDesc());
+            bundle.putString(Constant.BUNDLE_REPO_LANG,bean.getLang());
             intent.putExtras(bundle);
             mContext.startActivity(intent);
         });
