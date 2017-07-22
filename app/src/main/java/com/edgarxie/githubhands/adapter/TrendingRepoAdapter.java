@@ -36,22 +36,22 @@ public class TrendingRepoAdapter extends BaseRVAdapter<TrendingRepoBean,BaseRVAd
         boolean selected=DbCollectionMode.isRepoCollected(item.getRepo());
         if (!selected){
             holder.setImageBackground(R.id.item_collect
-                    ,mContext.getResources().getDrawable(R.drawable.collection_heart_unselected,null));
+                    ,mContext.getDrawable(R.drawable.collection_heart_unselected));
         }else {
             holder.setImageBackground(R.id.item_collect
-                    ,mContext.getResources().getDrawable(R.drawable.collection_heart_selected,null));
+                    ,mContext.getDrawable(R.drawable.collection_heart_selected));
         }
         setAvatarsUrl(holder,item.getAvatars());
         holder.setOnClickListener(R.id.item_collect, v -> {
             boolean select=DbCollectionMode.isRepoCollected(item.getRepo());
             if (!select){
                 holder.setImageBackground(R.id.item_collect
-                        ,mContext.getResources().getDrawable(R.drawable.collection_heart_selected));
+                        ,mContext.getDrawable(R.drawable.collection_heart_selected));
                 DbCollectionMode.repoCollected(item);
                 ToastUtil.show(mContext, Constant.COLLECTED);
             }else {
                 holder.setImageBackground(R.id.item_collect
-                        ,mContext.getResources().getDrawable(R.drawable.collection_heart_unselected));
+                        ,mContext.getDrawable(R.drawable.collection_heart_unselected));
                 DbCollectionMode.repoUncollected(item);
                 ToastUtil.show(mContext,Constant.UNCOLLECTED);
             }

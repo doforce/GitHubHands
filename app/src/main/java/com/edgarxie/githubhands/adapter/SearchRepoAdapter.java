@@ -4,7 +4,9 @@ import android.content.Context;
 import android.view.ViewGroup;
 
 import com.edgarxie.githubhands.R;
+import com.edgarxie.githubhands.model.DbCollectionMode;
 import com.edgarxie.githubhands.model.bean.SearchRepoBean;
+import com.edgarxie.githubhands.util.Constant;
 import com.edgarxie.utils.android.ToastUtil;
 import com.edgarxie.utils.android.recyclerview.BaseRVAdapter;
 
@@ -23,28 +25,28 @@ public class SearchRepoAdapter extends BaseRVAdapter<SearchRepoBean,BaseRVAdapte
         holder.setText(R.id.item_repo,item.getFullName());
         holder.setText(R.id.item_desc,item.getDescription());
         holder.setText(R.id.item_lang,item.getLanguage());
-        boolean selected=item.isCollected();
+        boolean selected= DbCollectionMode.isRepoCollected(item.getFullName());
         if (!selected){
             holder.setImageBackground(R.id.item_collect
-                    ,mContext.getResources().getDrawable(R.drawable.collection_heart_unselected));
+                    ,mContext.getDrawable(R.drawable.collection_heart_unselected));
         }else {
             holder.setImageBackground(R.id.item_collect
-                    ,mContext.getResources().getDrawable(R.drawable.collection_heart_selected));
+                    ,mContext.getDrawable(R.drawable.collection_heart_selected));
         }
         holder.setOnClickListener(R.id.item_collect, v -> {
-            ToastUtil.show(mContext,"Collect");
-            if (!selected){
+            boolean select=DbCollectionMode.isRepoCollected(item.getFullName());
+            if (!select){
+                DbCollectionMode.repoCollected(item.getDescription()
+                        ,item.getLanguage(),item.getFullName(),item.getHtmlUrl());
                 holder.setImageBackground(R.id.item_collect
-                        ,mContext.getResources().getDrawable(R.drawable.collection_heart_selected));
-                //// TODO: 2017/6/29 添加收藏
+                        ,mContext.getDrawable(R.drawable.collection_heart_selected));
+                ToastUtil.show(mContext, Constant.COLLECTED);
             }else {
+                DbCollectionMode.repoUncollected(item.getFullName());
                 holder.setImageBackground(R.id.item_collect
-                        ,mContext.getResources().getDrawable(R.drawable.collection_heart_unselected));
-                //// TODO: 2017/6/29 删除收藏
+                        ,mContext.getDrawable(R.drawable.collection_heart_unselected));
+                ToastUtil.show(mContext,Constant.UNCOLLECTED);
             }
-            SearchRepoBean bean=item;
-            bean.setCollected(!selected);
-            itemChange(bean,getPosition(item));
         });
     }
 

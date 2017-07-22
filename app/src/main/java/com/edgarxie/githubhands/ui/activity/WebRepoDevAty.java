@@ -1,5 +1,7 @@
 package com.edgarxie.githubhands.ui.activity;
 
+import android.widget.ImageView;
+
 import com.edgarxie.githubhands.R;
 
 /**
@@ -7,10 +9,23 @@ import com.edgarxie.githubhands.R;
  */
 
 public class WebRepoDevAty extends BaseWebRepoDevAty {
+    private ImageView collectView;
 
     @Override
     protected int getLayoutId() {
         return R.layout.activity_web_repo_developer;
+    }
+
+    @Override
+    protected void initSonViews() {
+        collectView= (ImageView) findViewById(R.id.bar_collect);
+        collectView.setOnClickListener(v -> mPresenter.collectOperation(isRepo
+                ,repoDesc,repoLang,repo,developer,avatar,url));
+    }
+
+    @Override
+    public void setCollectImageBG(int id) {
+        collectView.setBackground(getDrawable(id));
     }
 
     @Override

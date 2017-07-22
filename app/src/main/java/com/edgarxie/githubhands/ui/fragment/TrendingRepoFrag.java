@@ -52,7 +52,7 @@ public class TrendingRepoFrag extends BaseFragment<TrendingRepoPresenter> implem
         super.onActivityCreated(savedInstanceState);
         isFirstLoad=true;
 
-        mRvRepo= (RecyclerView) mView.findViewById(R.id.rv_trending_repo);
+        mRvRepo= (RecyclerView) mView.findViewById(R.id.rv_list_repo_dev);
         mRefresh= (SwipeRefreshLayout) mView.findViewById(R.id.layout_swipe_refresh);
         mRvRepo.setLayoutManager(new LinearLayoutManager(getContext()));
         mRvRepo.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayout.VERTICAL));

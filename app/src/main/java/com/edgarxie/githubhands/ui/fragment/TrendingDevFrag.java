@@ -34,7 +34,7 @@ public class TrendingDevFrag extends BaseFragment<TrendingDevPresenter>
         super.onActivityCreated(savedInstanceState);
         isFirstLoad=true;
 
-        mRvDeveloper = (RecyclerView) mView.findViewById(R.id.rv_trending_repo);
+        mRvDeveloper = (RecyclerView) mView.findViewById(R.id.rv_list_repo_dev);
         mRefresh= (SwipeRefreshLayout) mView.findViewById(R.id.layout_swipe_refresh);
         mRvDeveloper.setLayoutManager(new LinearLayoutManager(getContext()));
         mRvDeveloper.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayout.VERTICAL));

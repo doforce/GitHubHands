@@ -24,7 +24,6 @@ public class TrendingDevAdapter extends BaseRVAdapter<TrendingDevBean,BaseRVAdap
     }
     @Override
     protected void bindDataToItemView(SparseArrayViewHolder holder, TrendingDevBean item) {
-
         holder.setText(R.id.item_user,item.getUser());
         holder.setText(R.id.item_full_name,item.getFullName());
         ImageView view=holder.getView(R.id.item_avatar);
@@ -32,27 +31,24 @@ public class TrendingDevAdapter extends BaseRVAdapter<TrendingDevBean,BaseRVAdap
         boolean selected= DbCollectionMode.isDevCollected(item.getUser());
         if (!selected){
             holder.setImageBackground(R.id.item_collect
-                    ,mContext.getResources().getDrawable(R.drawable.collection_heart_unselected));
+                    ,mContext.getDrawable(R.drawable.collection_heart_unselected));
         }else {
             holder.setImageBackground(R.id.item_collect
-                    ,mContext.getResources().getDrawable(R.drawable.collection_heart_selected));
+                    ,mContext.getDrawable(R.drawable.collection_heart_selected));
         }
         holder.setOnClickListener(R.id.item_collect, v -> {
             boolean select=DbCollectionMode.isDevCollected(item.getUser());
             if (!select){
                 holder.setImageBackground(R.id.item_collect
-                        ,mContext.getResources().getDrawable(R.drawable.collection_heart_selected));
+                        ,mContext.getDrawable(R.drawable.collection_heart_selected));
                 DbCollectionMode.devCollected(item);
                 ToastUtil.show(mContext, Constant.COLLECTED);
             }else {
                 holder.setImageBackground(R.id.item_collect
-                        ,mContext.getResources().getDrawable(R.drawable.collection_heart_unselected));
+                        ,mContext.getDrawable(R.drawable.collection_heart_unselected));
                 DbCollectionMode.devUncollected(item);
                 ToastUtil.show(mContext,Constant.UNCOLLECTED);
             }
-            TrendingDevBean bean=item;
-            bean.setCollected(!selected);
-            itemChange(bean,getPosition(item));
         });
     }
 

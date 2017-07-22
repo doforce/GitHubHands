@@ -1,9 +1,7 @@
 package com.edgarxie.githubhands.ui.activity;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
@@ -40,7 +38,7 @@ public class CustomLangAty extends BaseActivity<CustomLangP>
 
         mLanguageList.setLayoutManager(new LinearLayoutManager(this));
         mLanguageList.addItemDecoration(new RVDecoration(this,RVDecoration.VERTICAL_LIST));
-        mTitle.setText(getResources().getString(R.string.title_custom_language));
+        mTitle.setText(getString(R.string.title_custom_language));
         mBack.setOnClickListener((view) -> finish());
     }
 

@@ -35,6 +35,15 @@
                 android:textSize="@dimen/tab_text_size"
                 android:text="Title"/>
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@drawable/collection_heart_unselected"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/small_view_size"
+                android:id="@+id/bar_collect"/>
+
         </RelativeLayout>
 
     </android.support.v7.widget.Toolbar>

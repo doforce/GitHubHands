@@ -135,9 +135,6 @@ public abstract class BaseWebRepoDevAty extends BaseActivity<WebRepoDevP> implem
     public boolean onOptionsItemSelected(MenuItem item) {
         int id=item.getItemId();
         switch (id){
-            case R.id.menu_collect:
-                mPresenter.collectOperation(isRepo,repoDesc,repoLang,repo,developer, avatar, url);
-                break;
             case R.id.menu_open_in_browser:
                 IntentUtil.openInBrowser(this, webView.getUrl());
                 break;

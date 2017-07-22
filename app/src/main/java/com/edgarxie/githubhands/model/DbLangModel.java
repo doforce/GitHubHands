@@ -39,8 +39,7 @@ public class DbLangModel {
     }
 
     public static void update(TrendingLang lang){
-        TrendingLangDao dao=App.mSession.getTrendingLangDao();
-        dao.update(lang);
+        App.mSession.runInTx(() -> App.mSession.update(lang));
     }
 
     public static void initTable(){
@@ -50,7 +49,6 @@ public class DbLangModel {
             final ArrayList<String> defa= new ArrayList<>(Arrays.asList(App.DEFAULT_LANG));
             for (int i = 0; i < all.length; i++) {
                 TrendingLang trendingLang=new TrendingLang();
-                trendingLang.setId(Long.valueOf(i));
                 trendingLang.setLang(all[i]);
                 if (defa.contains(all[i])){
                     trendingLang.setSelected(1);

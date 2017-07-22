@@ -43,13 +43,6 @@ public class SearchPresenter extends BasePresenter<ISearchView> {
                     + NetConstant.GITHUB_SEARCH_REPO, p, JsonSearchRepoBean.class, data -> {
                     int count=data.getTotalCount();
                 if (count!=0){
-//                    repos.clear();
-//                    List<JsonSearchRepoBean.SearchRepoBean> items=data.getItems();
-//                    for (int i = 0; i < items.size(); i++) {
-//                        repos.add(items.get(i));
-//                        if (i==29)
-//                            break;
-//                    }
                     repos=data.getItems();
                     mAdapter.setList(repos);
                     mView.setAdapter(mAdapter);
@@ -58,7 +51,7 @@ public class SearchPresenter extends BasePresenter<ISearchView> {
                 }
                 mView.setVisibility(View.GONE);
             }, msg -> {
-                mView.showToast("Connection error");
+                mView.showToast(NetConstant.CONNECT_ERROR);
                 mView.setVisibility(View.GONE);
             });
         } catch (IOException e) {
@@ -78,6 +71,8 @@ public class SearchPresenter extends BasePresenter<ISearchView> {
             bundle.putBoolean(Constant.BUNDLE_IS_REPO,true);
             bundle.putString(Constant.BUNDLE_WEB_URL,bean.getHtmlUrl());
             bundle.putString(Constant.BUNDLE_REPO,bean.getFullName());
+            bundle.putString(Constant.BUNDLE_REPO_LANG,bean.getLanguage());
+            bundle.putString(Constant.BUNDLE_REPO_DESC,bean.getDescription());
             intent.putExtras(bundle);
             mContext.startActivity(intent);
         });

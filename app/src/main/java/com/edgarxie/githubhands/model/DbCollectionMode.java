@@ -84,4 +84,12 @@ public class DbCollectionMode {
             App.mSession.runInTx(() -> App.mSession.delete(collections.get(0)));
         }
     }
+
+    public static List<RepoCollection> getAllRepoCollections(){
+        return repoDao().loadAll();
+    }
+
+    public static List<DevCollection> getAllDevCollections(){
+        return devDao().loadAll();
+    }
 }

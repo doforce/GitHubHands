@@ -3,13 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu_collect"
-        android:orderInCategory="100"
-        android:title="@string/collect"
-        app:showAsAction="never"
-        />
-
-    <item
         android:id="@+id/menu_follow"
         android:orderInCategory="100"
         android:title="@string/follow"

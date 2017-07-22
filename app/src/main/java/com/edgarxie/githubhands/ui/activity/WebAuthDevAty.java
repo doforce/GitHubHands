@@ -25,12 +25,6 @@ public class WebAuthDevAty extends BaseWebRepoDevAty {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        mPresenter.checkCollected(isRepo, repo, developer);
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         return true;
     }
@@ -39,4 +33,7 @@ public class WebAuthDevAty extends BaseWebRepoDevAty {
     public boolean onOptionsItemSelected(MenuItem item) {
         return false;
     }
+
+    @Override
+    public void setCollectImageBG(int id) {}
 }

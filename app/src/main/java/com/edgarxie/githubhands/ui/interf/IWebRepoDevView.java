@@ -13,4 +13,5 @@ public interface IWebRepoDevView extends ITopView {
     String getStr(int id);
     boolean isCollected();
     void setCollected(boolean collected);
+    void setCollectImageBG(int id);
 }

@@ -14,32 +14,25 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/small_view_size">
+            android:layout_height="wrap_content">
+
+           <ImageView
+               android:layout_width="@dimen/developer_avatar_size"
+               android:layout_height="@dimen/developer_avatar_size"
+               android:id="@+id/item_avatar"
+               android:layout_centerVertical="true"
+               />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/item_repo"
-                android:textSize="@dimen/item_title_size"
-                android:textColor="@color/colorItemRepo"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/item_desc"
-                android:layout_marginEnd="@dimen/item_margin_end"
-                android:textSize="@dimen/item_middle_size"
-                android:layout_below="@+id/item_repo"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/item_lang"
-                android:textSize="@dimen/item_middle_size"
-                android:layout_below="@+id/item_desc"
-                android:drawableStart="@drawable/ball_small" />
+                android:id="@+id/item_user"
+                android:layout_toEndOf="@+id/item_avatar"
+                android:layout_marginStart="@dimen/middle_view_size"
+                android:layout_marginTop="@dimen/small_view_size"
+                android:layout_centerVertical="true"
+                android:textColor="@color/colorItemRepo"
+                android:textSize="@dimen/item_user_text_size"/>
 
             <ImageView
                 android:layout_width="wrap_content"
