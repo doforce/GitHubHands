@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.edgarxie.githubhands.adapter.TrendingRepoAdapter;
+import com.edgarxie.githubhands.model.DbTrendingCacheModel;
 import com.edgarxie.githubhands.model.bean.JsonTrendingRepoBean;
 import com.edgarxie.githubhands.model.bean.TrendingRepoBean;
 import com.edgarxie.githubhands.ui.activity.WebRepoDevAty;
@@ -35,11 +36,12 @@ public class TrendingRepoPresenter extends BasePresenter<ITrendingRepoView> {
     }
 
     public void resumeRequest(String language,String frequency){
-        requestRepo(language,frequency);
+        List<TrendingRepoBean> repoBeen=userCache(language,frequency);
+        requestRepo(language, frequency,repoBeen);
         setAdapterListener();
     }
 
-    public void requestRepo(String language, String frequency) {
+    public void requestRepo(String language, String frequency,List<TrendingRepoBean> cache) {
         mView.refreshingPost(() -> mView.setRefreshing(true));
         OkManagerBean<JsonTrendingRepoBean> beanBuilder = new OkManagerBean<>();
         Map<String, String> par = new HashMap<>();
@@ -49,9 +51,12 @@ public class TrendingRepoPresenter extends BasePresenter<ITrendingRepoView> {
                     , par, JsonTrendingRepoBean.class, data -> {
                         int count = data.getCount();
                         if (count != 0) {
-                            mRepos = setCollection(data.getItems());
+                            mRepos = data.getItems();
                             mAdapter.setList(mRepos);
                             mView.runOnUIThread(() -> mView.setRecyclerAdapter(mAdapter));
+                            DbTrendingCacheModel.addRepoCache(mRepos);
+                            ToastUtil.show(mContext,"cache");
+                            DbTrendingCacheModel.deleteRepoCache(cache);
                         } else {
                             mView.runOnUIThread(() -> ToastUtil.show(mContext,data.getMsg()));
                         }
@@ -65,18 +70,21 @@ public class TrendingRepoPresenter extends BasePresenter<ITrendingRepoView> {
         }
     }
 
-    private List<TrendingRepoBean> setCollection(List<TrendingRepoBean> data){
-        //// TODO: 2017/6/29 从收藏的数据表里读取数据
-//        List<String> collectedRepos= DbCollectionMode.getAllSelectRepo();
-//        List<TrendingRepoBean> result=data;
-//        for (TrendingRepoBean bean : data) {
-//            if (collectedRepos.contains(bean.getRepo())){
-//                bean.setCollected(true);
-//            }else {
-//                bean.setCollected(false);
-//            }
-//        }
-        return data;
+    public void refreshRepo(String language,String frequency){
+        List<TrendingRepoBean> repoBeen=userCache(language, frequency);
+        requestRepo(language,frequency,repoBeen);
+    }
+
+    private List<TrendingRepoBean> userCache(String language, String frequency){
+        mRepos= DbTrendingCacheModel.getRepoCache(language,frequency);
+        if (mRepos.size()!=0){
+            mAdapter.setList(mRepos);
+            mView.setRecyclerAdapter(mAdapter);
+            ToastUtil.show(mContext,"not null");
+        }else {
+            ToastUtil.show(mContext,"null");
+        }
+        return mRepos;
     }
 
     private void setAdapterListener(){

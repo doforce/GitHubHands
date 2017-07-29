@@ -20,7 +20,7 @@ public class TrendingRepoFrag extends BaseFragment<TrendingRepoPresenter> implem
         ,MainActivity.OnMenuClick, MainActivity.OnTabSelectedListener {
     public static final String ARGS ="args";
     private String mLanguage="";
-    private String mFrequency;
+    private String mFrequency=NetConstant.DAILY;
     private RecyclerView mRvRepo;
     private SwipeRefreshLayout mRefresh;
     protected MainActivity mActivity;
@@ -60,7 +60,7 @@ public class TrendingRepoFrag extends BaseFragment<TrendingRepoPresenter> implem
         mPresenter=new TrendingRepoPresenter(getContext());
         mActivity= (MainActivity) getActivity();
 
-        mRefresh.setOnRefreshListener(() -> mPresenter.requestRepo(mLanguage,mFrequency));
+        mRefresh.setOnRefreshListener(() -> mPresenter.refreshRepo(mLanguage,mFrequency));
         mActivity.setOnTabSelectedListener(this);
         mActivity.setOnMenuClick(this);
     }
@@ -88,7 +88,7 @@ public class TrendingRepoFrag extends BaseFragment<TrendingRepoPresenter> implem
     private void applyFrequencyChange(String frequency){
         if (mFrequency!=frequency){
             mFrequency=frequency;
-            mPresenter.requestRepo(mLanguage,mFrequency);
+            mPresenter.refreshRepo(mLanguage,mFrequency);
         }
     }
 
@@ -96,7 +96,7 @@ public class TrendingRepoFrag extends BaseFragment<TrendingRepoPresenter> implem
     public void selected(String tab) {
         if (mLanguage!=tab){
             mLanguage= tab;
-            mPresenter.requestRepo(mLanguage,mFrequency);
+            mPresenter.refreshRepo(mLanguage,mFrequency);
         }
     }
 

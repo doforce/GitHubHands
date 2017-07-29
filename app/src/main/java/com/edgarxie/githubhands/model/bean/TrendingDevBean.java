@@ -3,7 +3,15 @@ package com.edgarxie.githubhands.model.bean;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Generated;
+
+@Entity
 public class TrendingDevBean {
+
+    @Id(autoincrement = true)
+    private Long id;
 
     @SerializedName("user_link")
     @Expose
@@ -19,14 +27,21 @@ public class TrendingDevBean {
     @Expose
     private String developerAvatar;
 
-    private boolean collected;
+    private String frequency;
 
-    public boolean isCollected() {
-        return collected;
+    @Generated(hash = 2018860501)
+    public TrendingDevBean(Long id, String userLink, String fullName, String user,
+            String developerAvatar, String frequency) {
+        this.id = id;
+        this.userLink = userLink;
+        this.fullName = fullName;
+        this.user = user;
+        this.developerAvatar = developerAvatar;
+        this.frequency = frequency;
     }
 
-    public void setCollected(boolean collected) {
-        this.collected = collected;
+    @Generated(hash = 1791818331)
+    public TrendingDevBean() {
     }
 
     public String getUserLink() {
@@ -59,5 +74,21 @@ public class TrendingDevBean {
 
     public void setDeveloperAvatar(String developerAvatar) {
         this.developerAvatar = developerAvatar;
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getFrequency() {
+        return this.frequency;
+    }
+
+    public void setFrequency(String frequency) {
+        this.frequency = frequency;
     }
 }
