@@ -30,6 +30,14 @@ public class Constant {
     public static final String COLLECTED="Collected";
     public static final String UNCOLLECTED="Uncollected";
 
+    public static final String BASE_MAIL_SERVER="https://tinymail.herokuapp.com";
+
+    public static final String APP_DOWNLOAD_RUL="https://www.coolapk.com/apk/com.edgarxie.githubhands";
+    public static final String SHARE_CONTENT="GitHands is a open source GitHub client,you can view" +
+            " the trending repositories and developers,search the repositories," +
+            "and most important,you can manage you GitHub activities via your GitHub " +
+            "personal access token.The download link is "+APP_DOWNLOAD_RUL;
+
     public interface Collection{
         int REPO = 1;
         int DEVELOPER = 2;

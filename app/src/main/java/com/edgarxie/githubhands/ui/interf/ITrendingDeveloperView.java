@@ -9,4 +9,5 @@ import com.edgarxie.githubhands.adapter.TrendingDevAdapter;
 public interface ITrendingDeveloperView extends ITopTrendingView {
 
     void setRecyclerAdapter(TrendingDevAdapter adapter);
+    void setFirstLoad(boolean isFirst);
 }

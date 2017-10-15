@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
     <application
         android:name=".App"
@@ -34,6 +35,11 @@
         <activity android:name=".ui.activity.WebRepoDevAty" />
         <activity android:name=".ui.activity.TokenGenerateActivity" />
         <activity android:name=".ui.activity.WebAuthDevAty"/>
+        <activity android:name=".ui.activity.FeedbackAty"/>
+
+        <meta-data android:value="59df2b8e8630f5382a00012e" android:name="UMENG_APPKEY"/>
+        <meta-data android:value="${UMENG_CHANNEL_VALUE}" android:name="UMENG_CHANNEL"/>
+
     </application>
 
 </manifest>

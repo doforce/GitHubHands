@@ -38,6 +38,7 @@ public class TrendingRepoPresenter extends BasePresenter<ITrendingRepoView> {
     public void resumeRequest(String language,String frequency){
         List<TrendingRepoBean> repoBeen=userCache(language,frequency);
         requestRepo(language, frequency,repoBeen);
+        mView.setFirstLoad(false);
         setAdapterListener();
     }
 
@@ -55,7 +56,6 @@ public class TrendingRepoPresenter extends BasePresenter<ITrendingRepoView> {
                             mAdapter.setList(mRepos);
                             mView.runOnUIThread(() -> mView.setRecyclerAdapter(mAdapter));
                             DbTrendingCacheModel.addRepoCache(mRepos);
-                            ToastUtil.show(mContext,"cache");
                             DbTrendingCacheModel.deleteRepoCache(cache);
                         } else {
                             mView.runOnUIThread(() -> ToastUtil.show(mContext,data.getMsg()));
@@ -76,14 +76,14 @@ public class TrendingRepoPresenter extends BasePresenter<ITrendingRepoView> {
     }
 
     private List<TrendingRepoBean> userCache(String language, String frequency){
-        mRepos= DbTrendingCacheModel.getRepoCache(language,frequency);
-        if (mRepos.size()!=0){
-            mAdapter.setList(mRepos);
-            mView.setRecyclerAdapter(mAdapter);
-            ToastUtil.show(mContext,"not null");
-        }else {
-            ToastUtil.show(mContext,"null");
-        }
+//        mRepos= DbTrendingCacheModel.getRepoCache(language,frequency);
+//        if (mRepos.size()!=0){
+//            mAdapter.setList(mRepos);
+//            mView.setRecyclerAdapter(mAdapter);
+//            ToastUtil.show(mContext,"not null");
+//        }else {
+//            ToastUtil.show(mContext,"null");
+//        }
         return mRepos;
     }
 
@@ -103,11 +103,6 @@ public class TrendingRepoPresenter extends BasePresenter<ITrendingRepoView> {
     }
 
     private String formatLanguage(String language) {
-//        if (language.equals("C#")) {
-//            language = "c%23";
-//        } else if (language.equals("F#")) {
-//            language = "f%23";
-//        }
-        return language;
+        return language.replace("#","-shuo");
     }
 }

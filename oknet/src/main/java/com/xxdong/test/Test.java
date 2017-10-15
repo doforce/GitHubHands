@@ -19,9 +19,11 @@ public class Test {
     public static final String ACCESS_TOKEN = "access_token";
 
     public static void main(String[] args) {
-       putRepo();
+//       putRepo();
 //        deleteRepo();
 //        getUser();
+        String lang="c++";
+        System.out.println(lang.replace("#","-shuo"));
     }
 
     public static void putRepo(){

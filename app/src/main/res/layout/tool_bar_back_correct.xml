@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="?attr/colorPrimary"
+    app:layout_scrollFlags="enterAlways"
+    app:popupTheme="@style/AppTheme.PopupOverlay"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/toolbar_back"
+            android:src="@drawable/back"
+            android:layout_alignParentStart="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/toolbar_title"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/toolbar_title_size"
+            android:layout_toEndOf="@+id/toolbar_back"
+            android:layout_marginStart="@dimen/large_view_size"
+            android:text="Back"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/toolbar_correct"
+            android:src="@drawable/correct"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/middle_view_size"
+            />
+
+    </RelativeLayout>
+
+</android.support.v7.widget.Toolbar>

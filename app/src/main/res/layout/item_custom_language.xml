@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="2dp">
@@ -14,14 +13,17 @@
         android:layout_marginStart="@dimen/middle_view_size"
         android:text="JavaScript"/>
 
-    <Switch
+
+    <com.kyleduo.switchbutton.SwitchButton
+        android:id="@+id/item_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/item_status"
+        android:layout_centerInParent="true"
         android:checked="false"
         android:textAllCaps="false"
+        android:layout_alignParentEnd="true"
         android:layout_marginEnd="@dimen/middle_view_size"
-        android:layout_alignParentEnd="true"/>
+        />
 
 
 </RelativeLayout>

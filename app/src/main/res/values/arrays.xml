@@ -30,13 +30,13 @@
         <item>CSS</item>
         <item>F#</item>
         <item>Go</item>
-        <item>Groovy</item>
+        <!--<item>Groovy</item>-->
         <item>HTML</item>
         <item>Java</item>
         <item>JavaScript</item>
         <item>Kotlin</item>
         <item>Objective-C</item>
-        <item>Pascal</item>
+        <!--<item>Pascal</item>-->
         <item>Perl</item>
         <item>PHP</item>
         <item>Python</item>

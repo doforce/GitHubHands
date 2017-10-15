@@ -36,6 +36,7 @@ public class TrendingDevPresenter extends BasePresenter<ITrendingDeveloperView> 
 
     public void resumeRequest(String frequency){
         requestDeveloper(frequency);
+        mView.setFirstLoad(false);
         setAdapterListener();
     }
 

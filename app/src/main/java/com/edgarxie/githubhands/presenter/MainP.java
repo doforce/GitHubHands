@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.edgarxie.githubhands.App;
+import com.edgarxie.githubhands.R;
 import com.edgarxie.githubhands.model.DbLangModel;
 import com.edgarxie.githubhands.ui.activity.CustomLangAty;
 import com.edgarxie.githubhands.ui.activity.TokenGenerateActivity;
@@ -24,9 +24,13 @@ import static com.edgarxie.githubhands.model.DbLangModel.getAllSelectedLang;
 
 public class MainP extends BasePresenter<IMainView> {
     private ArrayList<String> mLang=new ArrayList<>();
+    public  String[] DEFAULT_LANG;
+    public  String[] ALL_LANG;
 
     public MainP(Context context){
         mContext=context;
+        DEFAULT_LANG=context.getResources().getStringArray(R.array.default_languages);
+        ALL_LANG=context.getResources().getStringArray(R.array.all_language);
     }
 
     public void goToCustomLanguage() {
@@ -61,9 +65,9 @@ public class MainP extends BasePresenter<IMainView> {
 
     public void setLanguages() {
         if (DbLangModel.isEmpty()){
-            DbLangModel.initTable();
+            DbLangModel.initTable(ALL_LANG,DEFAULT_LANG);
             mLang.clear();
-            mLang=new ArrayList<>(Arrays.asList(App.DEFAULT_LANG));
+            mLang=new ArrayList<>(Arrays.asList(DEFAULT_LANG));
         }else {
             mLang= getAllSelectedLang();
         }

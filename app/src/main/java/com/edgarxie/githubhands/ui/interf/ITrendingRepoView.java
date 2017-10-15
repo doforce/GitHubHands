@@ -8,4 +8,5 @@ import com.edgarxie.githubhands.adapter.TrendingRepoAdapter;
 
 public interface ITrendingRepoView extends ITopTrendingView {
     void setRecyclerAdapter(TrendingRepoAdapter adapter);
+    void setFirstLoad(boolean isFirst);
 }

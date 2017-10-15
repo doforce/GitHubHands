@@ -29,9 +29,4 @@ public class CustomLangP extends BasePresenter<ICustomLanguageView> {
         mView.setAdapter(mAdapter);
     }
 
-    public void save(){
-
-    }
-
-
 }

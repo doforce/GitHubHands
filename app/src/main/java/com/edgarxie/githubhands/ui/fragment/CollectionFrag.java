@@ -6,7 +6,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.MenuItem;
 import android.widget.LinearLayout;
 
 import com.edgarxie.githubhands.R;
@@ -20,7 +19,7 @@ import com.edgarxie.githubhands.util.Constant;
  * Created by edgar on 17-4-18.
  */
 
-public class CollectionFrag extends BaseFragment<CollectionPresenter> implements MainActivity.OnMenuClick,ICollectionView {
+public class CollectionFrag extends BaseFragment<CollectionPresenter> implements MainActivity.OnCollectionMenuClick,ICollectionView {
 
     private MainActivity mActivity;
     private int whatCollection = Constant.Collection.REPO;
@@ -32,7 +31,7 @@ public class CollectionFrag extends BaseFragment<CollectionPresenter> implements
         super.onActivityCreated(savedInstanceState);
         mActivity = (MainActivity) getActivity();
         mPresenter=new CollectionPresenter(getContext());
-        mActivity.setOnMenuClick(this);
+        mActivity.setCollectionMenuClick(this);
         initViews();
     }
 
@@ -45,10 +44,10 @@ public class CollectionFrag extends BaseFragment<CollectionPresenter> implements
     }
 
     @Override
-    public void onMenuClick(MenuItem item) {
-        int id = item.getItemId();
+    public void onMenuClick(int id) {
         switch (id) {
             case R.id.action_collections_repo:
+                mActivity.setCollTitle(getString(R.string.collection_repository));
                 if (whatCollection!=Constant.Collection.REPO) {
                     whatCollection = Constant.Collection.REPO;
                     mPresenter.loadRepoCollection(() -> {
@@ -56,6 +55,7 @@ public class CollectionFrag extends BaseFragment<CollectionPresenter> implements
                 }
                 break;
             case R.id.action_collections_developer:
+                mActivity.setCollTitle(getString(R.string.collection_developer));
                 if (whatCollection!=Constant.Collection.DEVELOPER) {
                     whatCollection = Constant.Collection.DEVELOPER;
                     mPresenter.loadDevCollection(() -> {

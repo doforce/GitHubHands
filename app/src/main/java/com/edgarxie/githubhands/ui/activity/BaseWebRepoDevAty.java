@@ -138,6 +138,9 @@ public abstract class BaseWebRepoDevAty extends BaseActivity<WebRepoDevP> implem
             case R.id.menu_open_in_browser:
                 IntentUtil.openInBrowser(this, webView.getUrl());
                 break;
+            case R.id.menu_refresh:
+                webView.reload();
+                break;
             case R.id.menu_follow:
                 mPresenter.authOperation(item);
                 break;

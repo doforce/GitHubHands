@@ -6,7 +6,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.MenuItem;
 import android.widget.LinearLayout;
 
 import com.edgarxie.githubhands.R;
@@ -21,13 +20,13 @@ import com.edgarxie.githubhands.util.NetConstant;
  */
 
 public class TrendingDevFrag extends BaseFragment<TrendingDevPresenter>
-        implements MainActivity.OnMenuClick, ITrendingDeveloperView {
+        implements  ITrendingDeveloperView {
 
     private String mFrequency= NetConstant.DAILY;
     private RecyclerView mRvDeveloper;
     private SwipeRefreshLayout mRefresh;
     protected MainActivity mActivity;
-    private boolean isFirstLoad=true;
+    private boolean isFirstLoad;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -43,31 +42,26 @@ public class TrendingDevFrag extends BaseFragment<TrendingDevPresenter>
         mActivity= (MainActivity) getActivity();
 
         mRefresh.setOnRefreshListener(() -> mPresenter.requestDeveloper(mFrequency));
-        mActivity.setOnMenuClick(this);
-    }
-
-    @Override
-    public void onMenuClick(MenuItem item) {
-        int id = item.getItemId();
-        switch (id) {
-            case R.id.action_trending_daily:
-                applyFrequencyChange(NetConstant.DAILY);
-                break;
-            case R.id.action_trending_weekly:
-                applyFrequencyChange(NetConstant.WEEKLY);
-                break;
-            case R.id.action_trending_monthly:
-                applyFrequencyChange(NetConstant.MONTHLY);
-                break;
-            case R.id.action_collections_repo:
-                break;
-            case R.id.action_collections_developer:
-                break;
-        }
+        mActivity.setDevMenuClick(id -> {
+            switch (id) {
+                case R.id.action_trending_daily:
+                    mActivity.setDevTitle(getString(R.string.developer_daily));
+                    applyFrequencyChange(NetConstant.DAILY);
+                    break;
+                case R.id.action_trending_weekly:
+                    mActivity.setDevTitle(getString(R.string.developer_weekly));
+                    applyFrequencyChange(NetConstant.WEEKLY);
+                    break;
+                case R.id.action_trending_monthly:
+                    mActivity.setDevTitle(getString(R.string.developer_monthly));
+                    applyFrequencyChange(NetConstant.MONTHLY);
+                    break;
+            }
+        });
     }
 
     private void applyFrequencyChange(String frequency){
-        if (mFrequency!=frequency){
+        if (!mFrequency.equals(frequency)){
             mFrequency=frequency;
             mPresenter.requestDeveloper(mFrequency);
         }
@@ -82,9 +76,8 @@ public class TrendingDevFrag extends BaseFragment<TrendingDevPresenter>
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
-        isFirstLoad=false;
+    public void setFirstLoad(boolean firstLoad) {
+        isFirstLoad = firstLoad;
     }
 
     @Override

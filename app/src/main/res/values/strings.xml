@@ -55,5 +55,9 @@
     <string name="submit">Submit</string>
     <string name="token_box_hint">Input token</string>
     <string name="title_activity_login">Sign in</string>
+    <string name="contact_way">Contact way:</string>
+    <string name="feedback_content">Feedback content:</string>
+    <string name="feedback_message">Any suggestions or bugs you have,you can contact with doforce@126.com,I will reply as soon as possible.</string>
+    <string name="refresh">Refresh</string>
 
 </resources>

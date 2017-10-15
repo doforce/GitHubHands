@@ -42,11 +42,10 @@ public class DbLangModel {
         App.mSession.runInTx(() -> App.mSession.update(lang));
     }
 
-    public static void initTable(){
-        final String[] all=App.ALL_LANG;
+    public static void initTable(String[] all,String[] default_lang){
         DaoSession session=App.mSession;
         session.runInTx(() -> {
-            final ArrayList<String> defa= new ArrayList<>(Arrays.asList(App.DEFAULT_LANG));
+            final ArrayList<String> defa= new ArrayList<>(Arrays.asList(default_lang));
             for (int i = 0; i < all.length; i++) {
                 TrendingLang trendingLang=new TrendingLang();
                 trendingLang.setLang(all[i]);

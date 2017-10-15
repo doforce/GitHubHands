@@ -26,6 +26,7 @@ import com.edgarxie.githubhands.ui.fragment.TrendingDevFrag;
 import com.edgarxie.githubhands.ui.fragment.TrendingRepoFrag;
 import com.edgarxie.githubhands.ui.interf.IMainView;
 import com.edgarxie.githubhands.util.Constant;
+import com.edgarxie.utils.android.recyclerview.ShareUtil;
 
 import java.util.List;
 
@@ -35,9 +36,7 @@ public class MainActivity extends BaseActivity<MainP>
     private Fragment mRepoFrag;
     private Fragment mDeveloperFrag;
     private Fragment mCollectionsFrag;
-    private static final String TAG = "MainActivity";
     private int startTitle=R.string.repository;
-    private OnMenuClick onMenuClick;
     private OnTabSelectedListener onTabSelectedListener;
 
     private Toolbar mToolbar;
@@ -53,11 +52,26 @@ public class MainActivity extends BaseActivity<MainP>
     private TextView mUsername;
     private View mHeaderView;
 
+    private OnDevMenuClick devMenuClick;
+    private OnRepoMenuClick repoMenuClick;
+    private OnCollectionMenuClick collectionMenuClick;
+
+    public enum FragmentType{
+        REPO,DEV,COLL
+    }
+
+    private String repoTitle;
+    private String devTitle;
+    private String collTitle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initViews();
+        repoTitle=getString(R.string.repository_daily);
+        devTitle=getString(R.string.developer_daily);
+        collTitle=getString(R.string.collection_repository);
         mPresenter=new MainP(this);
         addDefaultFragment();
     }
@@ -65,8 +79,14 @@ public class MainActivity extends BaseActivity<MainP>
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (onMenuClick !=null){
-            onMenuClick.onMenuClick(item);
+        if (null!=repoMenuClick){
+            repoMenuClick.onMenuClick(id);
+        }
+        if (null!=devMenuClick){
+            devMenuClick.onMenuClick(id);
+        }
+        if (null!=collectionMenuClick){
+            collectionMenuClick.onMenuClick(id);
         }
         switch (id){
             case R.id.action_trending_daily:
@@ -103,7 +123,7 @@ public class MainActivity extends BaseActivity<MainP>
                 mToolbar.getMenu().clear();
                 mToolbar.inflateMenu(R.menu.main_toolbar_frequency);
                 startTitle=R.string.repository;
-                setToolBarTitle(startTitle,R.string.daily);
+                setToolBarTitles(FragmentType.REPO);
                 switchFragment(mDeveloperFrag,mCollectionsFrag,mRepoFrag,1
                         , Constant.TAG_TRENDING_REPO);
                 break;
@@ -112,7 +132,7 @@ public class MainActivity extends BaseActivity<MainP>
                 mToolbar.getMenu().clear();
                 mToolbar.inflateMenu(R.menu.main_toolbar_frequency);
                 startTitle=R.string.developer;
-                setToolBarTitle(startTitle,R.string.daily);
+                setToolBarTitles(FragmentType.DEV);
                 switchFragment(mRepoFrag,mCollectionsFrag,mDeveloperFrag,2
                         , Constant.TAG_TRENDING_DEVELOPER);
                 break;
@@ -120,15 +140,16 @@ public class MainActivity extends BaseActivity<MainP>
                 mTabLayout.setVisibility(View.GONE);
                 mToolbar.getMenu().clear();
                 mToolbar.inflateMenu(R.menu.main_toolbar_type);
-                setToolBarTitle(R.string.collection_repository);
+                setToolBarTitles(FragmentType.COLL);
                 switchFragment(mRepoFrag,mDeveloperFrag,mCollectionsFrag,3
                         , Constant.TAG_COLLECTIONS);
                 break;
-            case R.id.nav_about:
-                break;
             case R.id.nav_feedback:
+                Intent intent=new Intent(MainActivity.this,FeedbackAty.class);
+                startActivity(intent);
                 break;
             case R.id.nav_share:
+                ShareUtil.shareText(this,Constant.SHARE_CONTENT);
                 break;
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);
@@ -258,21 +279,50 @@ public class MainActivity extends BaseActivity<MainP>
         this.onTabSelectedListener = onTabSelectedListener;
     }
 
-    //让fragment监听MainActivity中的MenuItem
-    public interface OnMenuClick{
-        void onMenuClick(MenuItem item);
+    public interface OnRepoMenuClick{
+        void onMenuClick(int id);
     }
 
-    public void setOnMenuClick(OnMenuClick mOnMenuClick) {
-        this.onMenuClick = mOnMenuClick;
+    public interface OnDevMenuClick{
+        void onMenuClick(int id);
     }
 
-    private void setToolBarTitle(int start, int end){
+    public interface OnCollectionMenuClick{
+        void onMenuClick(int id);
+    }
+
+    public void setRepoMenuClick(OnRepoMenuClick repoMenuClick) {
+        this.repoMenuClick = repoMenuClick;
+    }
+
+    public void setDevMenuClick(OnDevMenuClick devMenuClick) {
+        this.devMenuClick = devMenuClick;
+    }
+
+    public void setCollectionMenuClick(OnCollectionMenuClick collectionMenuClick) {
+        this.collectionMenuClick = collectionMenuClick;
+    }
+
+    public void setToolBarTitle(int start, int end){
         mToolbarTitle.setText(getString(start)+" "+getString(end));
     }
 
-    private void setToolBarTitle(int id){
+    public void setToolBarTitle(int id){
         mToolbarTitle.setText(id);
+    }
+
+    public void setToolBarTitle(String title){
+        mToolbarTitle.setText(title);
+    }
+
+    public void setToolBarTitles(FragmentType type){
+        if (FragmentType.REPO==type){
+            setToolBarTitle(repoTitle);
+        }else if (FragmentType.DEV==type){
+            setToolBarTitle(devTitle);
+        }else if (FragmentType.COLL==type){
+            setToolBarTitle(collTitle);
+        }
     }
 
     @Override
@@ -313,5 +363,17 @@ public class MainActivity extends BaseActivity<MainP>
     @Override
     protected void attachView() {
         mPresenter.attach(this);
+    }
+
+    public void setRepoTitle(String repoTitle) {
+        this.repoTitle = repoTitle;
+    }
+
+    public void setDevTitle(String devTitle) {
+        this.devTitle = devTitle;
+    }
+
+    public void setCollTitle(String collTitle) {
+        this.collTitle = collTitle;
     }
 }
